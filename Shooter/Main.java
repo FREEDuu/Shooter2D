@@ -1,4 +1,8 @@
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;;
 
 public class Main {
     public static void main(String[] args){
@@ -17,6 +21,7 @@ public class Main {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-    
+        
+
     }
 }

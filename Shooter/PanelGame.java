@@ -29,7 +29,7 @@ public class PanelGame extends JPanel implements Runnable{
         int height = gd.getDisplayMode().getHeight();
         this.setPreferredSize(new DimensionUIResource(width, height));
         this.setDoubleBuffered(true);
-        this.setBackground(Color.black);
+        this.setBackground(Color.white);
         this.addKeyListener(controllK);
         this.setFocusable(true);
         this.startGame();
@@ -83,7 +83,6 @@ public class PanelGame extends JPanel implements Runnable{
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-
         Graphics2D g2 = (Graphics2D) g;
         player.draw(g2);
         g2.dispose();;
