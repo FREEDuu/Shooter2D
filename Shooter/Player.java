@@ -13,26 +13,33 @@ public class Player extends Entity{
         this.pg = pg;
         this.controllerK = controllerK;
         this.SetDefault();
+        this.getPgImgs();
+
     }
 
     public void getPgImgs(){
+        up = new BufferedImage[4];
+        down = new BufferedImage[4];
+        left = new BufferedImage[4];
+        right = new BufferedImage[4];
+
         try{
-            up1 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/up.png")).getSubimage(0, 0, 32, 32);
-            up2 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/up.png")).getSubimage(32, 0, 32, 32);
-            up3 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/up.png")).getSubimage(64, 0, 32, 32);
-            up4 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/up.png")).getSubimage(96, 0, 32, 32);
-            right1 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/right.png")).getSubimage(0, 0, 32, 32);
-            right2 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/right.png")).getSubimage(32, 0, 32, 32);
-            right3 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/right.png")).getSubimage(64, 0, 32, 32);
-            right4 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/right.png")).getSubimage(96, 0, 32, 32);
-            left1 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/left.png")).getSubimage(0, 0, 32, 32);
-            left2 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/left.png")).getSubimage(32, 0, 32, 32);
-            left3 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/left.png")).getSubimage(64, 0, 32, 32);
-            left4 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/left.png")).getSubimage(96, 0, 32, 32);
-            down1 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/down.png")).getSubimage(0, 0, 32, 32);
-            down2 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/down.png")).getSubimage(32, 0, 32, 32);
-            down3 = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/down.png")).getSubimage(64, 0, 32, 32);
-            down4 =ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/down.png")).getSubimage(96, 0, 32, 32);
+            up[0] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/up.png")).getSubimage(0, 0, 32, 32);
+            up[1] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/up.png")).getSubimage(32, 0, 32, 32);
+            up[2] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/up.png")).getSubimage(64, 0, 32, 32);
+            up[3] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/up.png")).getSubimage(96, 0, 32, 32);
+            right[0] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/right.png")).getSubimage(0, 0, 32, 32);
+            right[1] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/right.png")).getSubimage(32, 0, 32, 32);
+            right[2] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/right.png")).getSubimage(64, 0, 32, 32);
+            right[3] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/right.png")).getSubimage(96, 0, 32, 32);
+            left[0] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/left.png")).getSubimage(0, 0, 32, 32);
+            left[1] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/left.png")).getSubimage(32, 0, 32, 32);
+            left[2] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/left.png")).getSubimage(64, 0, 32, 32);
+            left[3] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/left.png")).getSubimage(96, 0, 32, 32);
+            down[0] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/down.png")).getSubimage(0, 0, 32, 32);
+            down[1] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/down.png")).getSubimage(32, 0, 32, 32);
+            down[2] = ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/down.png")).getSubimage(64, 0, 32, 32);
+            down[3] =ImageIO.read(new File("/home/fred/Desktop/etc/Shooter2D/Shooter/images/player/walk/down.png")).getSubimage(96, 0, 32, 32);
         }
         catch(Exception e){
             e.printStackTrace();
@@ -44,26 +51,40 @@ public class Player extends Entity{
         this.y = 150;
         this.speed = 10;
         this.direction = "down";
+        this.imageCounter = 0;
+        this.imageNumber = 0;
     }
 
     public void update(){
-        if(controllerK.up == true){
-            y -= speed;
-            direction = "up";
+        if(controllerK.up || controllerK.down || controllerK.left || controllerK.right){
+            if(controllerK.up == true){
+                y -= speed;
+                direction = "up";
+            }
+            if(controllerK.down == true){
+                y += speed;
+                direction = "down";
+            }
+            if(controllerK.left == true){
+                x -= speed;
+                direction = "left";
+            }
+            if(controllerK.right == true){
+                x += speed;
+                direction = "right";
+            }
+            imageCounter++;
+            if(imageCounter > 15){
+                imageNumber++;
+                imageNumber = imageNumber % 4;
+                imageCounter = 0;
+            }
+            idle = false;
         }
-        if(controllerK.down == true){
-            y += speed;
-            direction = "down";
-
+        else{
+            idle = true;
         }
-        if(controllerK.left == true){
-            x -= speed;
-            direction = "left";
-        }
-        if(controllerK.right == true){
-            x += speed;
-            direction = "right";
-        }
+ 
     }
 
     public void draw(Graphics2D g2){
@@ -71,19 +92,41 @@ public class Player extends Entity{
         
         switch (direction) {
             case "up":
-                image = up1;
+                if(idle){
+                    image = up[0];
+                }
+                else{
+                    image = up[imageNumber];
+                }
                 break;
             case "down":
-                image = down1;
+                if(idle){
+                    image = down[0];
+                }
+                else{
+                    image = down[imageNumber];
+                }
+                break;
             case "left":
-                image = left1;
+                if(idle){
+                    image = left[0];
+                }
+                else{
+                    image = left[imageNumber];
+                }
                 break;
             case "right":
-                image = right1;
-                          
+                image = right[imageNumber];
+                if(idle){
+                    image = right[0];
+                }
+                else{
+                    image = right[imageNumber];
+                }
+                break;
         }
 
-        g2.drawImage(image, x, y, 32, 32, null);
+        g2.drawImage(image, x, y, pg.tileSize*8, pg.tileSize*8, null);
         
     }
 }

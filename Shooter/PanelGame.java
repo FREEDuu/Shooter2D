@@ -10,8 +10,11 @@ import javax.swing.plaf.DimensionUIResource;
 public class PanelGame extends JPanel implements Runnable{
 
     //variabili globali del PanelGame
+    public int maxWorldCol = 32;
+    public int maxWorldRow = 24;
+    public int tileSize = 16;
 
-    Toolkit toolkit = Toolkit.getDefaultToolkit(); /* serve per sincronizzare il framerate su linux */
+    TileManager tileM = new TileManager(this);
     int FPS = 45;
     Thread gameThread;
     ControllerKey controllK = new ControllerKey();
@@ -69,7 +72,6 @@ public class PanelGame extends JPanel implements Runnable{
                 delta --;
                 
             }
-            toolkit.sync();
         }
     }
 
@@ -84,7 +86,7 @@ public class PanelGame extends JPanel implements Runnable{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        tileM.draw(g2, "map.txt");
         player.draw(g2);
-        g2.dispose();;
     }
 }
