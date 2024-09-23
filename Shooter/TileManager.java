@@ -21,7 +21,6 @@ public class TileManager {
         try {
             tiles[0] = new Tile();
             tiles[0].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/000.png"));
-            tiles[0].collision = true;
             
             tiles[1] = new Tile();
             tiles[1].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/001.png"));
@@ -34,7 +33,8 @@ public class TileManager {
         
             tiles[4] = new Tile();
             tiles[4].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/004.png"));
-    
+            tiles[4].collision = true;
+
             tiles[5] = new Tile();
             tiles[5].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/005.png"));
             
@@ -66,14 +66,30 @@ public class TileManager {
 
     public void draw(Graphics2D g2,String map){
         loadMap(map);
+
+        int screenY, screenX , worldX, worldY;
+        // i is for y-pos and j is for x-pos
+
         for(int i=0; i<gp.maxWorldRow; i++){
             for(int j=0; j<gp.maxWorldCol; j++){
-                int worldX = j * gp.tileSize  * 4;
-                int worldY = i * gp.tileSize * 2;
-                g2.drawImage( tiles[ mapTileNum[i][j] ].image, worldX , worldY, gp.tileSize*16, gp.tileSize*16, null );
+                worldX = j * gp.tileSize  * 4;
+                worldY = i * gp.tileSize * 4;
+
+                screenX = worldX - gp.player.x + gp.player.cameraX;
+                screenY = worldY - gp.player.y + gp.player.cameraY;
+                if(worldX > gp.player.x - gp.player.cameraX - (8 * gp.tileSize ) &&
+                worldX < gp.player.x + gp.player.cameraX + (8 * gp.tileSize) &&
+                worldY > gp.player.y - gp.player.cameraY - ( 8 * gp.tileSize) &&
+
+                worldY < gp.player.y + gp.player.cameraY + ( 8 * gp.tileSize) ){
+
+                g2.drawImage( tiles[ mapTileNum[i][j] ].image, screenX , screenY, gp.tileSize*4, gp.tileSize*4, null );
+             }
+
             }
         }
-        /*i is for y-pos and j is for x-pos
+        /*
+
         //for(int i=0; i<gp.maxWorldRow; i++){
             for(int j=0; j<gp.maxWorldCol; j++){
                 int worldX = j * gp.tileSize;

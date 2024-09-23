@@ -4,7 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import javax.swing.JPanel;
-import java.awt.Toolkit;
 import javax.swing.plaf.DimensionUIResource;
 
 public class PanelGame extends JPanel implements Runnable{
@@ -13,12 +12,17 @@ public class PanelGame extends JPanel implements Runnable{
     public int maxWorldCol = 32;
     public int maxWorldRow = 24;
     public int tileSize = 16;
-
+    public int WorldH = tileSize * maxWorldCol;
+    public int WorldY = tileSize * maxWorldRow;
+    GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+    int width = gd.getDisplayMode().getWidth();
+    int height = gd.getDisplayMode().getHeight();
     TileManager tileM = new TileManager(this);
     int FPS = 45;
     Thread gameThread;
+    CollisioneDetector cDetector = new CollisioneDetector(this);
     ControllerKey controllK = new ControllerKey();
-    Player player = new Player(this, controllK);
+    public Player player = new Player(this, controllK);
     int varx = 100;
     int vary = 100;
     int speed = 10;
@@ -27,9 +31,6 @@ public class PanelGame extends JPanel implements Runnable{
 
     public PanelGame(){
 
-        GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-        int width = gd.getDisplayMode().getWidth();
-        int height = gd.getDisplayMode().getHeight();
         this.setPreferredSize(new DimensionUIResource(width, height));
         this.setDoubleBuffered(true);
         this.setBackground(Color.white);
@@ -86,7 +87,10 @@ public class PanelGame extends JPanel implements Runnable{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.red);
         tileM.draw(g2, "map.txt");
         player.draw(g2);
+        g2.drawRect(player.hitBox.x, player.hitBox.y, player.hitBox.width, player.hitBox.height);
+
     }
 }

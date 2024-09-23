@@ -1,3 +1,4 @@
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
 public class Entity {
@@ -7,6 +8,7 @@ public class Entity {
 
     public int x,y,speed, imageCounter, imageNumber ;
     public BufferedImage[] up, down, left, right ;
+    public Rectangle hitBox;
     public String direction ;
-    public boolean idle;
+    public boolean idle, collision;
 }

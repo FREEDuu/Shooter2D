@@ -6,6 +6,7 @@ import javax.imageio.ImageIO;
 
 public class Player extends Entity{
 
+    int cameraX, cameraY;
     PanelGame pg;
     ControllerKey controllerK;
 
@@ -14,6 +15,10 @@ public class Player extends Entity{
         this.controllerK = controllerK;
         this.SetDefault();
         this.getPgImgs();
+        cameraY =( pg.height / 2 ) - ((pg.tileSize / 2) * 8);
+        cameraX = ( pg.width / 2 ) - ((pg.tileSize / 2) * 8);
+        this.hitBox = new Rectangle((pg.tileSize * 3), (2 * pg.tileSize), pg.tileSize * 2, pg.tileSize * 3);
+
 
     }
 
@@ -24,22 +29,22 @@ public class Player extends Entity{
         right = new BufferedImage[4];
 
         try{
-            up[0] = ImageIO.read(new File("/images/player/walk/up.png")).getSubimage(0, 0, 32, 32);
-            up[1] = ImageIO.read(new File("/images/player/walk/up.png")).getSubimage(32, 0, 32, 32);
-            up[2] = ImageIO.read(new File("/images/player/walk/up.png")).getSubimage(64, 0, 32, 32);
-            up[3] = ImageIO.read(new File("/images/player/walk/up.png")).getSubimage(96, 0, 32, 32);
-            right[0] = ImageIO.read(new File("/images/player/walk/right.png")).getSubimage(0, 0, 32, 32);
-            right[1] = ImageIO.read(new File("/images/player/walk/right.png")).getSubimage(32, 0, 32, 32);
-            right[2] = ImageIO.read(new File("/images/player/walk/right.png")).getSubimage(64, 0, 32, 32);
-            right[3] = ImageIO.read(new File("/images/player/walk/right.png")).getSubimage(96, 0, 32, 32);
-            left[0] = ImageIO.read(new File("/images/player/walk/left.png")).getSubimage(0, 0, 32, 32);
-            left[1] = ImageIO.read(new File("/images/player/walk/left.png")).getSubimage(32, 0, 32, 32);
-            left[2] = ImageIO.read(new File("/images/player/walk/left.png")).getSubimage(64, 0, 32, 32);
-            left[3] = ImageIO.read(new File("/images/player/walk/left.png")).getSubimage(96, 0, 32, 32);
-            down[0] = ImageIO.read(new File("/images/player/walk/down.png")).getSubimage(0, 0, 32, 32);
-            down[1] = ImageIO.read(new File("/images/player/walk/down.png")).getSubimage(32, 0, 32, 32);
-            down[2] = ImageIO.read(new File("/images/player/walk/down.png")).getSubimage(64, 0, 32, 32);
-            down[3] =ImageIO.read(new File("/images/player/walk/down.png")).getSubimage(96, 0, 32, 32);
+            up[0] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(0, 0, 32, 32);
+            up[1] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(32, 0, 32, 32);
+            up[2] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(64, 0, 32, 32);
+            up[3] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(96, 0, 32, 32);
+            right[0] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(0, 0, 32, 32);
+            right[1] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(32, 0, 32, 32);
+            right[2] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(64, 0, 32, 32);
+            right[3] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(96, 0, 32, 32);
+            left[0] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(0, 0, 32, 32);
+            left[1] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(32, 0, 32, 32);
+            left[2] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(64, 0, 32, 32);
+            left[3] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(96, 0, 32, 32);
+            down[0] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(0, 0, 32, 32);
+            down[1] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(32, 0, 32, 32);
+            down[2] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(64, 0, 32, 32);
+            down[3] =ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(96, 0, 32, 32);
         }
         catch(Exception e){
             e.printStackTrace();
@@ -58,19 +63,15 @@ public class Player extends Entity{
     public void update(){
         if(controllerK.up || controllerK.down || controllerK.left || controllerK.right){
             if(controllerK.up == true){
-                y -= speed;
                 direction = "up";
             }
             if(controllerK.down == true){
-                y += speed;
                 direction = "down";
             }
             if(controllerK.left == true){
-                x -= speed;
                 direction = "left";
             }
             if(controllerK.right == true){
-                x += speed;
                 direction = "right";
             }
             imageCounter++;
@@ -80,9 +81,22 @@ public class Player extends Entity{
                 imageCounter = 0;
             }
             idle = false;
-        }
+            collision = false;
+            pg.cDetector.checkTile(this);
+
+            if(collision == false){
+
+                switch(direction){
+                    case "up": y -= speed; break;
+                    case "down": y += speed; break;
+                    case "left": x -= speed; break;
+                    case "right": x += speed; break;
+                }
+            }
         else{
             idle = true;
+        }
+        
         }
  
     }
@@ -126,7 +140,7 @@ public class Player extends Entity{
                 break;
         }
 
-        g2.drawImage(image, x, y, pg.tileSize*8, pg.tileSize*8, null);
+        g2.drawImage(image, cameraX, cameraY, pg.tileSize*8, pg.tileSize*8, null);
         
     }
 }
