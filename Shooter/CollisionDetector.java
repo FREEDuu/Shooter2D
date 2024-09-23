@@ -1,8 +1,8 @@
-public class CollisioneDetector {
+public class CollisionDetector {
 
     PanelGame pg;
 
-    public CollisioneDetector(PanelGame pg){
+    public CollisionDetector(PanelGame pg){
         this.pg = pg;
     }
 

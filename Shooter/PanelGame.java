@@ -20,7 +20,7 @@ public class PanelGame extends JPanel implements Runnable{
     TileManager tileM = new TileManager(this);
     int FPS = 45;
     Thread gameThread;
-    CollisioneDetector cDetector = new CollisioneDetector(this);
+    CollisionDetector cDetector = new CollisionDetector(this);
     ControllerKey controllK = new ControllerKey();
     public Player player = new Player(this, controllK);
     int varx = 100;

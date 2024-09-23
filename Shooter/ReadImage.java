@@ -1,4 +1,4 @@
-import java.awt.image.*;;
+import java.awt.image.*;
 
 public class ReadImage {
     public static int[][] get2DPixelArraySlow(BufferedImage sampleImage) {
