@@ -6,9 +6,10 @@ public class Entity {
     // classe generica per implementare poi il player ed i mob
     // all'interno ci saranno funzioni generiche come paintComponent ecc
 
-    public int x,y,speed, imageCounter, imageNumber ;
+    public int x,y,speed, imageCounter, imageNumber, life ;
     public BufferedImage[] up, down, left, right ;
     public Rectangle hitBox;
-    public String direction ;
+    public String direction , name;
     public boolean idle, collision;
+    public PanelGame gp;
 }

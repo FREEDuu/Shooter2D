@@ -1,14 +1,14 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
 import javax.imageio.ImageIO;
 
 public class Player extends Entity{
 
     int cameraX, cameraY;
-    PanelGame pg;
     ControllerKey controllerK;
+    PanelGame pg;
+    boolean reload;
 
     public Player(PanelGame pg, ControllerKey controllerK){
         this.pg = pg;
@@ -51,6 +51,10 @@ public class Player extends Entity{
         }
     }
 
+    public void shoot(){
+        pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x , MouseInfo.getPointerInfo().getLocation().y));
+    }
+
     public void SetDefault(){
         this.x = 150;
         this.y = 150;
@@ -79,6 +83,7 @@ public class Player extends Entity{
                 imageNumber++;
                 imageNumber = imageNumber % 4;
                 imageCounter = 0;
+                reload = true;
             }
             idle = false;
             collision = false;
@@ -97,6 +102,10 @@ public class Player extends Entity{
             idle = true;
         }
         
+        }
+        if(controllerK.shoot && reload){
+            shoot();
+            reload = false;
         }
  
     }

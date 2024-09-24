@@ -1,17 +1,16 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
 
 public class ControllerKey implements KeyListener {
 
     // variabili che servono per capire che tasto wasd si sta premendo, vengono cambiate a t/f quando viene premuto/rilasciato wasd
 
-    boolean up;
-    boolean down;
-    boolean right;
-    boolean left;
+    boolean up, down, left, right, shoot;
 
     @Override
     public void keyTyped(KeyEvent e) {
+
     }
 
     @Override
@@ -29,6 +28,9 @@ public class ControllerKey implements KeyListener {
         }
         if(keycode == KeyEvent.VK_D){
             right = true;
+        }
+        if(keycode == KeyEvent.VK_SPACE){
+            shoot = true;
         }
 
     }
@@ -49,7 +51,14 @@ public class ControllerKey implements KeyListener {
         if(keycode == KeyEvent.VK_D){
             right = false;
         }
+        if(keycode == KeyEvent.VK_SPACE){
+            shoot = false;
+        }
     }
 
-    
+    public void mousePressed(MouseEvent e) {
+        if(e.getButton() == MouseEvent.BUTTON1){
+            System.out.println("Left button clicked");
+        }
+    }
 }
