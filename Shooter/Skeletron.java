@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 
 public class Skeletron extends Entity{
 
-    Random choise = new Random();
+    Random choice = new Random();
     int rand;
 
     public Skeletron(PanelGame gp){
@@ -110,7 +110,7 @@ public class Skeletron extends Entity{
             imageNumber++;
             imageNumber = imageNumber % 3;
             imageCounter = 0;
-            rand = choise.nextInt(4);
+            rand = choice.nextInt(4);
         if(rand == 0) {
             direction = "up";
         }
