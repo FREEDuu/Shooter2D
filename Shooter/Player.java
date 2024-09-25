@@ -17,8 +17,8 @@ public class Player extends Entity{
         this.reloadCounter = 0;
         this.SetDefault();
         this.getPgImgs();
-        cameraY = ( pg.height / 2 ) - ((pg.tileSize / 2) * 8);
-        cameraX = ( pg.width / 2 ) - ((pg.tileSize / 2) * 8);
+        cameraY = ( pg.height / 2);
+        cameraX = ( pg.width / 2) ;
         this.reload = true;
         this.hitBox = new Rectangle((pg.tileSize * 3), (2 * pg.tileSize), pg.tileSize * 2, pg.tileSize * 3);
 
@@ -59,8 +59,8 @@ public class Player extends Entity{
     }
 
     public void SetDefault(){
-        this.x = 300;
-        this.y = 300;
+        this.x = 500;
+        this.y = 500;
         this.speed = 10;
         this.direction = "down";
         this.imageCounter = 0;

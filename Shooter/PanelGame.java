@@ -22,7 +22,7 @@ public class PanelGame extends JPanel implements Runnable{
     public int width = gd.getDisplayMode().getWidth();
     public int height = gd.getDisplayMode().getHeight();
     TileManager tileM = new TileManager(this);
-    int FPS = 45;
+    int FPS = 60;
     Thread gameThread;
     CollisionDetector cDetector = new CollisionDetector(this);
     ControllerKey controllK = new ControllerKey();

@@ -20,10 +20,9 @@ public class Bullet extends Projectile{
         this.damage = 2;
         this.angle = Utils.getAngle(pg.width/2, pg.height/2, x, y);
         this.getBulletImg();
-        this.x = pg.player.x - (img.getWidth()/2)*2 + ( pg.tileSize*8 /2);
+        this.x = pg.player.x - (img.getWidth()/2)*2 + ( pg.tileSize*8/2);
         this.y = pg.player.y - (img.getHeight()/2)*2 + (pg.tileSize*8/2);
-
-}
+    }
 
     public void getBulletImg() {
 

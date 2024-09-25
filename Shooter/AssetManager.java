@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class AssetManager {
     PanelGame pg;
-    Random choise =  new Random();
+    Random choice =  new Random();
     int rand;
 
     public AssetManager(PanelGame pg){
@@ -10,10 +10,10 @@ public class AssetManager {
     }
 
     public void placeMonster(){
-        for(int i = 0; i < choise.nextInt(19); i++){
+        for(int i = 0; i < choice.nextInt(19); i++){
             pg.Skeletrons[i] = new Skeletron(pg);
-            pg.Skeletrons[i].x = choise.nextInt(150, 200);
-            pg.Skeletrons[i].y = choise.nextInt(150, 200);
+            pg.Skeletrons[i].x = choice.nextInt(150, 200);
+            pg.Skeletrons[i].y = choice.nextInt(150, 200);
         }
     }
 }
