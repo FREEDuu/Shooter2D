@@ -15,8 +15,11 @@ public class Skeletron extends Entity{
 
         this.name = "skeletron";
         this.direction = "down";
+        this.collision = false;
         this.speed = 4;
         this.hitBox = new Rectangle(8,8,40,40);
+        this.solidAreaDefaultX = this.hitBox.x;
+        this.solidAreaDefaultY = this.hitBox.y;
         this.life = 10;
         this.gp = gp;
         this.imageCounter = 0;
@@ -124,11 +127,16 @@ public class Skeletron extends Entity{
             direction = "down";
         }
         }
+        collision = false;
+        gp.cDetector.checkTile(this);
+        if(collision == false){
         switch(direction){
             case "up": y -= speed; break;
             case "down": y += speed; break;
             case "left": x += speed; break;
             case "right": x -= speed; break;
+        }
+
         }
         idle = false;
     }

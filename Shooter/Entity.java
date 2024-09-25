@@ -9,7 +9,9 @@ public class Entity {
     public int x,y,speed, imageCounter, imageNumber, life ;
     public BufferedImage[] up, down, left, right ;
     public Rectangle hitBox;
+    public BufferedImage img;
     public String direction , name;
+    public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean idle, collision;
     public PanelGame gp;
 }

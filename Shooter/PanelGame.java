@@ -19,8 +19,8 @@ public class PanelGame extends JPanel implements Runnable{
     public int WorldH = tileSize * maxWorldCol;
     public int WorldY = tileSize * maxWorldRow;
     GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
-    int width = gd.getDisplayMode().getWidth();
-    int height = gd.getDisplayMode().getHeight();
+    public int width = gd.getDisplayMode().getWidth();
+    public int height = gd.getDisplayMode().getHeight();
     TileManager tileM = new TileManager(this);
     int FPS = 45;
     Thread gameThread;
@@ -95,6 +95,9 @@ public class PanelGame extends JPanel implements Runnable{
                 Skeletrons[i].update();
             }
         }
+        for(int i = 0; i < bullets.size(); i++){
+            bullets.get(i).update(bullets.get(i).angle); 
+        }
     }
 
     // funzione generica predefinita di swing che eredita da paintcomponent base
@@ -110,8 +113,8 @@ public class PanelGame extends JPanel implements Runnable{
                 Skeletrons[i].draw(g2);
             }
         }
-        bullets.forEach((bullet) -> bullet.draw(g2)); 
-        g2.drawRect(player.hitBox.x, player.hitBox.y, player.hitBox.width, player.hitBox.height);
-
+        for(int i = 0; i < bullets.size(); i++ ){
+            bullets.get(i).draw(g2); 
+        }
     }
 }

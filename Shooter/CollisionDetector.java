@@ -56,5 +56,46 @@ public class CollisionDetector {
 
         }
     }
+    public int checkEntity(Entity entity, Entity target) {
+        
+        int index = 1000;
+        
+        //imposta speed a entity.speed normalemente, aumenta se attacco
+        int reach = entity.speed;
+
+                
+                //imposta le posizioni delle aree dei rettangoli "come sono nello spazio" (e poi reset)
+                
+            entity.hitBox.x = entity.hitBox.x + entity.x;    
+            entity.hitBox.y = entity.hitBox.y + entity.y;
+            
+            target.hitBox.x = target.hitBox.x + target.x;
+            target.hitBox.y = target.hitBox.y + target.y;
+                
+                
+            if( entity.hitBox.intersects(target.hitBox)) {
+                if( target != entity){
+                    entity.collision = true;
+                    }
+                }
+            switch(entity.direction) {
+                    //if the player is attacking we offset his solid area to the weapon and check collision
+                    case "up": entity.hitBox.y -= reach; break;
+                    case "down": entity.hitBox.y += reach; break;
+                    case "left": entity.hitBox.x -= reach; break;
+                    case "right": entity.hitBox.x += reach;  break;
+                }
+                
+                //restore dafaults
+            entity.hitBox.x = entity.solidAreaDefaultX;
+            entity.hitBox.y = entity.solidAreaDefaultY;
+            target.hitBox.x = target.solidAreaDefaultX;
+            target.hitBox.y = target.solidAreaDefaultY;
+
+            return index;
+            }
+
 
 }
+
+    

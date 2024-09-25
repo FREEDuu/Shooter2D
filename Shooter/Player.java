@@ -9,14 +9,17 @@ public class Player extends Entity{
     ControllerKey controllerK;
     PanelGame pg;
     boolean reload;
+    int reloadCounter;
 
     public Player(PanelGame pg, ControllerKey controllerK){
         this.pg = pg;
         this.controllerK = controllerK;
+        this.reloadCounter = 0;
         this.SetDefault();
         this.getPgImgs();
-        cameraY =( pg.height / 2 ) - ((pg.tileSize / 2) * 8);
+        cameraY = ( pg.height / 2 ) - ((pg.tileSize / 2) * 8);
         cameraX = ( pg.width / 2 ) - ((pg.tileSize / 2) * 8);
+        this.reload = true;
         this.hitBox = new Rectangle((pg.tileSize * 3), (2 * pg.tileSize), pg.tileSize * 2, pg.tileSize * 3);
 
 
@@ -56,8 +59,8 @@ public class Player extends Entity{
     }
 
     public void SetDefault(){
-        this.x = 150;
-        this.y = 150;
+        this.x = 300;
+        this.y = 300;
         this.speed = 10;
         this.direction = "down";
         this.imageCounter = 0;
@@ -65,6 +68,15 @@ public class Player extends Entity{
     }
 
     public void update(){
+        reloadCounter++;
+        if(reloadCounter > 70){
+            reload = true;
+            reloadCounter = 0;
+        }
+        if(controllerK.shoot && reload){
+            shoot();
+            reload = false;
+        }
         if(controllerK.up || controllerK.down || controllerK.left || controllerK.right){
             if(controllerK.up == true){
                 direction = "up";
@@ -83,7 +95,6 @@ public class Player extends Entity{
                 imageNumber++;
                 imageNumber = imageNumber % 4;
                 imageCounter = 0;
-                reload = true;
             }
             idle = false;
             collision = false;
@@ -102,10 +113,6 @@ public class Player extends Entity{
             idle = true;
         }
         
-        }
-        if(controllerK.shoot && reload){
-            shoot();
-            reload = false;
         }
  
     }
