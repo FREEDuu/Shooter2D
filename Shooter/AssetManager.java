@@ -10,7 +10,7 @@ public class AssetManager {
     }
 
     public void placeMonster(){
-        for(int i = 0; i < choice.nextInt(19); i++){
+        for(int i = 0; i < choice.nextInt(9,19); i++){
             pg.Skeletrons[i] = new Skeletron(pg);
             pg.Skeletrons[i].x = choice.nextInt(150, 200);
             pg.Skeletrons[i].y = choice.nextInt(150, 200);

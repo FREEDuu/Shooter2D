@@ -28,7 +28,7 @@ public class Bullet extends Projectile{
 
 
         try{
-            img = ImageIO.read(new File("images/projectile/BulletProjectile.png"));
+            img = ImageIO.read(new File("Shooter/images/projectile/BulletProjectile.png"));
             //img = Utils.rotate(img, 90);
         }
         catch(Exception e){

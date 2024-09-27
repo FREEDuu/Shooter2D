@@ -22,12 +22,18 @@ public class PanelGame extends JPanel implements Runnable{
     public int width = gd.getDisplayMode().getWidth();
     public int height = gd.getDisplayMode().getHeight();
     TileManager tileM = new TileManager(this);
+    UI uiManager = new UI(this);
+    public String playerChoice ; 
     int FPS = 60;
     Thread gameThread;
+    public int gameState;
+    public int startState = 0;
+    public int playState = 1;
+    public int pauseState = 2;
+    public Player player;
     CollisionDetector cDetector = new CollisionDetector(this);
-    ControllerKey controllK = new ControllerKey();
+    ControllerKey controllK = new ControllerKey(this);
     AssetManager assetM = new AssetManager(this);
-    public Player player = new Player(this, controllK);
     public Skeletron[] Skeletrons = new Skeletron[20]; 
     int varx = 100;
     int vary = 100;
@@ -35,10 +41,11 @@ public class PanelGame extends JPanel implements Runnable{
 
     // Costruttore PanelGame, qui con startGame viene avviato il Mainloop del gioco, viene aggiunto il keyListener ecc.
     public PanelGame(){
-
+        this.playerChoice = "toChoise";
+        this.gameState = startState;
         this.setPreferredSize(new DimensionUIResource(width, height));
         this.setDoubleBuffered(true);
-        this.setBackground(Color.white);
+        this.setBackground(Color.black);
         this.addKeyListener(controllK);
         this.setFocusable(true);
         this.setupGame();
@@ -85,19 +92,25 @@ public class PanelGame extends JPanel implements Runnable{
             }
         }
     }
-
+    public void setupStartGame(){
+        player = new Player(this, controllK);
+    }
     // funzione update chiamata nel gameloop
 
     public void update(){
-        player.update();
-        for(int i = 0; i < Skeletrons.length; i++ ){
-            if(Skeletrons[i] != null){
-                Skeletrons[i].update();
+
+        if(playState == gameState){
+            player.update();
+            for(int i = 0; i < Skeletrons.length; i++ ){
+                if(Skeletrons[i] != null){
+                    Skeletrons[i].update();
+                }
+            }
+            for(int i = 0; i < bullets.size(); i++){
+                bullets.get(i).update(bullets.get(i).angle); 
             }
         }
-        for(int i = 0; i < bullets.size(); i++){
-            bullets.get(i).update(bullets.get(i).angle); 
-        }
+
     }
 
     // funzione generica predefinita di swing che eredita da paintcomponent base
@@ -105,16 +118,24 @@ public class PanelGame extends JPanel implements Runnable{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        g2.setColor(Color.red);
-        tileM.draw(g2, "map.txt");
-        player.draw(g2);
-        for(int i = 0; i < Skeletrons.length; i++ ){
-            if(Skeletrons[i] != null){
-                Skeletrons[i].draw(g2);
+
+        if(gameState == startState){
+            uiManager.draw(g2);
+        }
+        else{
+            g2.setColor(Color.red);
+            tileM.draw(g2, "map.txt");
+            player.draw(g2);
+            for(int i = 0; i < Skeletrons.length; i++ ){
+                if(Skeletrons[i] != null){
+                    Skeletrons[i].draw(g2);
+                }
             }
+            for(int i = 0; i < bullets.size(); i++ ){
+                bullets.get(i).draw(g2); 
+            }
+            uiManager.draw(g2);
         }
-        for(int i = 0; i < bullets.size(); i++ ){
-            bullets.get(i).draw(g2); 
-        }
+        
     }
 }

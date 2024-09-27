@@ -20,6 +20,7 @@ public class Player extends Entity{
         cameraY = ( pg.height / 2);
         cameraX = ( pg.width / 2) ;
         this.reload = true;
+        this.HP = new Rectangle(0,0, 500, 50);
         this.hitBox = new Rectangle((pg.tileSize * 3), (2 * pg.tileSize), pg.tileSize * 2, pg.tileSize * 3);
 
 
@@ -32,22 +33,44 @@ public class Player extends Entity{
         right = new BufferedImage[4];
 
         try{
-            up[0] = ImageIO.read(new File("images/player/walk/up.png")).getSubimage(0, 0, 32, 32);
-            up[1] = ImageIO.read(new File("images/player/walk/up.png")).getSubimage(32, 0, 32, 32);
-            up[2] = ImageIO.read(new File("images/player/walk/up.png")).getSubimage(64, 0, 32, 32);
-            up[3] = ImageIO.read(new File("images/player/walk/up.png")).getSubimage(96, 0, 32, 32);
-            right[0] = ImageIO.read(new File("images/player/walk/right.png")).getSubimage(0, 0, 32, 32);
-            right[1] = ImageIO.read(new File("images/player/walk/right.png")).getSubimage(32, 0, 32, 32);
-            right[2] = ImageIO.read(new File("images/player/walk/right.png")).getSubimage(64, 0, 32, 32);
-            right[3] = ImageIO.read(new File("images/player/walk/right.png")).getSubimage(96, 0, 32, 32);
-            left[0] = ImageIO.read(new File("images/player/walk/left.png")).getSubimage(0, 0, 32, 32);
-            left[1] = ImageIO.read(new File("images/player/walk/left.png")).getSubimage(32, 0, 32, 32);
-            left[2] = ImageIO.read(new File("images/player/walk/left.png")).getSubimage(64, 0, 32, 32);
-            left[3] = ImageIO.read(new File("images/player/walk/left.png")).getSubimage(96, 0, 32, 32);
-            down[0] = ImageIO.read(new File("images/player/walk/down.png")).getSubimage(0, 0, 32, 32);
-            down[1] = ImageIO.read(new File("images/player/walk/down.png")).getSubimage(32, 0, 32, 32);
-            down[2] = ImageIO.read(new File("images/player/walk/down.png")).getSubimage(64, 0, 32, 32);
-            down[3] =ImageIO.read(new File("images/player/walk/down.png")).getSubimage(96, 0, 32, 32);
+
+            if (pg.playerChoice.equals("Pistolero")) {
+                up[0] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(0, 0, 32, 32);
+                up[1] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(32, 0, 32, 32);
+                up[2] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(64, 0, 32, 32);
+                up[3] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(96, 0, 32, 32);
+                right[0] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(0, 0, 32, 32);
+                right[1] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(32, 0, 32, 32);
+                right[2] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(64, 0, 32, 32);
+                right[3] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(96, 0, 32, 32);
+                left[0] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(0, 0, 32, 32);
+                left[1] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(32, 0, 32, 32);
+                left[2] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(64, 0, 32, 32);
+                left[3] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(96, 0, 32, 32);
+                down[0] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(0, 0, 32, 32);
+                down[1] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(32, 0, 32, 32);
+                down[2] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(64, 0, 32, 32);
+                down[3] =ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(96, 0, 32, 32);
+            }
+            else if(pg.playerChoice.equals("Mago")){
+                up[0] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(0, 0, 32, 32);
+                up[1] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(32, 0, 32, 32);
+                up[2] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(64, 0, 32, 32);
+                up[3] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(96, 0, 32, 32);
+                right[0] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(0, 0, 32, 32);
+                right[1] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(32, 0, 32, 32);
+                right[2] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(64, 0, 32, 32);
+                right[3] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(96, 0, 32, 32);
+                left[0] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(0, 0, 32, 32);
+                left[1] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(32, 0, 32, 32);
+                left[2] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(64, 0, 32, 32);
+                left[3] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(96, 0, 32, 32);
+                down[0] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(0, 0, 32, 32);
+                down[1] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(32, 0, 32, 32);
+                down[2] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(64, 0, 32, 32);
+                down[3] =ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(96, 0, 32, 32);
+            }
+
         }
         catch(Exception e){
             e.printStackTrace();
@@ -157,6 +180,8 @@ public class Player extends Entity{
         }
 
         g2.drawImage(image, cameraX, cameraY, pg.tileSize*8, pg.tileSize*8, null);
-        
+        g2.setColor(Color.red);
+        g2.drawRect(HP.x, HP.y, HP.width, HP.height);
+        g2.fillRect(HP.x +10, HP.y + 10, HP.width, HP.height);
     }
 }

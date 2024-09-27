@@ -10,7 +10,7 @@ public class TileManager {
 
     PanelGame gp;
     Tile [] tiles;
-    int[] [] mapTileNum  = new int[24][32];
+    int[] [] mapTileNum  = new int[68][68];
 
     public TileManager(PanelGame gp){
         this.gp = gp;

@@ -17,7 +17,7 @@ public class Skeletron extends Entity{
         this.direction = "down";
         this.collision = false;
         this.speed = 4;
-        this.hitBox = new Rectangle(8,8,40,40);
+        this.hitBox = new Rectangle(0,0,48,48);
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;
         this.life = 10;
@@ -35,18 +35,18 @@ public class Skeletron extends Entity{
         right = new BufferedImage[3];
 
         try{
-            up[0] = ImageIO.read(new File("images/Boss/walk.png")).getSubimage(0, 0, 64, 64);
-            up[1] = ImageIO.read(new File("images/Boss/walk.png")).getSubimage(256, 0, 64, 64);
-            up[2] = ImageIO.read(new File("images/Boss/walk.png")).getSubimage(512, 0, 64, 64);
-            right[0] = ImageIO.read(new File("images/Boss/walk.png")).getSubimage(0, 64, 64, 64);
-            right[1] = ImageIO.read(new File("images/Boss/walk.png")).getSubimage(256, 64, 64, 64);
-            right[2] = ImageIO.read(new File("images/Boss/walk.png")).getSubimage(512, 64, 64, 64);
-            left[0] = ImageIO.read(new File("images/Boss/walk.png")).getSubimage(0, 128, 64, 64);
-            left[1] = ImageIO.read(new File("images/Boss/walk.png")).getSubimage(256, 128, 64, 64);
-            left[2] = ImageIO.read(new File("images/Boss/walk.png")).getSubimage(512, 128, 64, 64);
-            down[0] = ImageIO.read(new File("images/Boss/walk.png")).getSubimage(0, 192, 64, 64);
-            down[1] = ImageIO.read(new File("images/Boss/walk.png")).getSubimage(256, 192, 64, 64);
-            down[2] = ImageIO.read(new File("images/Boss/walk.png")).getSubimage(512, 192, 64, 64);
+            up[0] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(0, 0, 64, 64);
+            up[1] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(256, 0, 64, 64);
+            up[2] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(512, 0, 64, 64);
+            right[0] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(0, 64, 64, 64);
+            right[1] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(256, 64, 64, 64);
+            right[2] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(512, 64, 64, 64);
+            left[0] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(0, 128, 64, 64);
+            left[1] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(256, 128, 64, 64);
+            left[2] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(512, 128, 64, 64);
+            down[0] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(0, 192, 64, 64);
+            down[1] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(256, 192, 64, 64);
+            down[2] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(512, 192, 64, 64);
         }
         catch(Exception e){
             e.printStackTrace();
