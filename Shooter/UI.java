@@ -68,7 +68,7 @@ public class UI {
             g2.setColor(Color.white);
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 - pg.tileSize*12);
         
-            test = "Pistolero";
+            test = "Baby Punk";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2);
             if (arrawPos == 0) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test) , pg.height/2);
@@ -78,11 +78,18 @@ public class UI {
     
     
     
-            test = "Mago Pazzo";
+            test = "Queen";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*10);
             if (arrawPos == 1) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*10);
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*10);
+            }
+
+            test = "Er Biondo";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*20);
+            if (arrawPos == 2) {
+                this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*20);
+                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*20);
             }
         }
 

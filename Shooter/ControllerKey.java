@@ -38,6 +38,7 @@ public class ControllerKey implements KeyListener {
                 if (keycode == KeyEvent.VK_ENTER) {
                     if(pg.uiManager.arrawPos == 0){
                         pg.uiManager.startPage++;
+                        pg.uiManager.arrawPos = 0;
                     }
                     else{
                         System.exit(0);
@@ -46,24 +47,30 @@ public class ControllerKey implements KeyListener {
             }
             else{
                 if(keycode == KeyEvent.VK_W){
-                    pg.uiManager.arrawPos++;
-                    pg.uiManager.arrawPos = pg.uiManager.arrawPos % 2 ;
-    
+                    pg.uiManager.arrawPos--;
+                    if(pg.uiManager.arrawPos == -1){
+                        pg.uiManager.arrawPos = 2;
+                    }
+
                 }
                 if(keycode == KeyEvent.VK_S){
-                    pg.uiManager.arrawPos--;
+                    pg.uiManager.arrawPos++;
                     pg.uiManager.arrawPos = Math.abs(pg.uiManager.arrawPos);
-                    pg.uiManager.arrawPos = pg.uiManager.arrawPos % 2 ;
+                    pg.uiManager.arrawPos = pg.uiManager.arrawPos % 3 ;
                 }
                 if (keycode == KeyEvent.VK_ENTER) {
                     if(pg.uiManager.arrawPos == 0){
-                        pg.playerChoice = "Pistolero";
+                        pg.playerChoice = "babypunk";
                         pg.setupStartGame();
                         pg.gameState = pg.playState;
 
                     }
-                    else{
-                        pg.playerChoice = "Mago";
+                    else if (pg.uiManager.arrawPos == 1) {
+                        pg.playerChoice = "queen";
+                        pg.setupStartGame();
+                        pg.gameState = pg.playState; 
+                    }else{
+                        pg.playerChoice = "erbiondo";
                         pg.setupStartGame();
                         pg.gameState = pg.playState; 
                     }

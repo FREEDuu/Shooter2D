@@ -33,42 +33,64 @@ public class Player extends Entity{
         right = new BufferedImage[4];
 
         try{
-
-            if (pg.playerChoice.equals("Pistolero")) {
-                up[0] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(0, 0, 32, 32);
-                up[1] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(32, 0, 32, 32);
-                up[2] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(64, 0, 32, 32);
-                up[3] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(96, 0, 32, 32);
-                right[0] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(0, 0, 32, 32);
-                right[1] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(32, 0, 32, 32);
-                right[2] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(64, 0, 32, 32);
-                right[3] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(96, 0, 32, 32);
-                left[0] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(0, 0, 32, 32);
-                left[1] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(32, 0, 32, 32);
-                left[2] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(64, 0, 32, 32);
-                left[3] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(96, 0, 32, 32);
-                down[0] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(0, 0, 32, 32);
-                down[1] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(32, 0, 32, 32);
-                down[2] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(64, 0, 32, 32);
-                down[3] =ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(96, 0, 32, 32);
+            String Path;
+            if (pg.playerChoice.equals("babypunk")) {
+                Path = "Shooter/images/16x16/babypunk.png";
+                down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
+                down[1] = ImageIO.read(new File(Path)).getSubimage(24, 0, 24, 24);
+                down[2] = ImageIO.read(new File(Path)).getSubimage(48, 0, 24, 24);
+                down[3] = ImageIO.read(new File(Path)).getSubimage(72, 0, 24, 24);
+                left[0] = ImageIO.read(new File(Path)).getSubimage(0, 24, 24, 24);
+                left[1] = ImageIO.read(new File(Path)).getSubimage(24, 24, 24, 24);
+                left[2] = ImageIO.read(new File(Path)).getSubimage(48, 24, 24, 24);
+                left[3] = ImageIO.read(new File(Path)).getSubimage(72, 24, 24, 24);
+                right[0] = ImageIO.read(new File(Path)).getSubimage(0, 48, 24, 24);
+                right[1] = ImageIO.read(new File(Path)).getSubimage(24, 48, 24, 24);
+                right[2] = ImageIO.read(new File(Path)).getSubimage(48, 48, 24, 24);
+                right[3] = ImageIO.read(new File(Path)).getSubimage(72, 48, 24, 24);
+                up[0] = ImageIO.read(new File(Path)).getSubimage(0, 72, 24, 24);
+                up[1] = ImageIO.read(new File(Path)).getSubimage(24, 72, 24, 24);
+                up[2] = ImageIO.read(new File(Path)).getSubimage(48, 72, 24, 24);
+                up[3] =ImageIO.read(new File(Path)).getSubimage(72, 72, 24, 24);
             }
-            else if(pg.playerChoice.equals("Mago")){
-                up[0] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(0, 0, 32, 32);
-                up[1] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(32, 0, 32, 32);
-                up[2] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(64, 0, 32, 32);
-                up[3] = ImageIO.read(new File("Shooter/images/player/walk/up.png")).getSubimage(96, 0, 32, 32);
-                right[0] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(0, 0, 32, 32);
-                right[1] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(32, 0, 32, 32);
-                right[2] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(64, 0, 32, 32);
-                right[3] = ImageIO.read(new File("Shooter/images/player/walk/right.png")).getSubimage(96, 0, 32, 32);
-                left[0] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(0, 0, 32, 32);
-                left[1] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(32, 0, 32, 32);
-                left[2] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(64, 0, 32, 32);
-                left[3] = ImageIO.read(new File("Shooter/images/player/walk/left.png")).getSubimage(96, 0, 32, 32);
-                down[0] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(0, 0, 32, 32);
-                down[1] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(32, 0, 32, 32);
-                down[2] = ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(64, 0, 32, 32);
-                down[3] =ImageIO.read(new File("Shooter/images/player/walk/down.png")).getSubimage(96, 0, 32, 32);
+            
+            else if(pg.playerChoice.equals("queen")){
+                Path = "Shooter/images/16x16/queen.png";
+                down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
+                down[1] = ImageIO.read(new File(Path)).getSubimage(24, 0, 24, 24);
+                down[2] = ImageIO.read(new File(Path)).getSubimage(48, 0, 24, 24);
+                down[3] = ImageIO.read(new File(Path)).getSubimage(72, 0, 24, 24);
+                left[0] = ImageIO.read(new File(Path)).getSubimage(0, 24, 24, 24);
+                left[1] = ImageIO.read(new File(Path)).getSubimage(24, 24, 24, 24);
+                left[2] = ImageIO.read(new File(Path)).getSubimage(48, 24, 24, 24);
+                left[3] = ImageIO.read(new File(Path)).getSubimage(72, 24, 24, 24);
+                right[0] = ImageIO.read(new File(Path)).getSubimage(0, 48, 24, 24);
+                right[1] = ImageIO.read(new File(Path)).getSubimage(24, 48, 24, 24);
+                right[2] = ImageIO.read(new File(Path)).getSubimage(48, 48, 24, 24);
+                right[3] = ImageIO.read(new File(Path)).getSubimage(72, 48, 24, 24);
+                up[0] = ImageIO.read(new File(Path)).getSubimage(0, 72, 24, 24);
+                up[1] = ImageIO.read(new File(Path)).getSubimage(24, 72, 24, 24);
+                up[2] = ImageIO.read(new File(Path)).getSubimage(48, 72, 24, 24);
+                up[3] =ImageIO.read(new File(Path)).getSubimage(72, 72, 24, 24);
+            }
+            else if(pg.playerChoice.equals("erbiondo")){
+                Path = "Shooter/images/16x16/erbiondo.png";
+                down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
+                down[1] = ImageIO.read(new File(Path)).getSubimage(24, 0, 24, 24);
+                down[2] = ImageIO.read(new File(Path)).getSubimage(48, 0, 24, 24);
+                down[3] = ImageIO.read(new File(Path)).getSubimage(72, 0, 24, 24);
+                left[0] = ImageIO.read(new File(Path)).getSubimage(0, 24, 24, 24);
+                left[1] = ImageIO.read(new File(Path)).getSubimage(24, 24, 24, 24);
+                left[2] = ImageIO.read(new File(Path)).getSubimage(48, 24, 24, 24);
+                left[3] = ImageIO.read(new File(Path)).getSubimage(72, 24, 24, 24);
+                right[0] = ImageIO.read(new File(Path)).getSubimage(0, 48, 24, 24);
+                right[1] = ImageIO.read(new File(Path)).getSubimage(24, 48, 24, 24);
+                right[2] = ImageIO.read(new File(Path)).getSubimage(48, 48, 24, 24);
+                right[3] = ImageIO.read(new File(Path)).getSubimage(72, 48, 24, 24);
+                up[0] = ImageIO.read(new File(Path)).getSubimage(0, 72, 24, 24);
+                up[1] = ImageIO.read(new File(Path)).getSubimage(24, 72, 24, 24);
+                up[2] = ImageIO.read(new File(Path)).getSubimage(48, 72, 24, 24);
+                up[3] =ImageIO.read(new File(Path)).getSubimage(72, 72, 24, 24);
             }
 
         }

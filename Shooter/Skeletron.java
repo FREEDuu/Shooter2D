@@ -29,24 +29,31 @@ public class Skeletron extends Entity{
     }
 
     public void getSkImgs(){
-        up = new BufferedImage[3];
-        down = new BufferedImage[3];
-        left = new BufferedImage[3];
-        right = new BufferedImage[3];
+        up = new BufferedImage[4];
+        down = new BufferedImage[4];
+        left = new BufferedImage[4];
+        right = new BufferedImage[4];
 
         try{
-            up[0] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(0, 0, 64, 64);
-            up[1] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(256, 0, 64, 64);
-            up[2] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(512, 0, 64, 64);
-            right[0] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(0, 64, 64, 64);
-            right[1] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(256, 64, 64, 64);
-            right[2] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(512, 64, 64, 64);
-            left[0] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(0, 128, 64, 64);
-            left[1] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(256, 128, 64, 64);
-            left[2] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(512, 128, 64, 64);
-            down[0] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(0, 192, 64, 64);
-            down[1] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(256, 192, 64, 64);
-            down[2] = ImageIO.read(new File("Shooter/images/Boss/walk.png")).getSubimage(512, 192, 64, 64);
+            String Path;
+                Path = "Shooter/images/16x16/dragon.png";
+                down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
+                down[1] = ImageIO.read(new File(Path)).getSubimage(24, 0, 24, 24);
+                down[2] = ImageIO.read(new File(Path)).getSubimage(48, 0, 24, 24);
+                down[3] = ImageIO.read(new File(Path)).getSubimage(72, 0, 24, 24);
+                right[0] = ImageIO.read(new File(Path)).getSubimage(0, 24, 24, 24);
+                right[1] = ImageIO.read(new File(Path)).getSubimage(24, 24, 24, 24);
+                right[2] = ImageIO.read(new File(Path)).getSubimage(48, 24, 24, 24);
+                right[3] = ImageIO.read(new File(Path)).getSubimage(72, 24, 24, 24);
+                left[0] = ImageIO.read(new File(Path)).getSubimage(0, 48, 24, 24);
+                left[1] = ImageIO.read(new File(Path)).getSubimage(24, 48, 24, 24);
+                left[2] = ImageIO.read(new File(Path)).getSubimage(48, 48, 24, 24);
+                left[3] = ImageIO.read(new File(Path)).getSubimage(72, 48, 24, 24);
+                up[0] = ImageIO.read(new File(Path)).getSubimage(0, 72, 24, 24);
+                up[1] = ImageIO.read(new File(Path)).getSubimage(24, 72, 24, 24);
+                up[2] = ImageIO.read(new File(Path)).getSubimage(48, 72, 24, 24);
+                up[3] =ImageIO.read(new File(Path)).getSubimage(72, 72, 24, 24);
+            
         }
         catch(Exception e){
             e.printStackTrace();
@@ -111,7 +118,7 @@ public class Skeletron extends Entity{
         imageCounter++;
         if(imageCounter > 15){
             imageNumber++;
-            imageNumber = imageNumber % 3;
+            imageNumber = imageNumber % 4;
             imageCounter = 0;
             rand = choice.nextInt(4);
         if(rand == 0) {
