@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 public class Dragonite extends Entity{
 
     Random choice = new Random();
-    int rand;
+    int rand, lifeW;
 
     public Dragonite(PanelGame gp){
 
@@ -20,6 +20,8 @@ public class Dragonite extends Entity{
         this.solidAreaDefaultY = this.hitBox.y;
         this.life = 10;
         this.gp = gp;
+        this.HP = new Rectangle(0,0,120,25);
+        this.lifeW = HP.width;
         this.imageCounter = 0;
         this.imageNumber = 0;
         this.getSkImgs();
@@ -107,6 +109,9 @@ public class Dragonite extends Entity{
 
                 g2.drawImage(image, screenX , screenY, gp.tileSize*8, gp.tileSize*8, null );
                 g2.drawRect(screenX + hitBox.x, screenY + hitBox.y, hitBox.width, hitBox.height);
+                g2.fillRect(screenX, screenY + gp.tileSize, HP.width, HP.height);
+                g2.drawRect(screenX, screenY + gp.tileSize, lifeW, HP.height);
+
             }
 
     }
@@ -156,7 +161,6 @@ public class Dragonite extends Entity{
                 }
             }
         }
-        collision = false;
         gp.cDetector.checkTile(this);
         if(collision == false){
         switch(direction){
@@ -167,6 +171,7 @@ public class Dragonite extends Entity{
         }
 
         }
+        collision = false;
         idle = false;
     }
         

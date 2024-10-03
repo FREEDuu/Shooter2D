@@ -37,6 +37,7 @@ public class PanelGame extends JPanel implements Runnable{
     AssetManager assetM = new AssetManager(this);
     public Skeletron[] Skeletrons = new Skeletron[20]; 
     public Dragonite[] Dragonites = new Dragonite[20]; 
+    public Entity[][] enemies ={ Skeletrons, Dragonites };
     int varx = 100;
     int vary = 100;
     int speed = 10;
@@ -103,11 +104,12 @@ public class PanelGame extends JPanel implements Runnable{
     public void update(){
 
         if(playState == gameState){
-            player.update();
             if(bullets.size() > 0){
                 Utils.checkCollisionBulletsEnemy(Skeletrons, bullets);
                 Utils.checkCollisionBulletsEnemy(Dragonites, bullets);
+                Utils.checkCollisionPlayerEnemy(player, enemies);
             }
+            player.update();
             for(int i = 0; i < Skeletrons.length; i++ ){
                 if(Skeletrons[i] != null){
                     Skeletrons[i].update();

@@ -36,11 +36,22 @@ public class Utils{
             indice = CollisionDetector.checkEntity(enemy[i], bullets);
 
             if(indice != 999999){
-                enemy[i] = null;
+                if(enemy[i].HP.width - 50 > 0){
+                    enemy[i].HP.width -= 50;
+                }
+                else{
+                    enemy[i] = null;
+                }
                 bullets.set(indice, null);
             }
         }
     }
 
+    public static void checkCollisionPlayerEnemy(Player player, Entity[][] enemy){
+        for(int i = 0; i < enemy.length; i++){
+            CollisionDetector.checkEnemy(player, enemy[i]);
+        }
+
+    }   
 }
 

@@ -11,6 +11,7 @@ public class Player extends Entity{
     boolean reload;
     int reloadCounter;
     Rectangle RectReload;
+    int wLife;
 
     public Player(PanelGame pg, ControllerKey controllerK){
         this.pg = pg;
@@ -24,7 +25,9 @@ public class Player extends Entity{
         this.reload = true;
         this.HP = new Rectangle(0,0, 500, 50);
         this.hitBox = new Rectangle((pg.tileSize * 3), (4 * pg.tileSize), pg.tileSize * 2, pg.tileSize * 3);
-
+        this.solidAreaDefaultX = this.hitBox.x;
+        this.solidAreaDefaultY = this.hitBox.y;
+        this.wLife = HP.width;
     }
 
     public void getPgImgs(){
@@ -102,7 +105,7 @@ public class Player extends Entity{
 
     public void shoot(){
         pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x , MouseInfo.getPointerInfo().getLocation().y));
-        pg.SoundM.PlaySoundEffect(1);
+        //pg.SoundM.PlaySoundEffect(1);
     }
 
     public void SetDefault(){
@@ -148,9 +151,7 @@ public class Player extends Entity{
                 imageCounter = 0;
             }
             idle = false;
-            collision = false;
             pg.cDetector.checkTile(this);
-
             if(collision == false){
 
                 switch(direction){
@@ -160,9 +161,12 @@ public class Player extends Entity{
                     case "right": x += speed; break;
                 }
             }
-        else{
-            idle = true;
-        }
+            
+            else{
+                idle = true;
+            }
+            collision = false;
+
         
         }
  
@@ -213,5 +217,6 @@ public class Player extends Entity{
         g2.fillRect(HP.x + pg.tileSize, HP.y + pg.tileSize*5 , RectReload.width, RectReload.height);
         g2.setColor(Color.red);
         g2.fillRect(HP.x + pg.tileSize, HP.y + pg.tileSize, HP.width, HP.height);
+        g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize, wLife, HP.height);
     }
 }

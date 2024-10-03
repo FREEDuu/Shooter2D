@@ -91,6 +91,40 @@ public class CollisionDetector {
         return index;
     }
 
+    public static void checkEnemy(Entity entity, Entity[] target) {
+        
+        Entity element;
+        for(int i=0; i< target.length; i++ ){
+            element = target[i];
+            if( element != null && entity != null){ 
+                    //imposta le posizioni delle aree dei rettangoli "come sono nello spazio" (e poi reset)
+                    
+                entity.hitBox.x = entity.hitBox.x + entity.x;    
+                entity.hitBox.y = entity.hitBox.y + entity.y;
+                
+                element.hitBox.x = element.hitBox.x + element.x;
+                element.hitBox.y = element.hitBox.y + element.y;
+                    
+                    
+                if( entity.hitBox.intersects(element.hitBox)) {
+                    if( element != entity){
+                        entity.collision = true;
+                        element.collision = true;
+                        entity.HP.width -= 10;
+                    }
+                }                    
+                    //restore dafaults
+                entity.hitBox.x = entity.solidAreaDefaultX;
+                entity.hitBox.y = entity.solidAreaDefaultY;
+                element.hitBox.x = element.solidAreaDefaultX;
+                element.hitBox.y = element.solidAreaDefaultY;
+
+                
+            }
+        }
+        
+    }
+
 
 }
 
