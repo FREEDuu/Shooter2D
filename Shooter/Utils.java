@@ -15,6 +15,8 @@ public class Utils{
     }
 
     public static double getAngle(int midx, int midy, int mousex, int mousey){
+
+        
         double difx = Math.abs(midx - mousex);
         double dify = Math.abs(midy - mousey);
 
@@ -53,5 +55,20 @@ public class Utils{
         }
 
     }   
+
+    public static void checkWhiteBulletPlayer(Entity entity, List<Bullet> Wbullets){
+        int indice = 0;
+        indice = CollisionDetector.checkEntity(entity, Wbullets);
+        if(indice != 999999){
+            if(entity.HP.width - 50 > 0){
+                entity.HP.width -= 50;
+            }
+            else{
+                entity.onDeath();
+            }
+            Wbullets.set(indice, null);
+        }
+        
+    }
 }
 

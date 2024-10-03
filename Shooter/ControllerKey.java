@@ -23,6 +23,28 @@ public class ControllerKey implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int keycode = e.getKeyCode();
 
+        if(pg.gameState == pg.loseState){
+            if(keycode == KeyEvent.VK_W){
+                pg.uiManager.arrawPos++;
+                pg.uiManager.arrawPos = pg.uiManager.arrawPos % 2 ;
+
+            }
+            if(keycode == KeyEvent.VK_S){
+                pg.uiManager.arrawPos--;
+                pg.uiManager.arrawPos = Math.abs(pg.uiManager.arrawPos);
+                pg.uiManager.arrawPos = pg.uiManager.arrawPos % 2 ;
+            }
+            if (keycode == KeyEvent.VK_ENTER) {
+                if(pg.uiManager.arrawPos == 0){
+                    pg.RestartGame();
+                    pg.uiManager.arrawPos = 0;
+                }
+                else{
+                    System.exit(0);
+                }
+            }
+        }
+
         if (pg.gameState == pg.startState) {
             if (pg.uiManager.startPage == 0) {
                 if(keycode == KeyEvent.VK_W){

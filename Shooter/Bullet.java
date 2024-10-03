@@ -12,17 +12,30 @@ public class Bullet extends Projectile{
     BufferedImage img;
     Random rand = new Random();
     int bulletx, bullety;
+    boolean PlayerShoot;
 
-    public Bullet(PanelGame pg, int x, int y){
+    public Bullet(PanelGame pg, int x, int y, boolean ShootbyPlayer){
         this.gp = pg; 
         this.name = "Bullet";
-        this.speed = 40;
         this.cost = 3;
+        this.PlayerShoot = ShootbyPlayer;
         this.damage = 2;
-        this.angle = Utils.getAngle(pg.width/2, pg.height/2, x, y);
+        
         this.getBulletImg();
-        this.x = pg.player.x - (img.getWidth()/2)*2 + ( pg.tileSize*8/2);
-        this.y = pg.player.y - (img.getHeight()/2)*2 + (pg.tileSize*8/2);
+        if(ShootbyPlayer){
+            this.x = pg.player.x - (img.getWidth()/2)*2 + ( pg.tileSize*8/2);
+            this.y = pg.player.y - (img.getHeight()/2)*2 + (pg.tileSize*8/2);
+            this.angle = Utils.getAngle(pg.width/2, pg.height/2, x, y);
+            this.speed = 40;
+        }
+        else{
+            this.x = x;
+            this.y = y;
+            this.angle = Utils.getAngle(this.x, this.y, pg.player.x, pg.player.y);
+            this.speed = 20;
+
+        }
+  
         this.hitBox = new Rectangle(gp.tileSize,gp.tileSize,gp.tileSize*2,gp.tileSize*2);
     }
 

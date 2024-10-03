@@ -104,7 +104,7 @@ public class Player extends Entity{
     }
 
     public void shoot(){
-        pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x , MouseInfo.getPointerInfo().getLocation().y));
+        pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x , MouseInfo.getPointerInfo().getLocation().y, true));
         //pg.SoundM.PlaySoundEffect(1);
     }
 
@@ -120,9 +120,9 @@ public class Player extends Entity{
     public void update(){
         reloadCounter++;
         if(RectReload.width < 350){
-            RectReload.width += 5;
+            RectReload.width += 10;
         }
-        if(reloadCounter > 70){
+        if(reloadCounter > 35){
             reload = true;
             reloadCounter = 0;
         }
@@ -151,7 +151,9 @@ public class Player extends Entity{
                 imageCounter = 0;
             }
             idle = false;
+            collision = false;
             pg.cDetector.checkTile(this);
+            Utils.checkCollisionPlayerEnemy(this, pg.enemies);
             if(collision == false){
 
                 switch(direction){
@@ -165,7 +167,6 @@ public class Player extends Entity{
             else{
                 idle = true;
             }
-            collision = false;
 
         
         }
@@ -218,5 +219,9 @@ public class Player extends Entity{
         g2.setColor(Color.red);
         g2.fillRect(HP.x + pg.tileSize, HP.y + pg.tileSize, HP.width, HP.height);
         g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize, wLife, HP.height);
+    }
+
+    public void onDeath(){
+        pg.gameState = pg.loseState;
     }
 }

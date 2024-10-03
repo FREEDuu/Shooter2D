@@ -19,6 +19,38 @@ public class UI {
 
         if(pg.gameState == pg.playState){
             // disegna vita e mana
+            String test = "Livello " + Integer.toString(pg.Lvl);
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.tileSize*4);
+
+        }
+        else if(pg.gameState == pg.loseState){
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+            String test = "Livello Raggiunto : "+ Integer.toString(pg.Lvl);
+            g2.setColor(Color.white);
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 - pg.tileSize*12);
+        
+            test = "Riavvia Parita";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2);
+            if (arrawPos == 0) {
+                this.g2.drawString(">", pg.width/2 - getXofText(g2, test) , pg.height/2);
+                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2);
+        
+            }
+    
+    
+    
+            test = "Esci dal Gioco";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*10);
+            if (arrawPos == 1) {
+                this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*10);
+                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*10);
+            }
+    
+    
+            test = "Best Record : LvL 10";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*25);
+
+
         }
         else if(pg.gameState == pg.pauseState){
             // metti in pausa

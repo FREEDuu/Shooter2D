@@ -104,6 +104,14 @@ public class CollisionDetector {
                 
                 element.hitBox.x = element.hitBox.x + element.x;
                 element.hitBox.y = element.hitBox.y + element.y;
+
+                switch(entity.direction) {
+                    //if the player is attacking we offset his solid area to the weapon and check collision
+                    case "up": entity.hitBox.y -= entity.speed; break;
+                    case "down": entity.hitBox.y += entity.speed; break;
+                    case "left": entity.hitBox.x -= entity.speed; break;
+                    case "right": entity.hitBox.x += entity.speed;  break;
+                }
                     
                     
                 if( entity.hitBox.intersects(element.hitBox)) {

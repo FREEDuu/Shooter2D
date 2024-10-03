@@ -10,15 +10,20 @@ public class AssetManager {
     }
 
     public void placeMonster(){
-        for(int i = 0; i < choice.nextInt(9,19); i++){
+        for(int i = 0; i < choice.nextInt(1,2); i++){
             pg.Skeletrons[i] = new Skeletron(pg);
-            pg.Skeletrons[i].x = choice.nextInt(150, 200);
-            pg.Skeletrons[i].y = choice.nextInt(150, 200);
+            pg.Skeletrons[i].x = choice.nextInt(150, 400);
+            pg.Skeletrons[i].y = choice.nextInt(150, 400);
         }
-        for(int i = 0; i < choice.nextInt(9,19); i++){
+        for(int i = 0; i < choice.nextInt(1,2); i++){
             pg.Dragonites[i] = new Dragonite(pg);
-            pg.Dragonites[i].x = choice.nextInt(150, 200);
-            pg.Dragonites[i].y = choice.nextInt(150, 200);
+            pg.Dragonites[i].x = choice.nextInt(100, 400);
+            pg.Dragonites[i].y = choice.nextInt(100, 400);
+        }
+        for(int i = 0; i < choice.nextInt(1,2); i++){
+            pg.WhiteMonsters[i] = new WhiteMonster(pg);
+            pg.WhiteMonsters[i].x = choice.nextInt(150, 400);
+            pg.WhiteMonsters[i].y = choice.nextInt(150, 400);
         }
     }
 }

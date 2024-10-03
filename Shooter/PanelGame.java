@@ -17,6 +17,7 @@ public class PanelGame extends JPanel implements Runnable{
     public int tileSize = 16;
     public Sound SoundM = new Sound();
     public List<Bullet> bullets = new ArrayList<Bullet>();
+    public List<Bullet> WhiteMonsterbullets = new ArrayList<Bullet>();
     public int WorldH = tileSize * maxWorldCol;
     public int WorldY = tileSize * maxWorldRow;
     GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
@@ -26,17 +27,21 @@ public class PanelGame extends JPanel implements Runnable{
     UI uiManager = new UI(this);
     public String playerChoice ; 
     int FPS = 60;
+    boolean ret = true;
     Thread gameThread;
-    public int gameState;
+    public int Lvl = 1;
     public int startState = 0;
+    public int gameState = startState;
     public int playState = 1;
     public int pauseState = 2;
+    public int loseState = 2;
     public Player player;
     CollisionDetector cDetector = new CollisionDetector(this);
     ControllerKey controllK = new ControllerKey(this);
     AssetManager assetM = new AssetManager(this);
     public Skeletron[] Skeletrons = new Skeletron[20]; 
     public Dragonite[] Dragonites = new Dragonite[20]; 
+    public WhiteMonster[] WhiteMonsters = new WhiteMonster[20]; 
     public Entity[][] enemies ={ Skeletrons, Dragonites };
     int varx = 100;
     int vary = 100;
@@ -51,7 +56,6 @@ public class PanelGame extends JPanel implements Runnable{
         this.setBackground(Color.black);
         this.addKeyListener(controllK);
         this.setFocusable(true);
-        this.setupGame();
         this.startGame();
     }
 
@@ -60,11 +64,6 @@ public class PanelGame extends JPanel implements Runnable{
         this.gameThread = new Thread(this);
         this.gameThread.start();
 
-    }
-
-    public void setupGame(){
-        assetM.placeMonster();
-        SoundM.LoopMusicEffect(0);
     }
     
     //funzione builtin di swing chiamata in gamethread.start
@@ -98,6 +97,8 @@ public class PanelGame extends JPanel implements Runnable{
     }
     public void setupStartGame(){
         player = new Player(this, controllK);
+        assetM.placeMonster();
+        SoundM.LoopMusicEffect(0);
     }
     // funzione update chiamata nel gameloop
 
@@ -107,17 +108,28 @@ public class PanelGame extends JPanel implements Runnable{
             if(bullets.size() > 0){
                 Utils.checkCollisionBulletsEnemy(Skeletrons, bullets);
                 Utils.checkCollisionBulletsEnemy(Dragonites, bullets);
-                Utils.checkCollisionPlayerEnemy(player, enemies);
+                Utils.checkCollisionBulletsEnemy(WhiteMonsters, bullets);
+            }
+            if(WhiteMonsterbullets.size() > 0){
+                Utils.checkWhiteBulletPlayer(player, WhiteMonsterbullets);
             }
             player.update();
             for(int i = 0; i < Skeletrons.length; i++ ){
                 if(Skeletrons[i] != null){
                     Skeletrons[i].update();
+                    ret = false;
                 }
             }
             for(int i = 0; i < Dragonites.length; i++ ){
                 if(Dragonites[i] != null){
                     Dragonites[i].update();
+                    ret = false;
+                }
+            }
+            for(int i = 0; i < WhiteMonsters.length; i++ ){
+                if(WhiteMonsters[i] != null){
+                    WhiteMonsters[i].update();
+                    ret = false;
                 }
             }
             Bullet b;
@@ -126,6 +138,15 @@ public class PanelGame extends JPanel implements Runnable{
                 if(b != null)
                 b.update(b.angle); 
             }
+            for(int i = 0; i < WhiteMonsterbullets.size(); i++){
+                b = WhiteMonsterbullets.get(i);
+                if(b != null)
+                b.update(b.angle); 
+            }
+            if(ret){
+                this.nextLevel();
+            }
+            ret = true;
         }
 
     }
@@ -153,13 +174,33 @@ public class PanelGame extends JPanel implements Runnable{
                     Dragonites[i].draw(g2);
                 }
             }
+            for(int i = 0; i < WhiteMonsters.length; i++ ){
+                if(WhiteMonsters[i] != null){
+                    WhiteMonsters[i].draw(g2);
+                }
+            }
             for(int i = 0; i < bullets.size(); i++ ){
                 if(bullets.get(i) != null){
                     bullets.get(i).draw(g2); 
                 }
             }
+            for(int i = 0; i < WhiteMonsterbullets.size(); i++ ){
+                if(WhiteMonsterbullets.get(i) != null){
+                    WhiteMonsterbullets.get(i).draw(g2); 
+                }
+            }
             uiManager.draw(g2);
         }
         
+    }
+
+    public void nextLevel(){
+        this.Lvl ++;
+        this.setupStartGame();
+    }
+
+    public void RestartGame(){
+        this.gameState = this.playState;
+        this.setupStartGame();
     }
 }

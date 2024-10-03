@@ -14,4 +14,6 @@ public class Entity {
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean idle, collision;
     public PanelGame gp;
+
+    public void onDeath(){};
 }
