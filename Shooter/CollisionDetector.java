@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class CollisionDetector {
 
     PanelGame pg;
@@ -56,44 +58,38 @@ public class CollisionDetector {
 
         }
     }
-    public int checkEntity(Entity entity, Entity target) {
+    public static int checkEntity(Entity entity, List<Bullet> target) {
         
-        int index = 1000;
-        
-        //imposta speed a entity.speed normalemente, aumenta se attacco
-        int reach = entity.speed;
-
+        int index = 999999;
+        Entity element;
+        for(int i=0; i< target.size(); i++ ){
+            element = target.get(i);
+            if( element != null && entity != null){ 
+                    //imposta le posizioni delle aree dei rettangoli "come sono nello spazio" (e poi reset)
+                    
+                entity.hitBox.x = entity.hitBox.x + entity.x;    
+                entity.hitBox.y = entity.hitBox.y + entity.y;
                 
-                //imposta le posizioni delle aree dei rettangoli "come sono nello spazio" (e poi reset)
-                
-            entity.hitBox.x = entity.hitBox.x + entity.x;    
-            entity.hitBox.y = entity.hitBox.y + entity.y;
-            
-            target.hitBox.x = target.hitBox.x + target.x;
-            target.hitBox.y = target.hitBox.y + target.y;
-                
-                
-            if( entity.hitBox.intersects(target.hitBox)) {
-                if( target != entity){
-                    entity.collision = true;
+                element.hitBox.x = element.hitBox.x + element.x;
+                element.hitBox.y = element.hitBox.y + element.y;
+                    
+                    
+                if( entity.hitBox.intersects(element.hitBox)) {
+                    if( element != entity){
+                        index = i;
                     }
-                }
-            switch(entity.direction) {
-                    //if the player is attacking we offset his solid area to the weapon and check collision
-                    case "up": entity.hitBox.y -= reach; break;
-                    case "down": entity.hitBox.y += reach; break;
-                    case "left": entity.hitBox.x -= reach; break;
-                    case "right": entity.hitBox.x += reach;  break;
-                }
-                
-                //restore dafaults
-            entity.hitBox.x = entity.solidAreaDefaultX;
-            entity.hitBox.y = entity.solidAreaDefaultY;
-            target.hitBox.x = target.solidAreaDefaultX;
-            target.hitBox.y = target.solidAreaDefaultY;
+                }                    
+                    //restore dafaults
+                entity.hitBox.x = entity.solidAreaDefaultX;
+                entity.hitBox.y = entity.solidAreaDefaultY;
+                element.hitBox.x = element.solidAreaDefaultX;
+                element.hitBox.y = element.solidAreaDefaultY;
 
-            return index;
+                
             }
+        }
+        return index;
+    }
 
 
 }

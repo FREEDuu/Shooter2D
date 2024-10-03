@@ -1,6 +1,6 @@
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-
+import java.util.List;
 
 public class Utils{
 
@@ -28,6 +28,18 @@ public class Utils{
             return (Math.PI/2 * 2) - Math.atan(dify/difx);
         }
         return Math.atan(dify/difx);
+    }
+
+    public static void checkCollisionBulletsEnemy(Entity[] enemy, List<Bullet> bullets){
+        int indice = 0;
+        for(int i = 0; i < enemy.length; i++){
+            indice = CollisionDetector.checkEntity(enemy[i], bullets);
+
+            if(indice != 999999){
+                enemy[i] = null;
+                bullets.set(indice, null);
+            }
+        }
     }
 
 }

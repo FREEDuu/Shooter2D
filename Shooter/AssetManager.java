@@ -15,5 +15,10 @@ public class AssetManager {
             pg.Skeletrons[i].x = choice.nextInt(150, 200);
             pg.Skeletrons[i].y = choice.nextInt(150, 200);
         }
+        for(int i = 0; i < choice.nextInt(9,19); i++){
+            pg.Dragonites[i] = new Dragonite(pg);
+            pg.Dragonites[i].x = choice.nextInt(150, 200);
+            pg.Dragonites[i].y = choice.nextInt(150, 200);
+        }
     }
 }

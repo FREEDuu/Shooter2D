@@ -2,8 +2,6 @@ import java.io.File;
 import java.util.Random;
 import java.awt.image.BufferedImage;
 import java.awt.*;
-
-
 import javax.imageio.ImageIO;
 
 public class Skeletron extends Entity{
@@ -13,11 +11,11 @@ public class Skeletron extends Entity{
 
     public Skeletron(PanelGame gp){
 
-        this.name = "skeletron";
+        this.name = "mini-drago";
         this.direction = "down";
         this.collision = false;
         this.speed = 4;
-        this.hitBox = new Rectangle(0,0,48,48);
+        this.hitBox = new Rectangle((gp.tileSize * 3), (4 * gp.tileSize), gp.tileSize * 2, gp.tileSize * 3);
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;
         this.life = 10;
@@ -88,7 +86,7 @@ public class Skeletron extends Entity{
                             image = down[imageNumber];
                         }
                         break;
-                    case "left":
+                    case "right":
                         if(idle){
                             image = left[0];
                         }
@@ -96,7 +94,7 @@ public class Skeletron extends Entity{
                             image = left[imageNumber];
                         }
                         break;
-                    case "right":
+                    case "left":
                         image = right[imageNumber];
                         if(idle){
                             image = right[0];
@@ -108,6 +106,7 @@ public class Skeletron extends Entity{
                 }
 
                 g2.drawImage(image, screenX , screenY, gp.tileSize*8, gp.tileSize*8, null );
+                g2.drawRect(screenX + hitBox.x, screenY + hitBox.y, hitBox.width, hitBox.height);
             }
 
     }
@@ -140,8 +139,8 @@ public class Skeletron extends Entity{
         switch(direction){
             case "up": y -= speed; break;
             case "down": y += speed; break;
-            case "left": x += speed; break;
-            case "right": x -= speed; break;
+            case "left": x -= speed; break;
+            case "right": x += speed; break;
         }
 
         }

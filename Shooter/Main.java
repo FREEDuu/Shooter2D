@@ -1,4 +1,7 @@
 import javax.swing.JFrame;
+import java.awt.*;
+import java.io.File;
+import javax.imageio.ImageIO;
 
 public class Main {
     public static void main(String[] args){
@@ -13,10 +16,24 @@ public class Main {
         // PanelGame principale
 
         PanelGame panelgame = new PanelGame();
+        Toolkit toolKit = Toolkit.getDefaultToolkit();
+        Image cursore = null;
+        try{
+            cursore = ImageIO.read(new File("Shooter/images/Weapons/crosshair.png")).getSubimage(38, 10, 18,18).getScaledInstance(100, 100, 0);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        Point point = new Point(0, 0);
+        Cursor cursor = toolKit.createCustomCursor(cursore, point, "Cursor");
+        panelgame.setCursor(cursor);
+
         frame.add(panelgame);     
         frame.pack();
+        frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        
         
 
     }

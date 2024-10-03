@@ -1,5 +1,6 @@
 import java.io.File;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.util.Random;
@@ -22,6 +23,7 @@ public class Bullet extends Projectile{
         this.getBulletImg();
         this.x = pg.player.x - (img.getWidth()/2)*2 + ( pg.tileSize*8/2);
         this.y = pg.player.y - (img.getHeight()/2)*2 + (pg.tileSize*8/2);
+        this.hitBox = new Rectangle(gp.tileSize,gp.tileSize,gp.tileSize*2,gp.tileSize*2);
     }
 
     public void getBulletImg() {
@@ -58,7 +60,8 @@ public class Bullet extends Projectile{
         screenX = x - gp.player.x + gp.player.cameraX;
         screenY = y - gp.player.y + gp.player.cameraY;
 
-        g2.drawImage(img, screenX , screenY, img.getWidth()*2, img.getHeight()*2, null);
+        g2.drawImage(img, screenX , screenY, gp.tileSize*3, gp.tileSize*3, null);
+        g2.drawRect(screenX + hitBox.x , screenY + hitBox.y, hitBox.width, hitBox.height);
 
     }
 }

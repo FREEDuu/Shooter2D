@@ -15,6 +15,7 @@ public class PanelGame extends JPanel implements Runnable{
     public int maxWorldCol = 32;
     public int maxWorldRow = 24;
     public int tileSize = 16;
+    public Sound SoundM = new Sound();
     public List<Bullet> bullets = new ArrayList<Bullet>();
     public int WorldH = tileSize * maxWorldCol;
     public int WorldY = tileSize * maxWorldRow;
@@ -35,6 +36,7 @@ public class PanelGame extends JPanel implements Runnable{
     ControllerKey controllK = new ControllerKey(this);
     AssetManager assetM = new AssetManager(this);
     public Skeletron[] Skeletrons = new Skeletron[20]; 
+    public Dragonite[] Dragonites = new Dragonite[20]; 
     int varx = 100;
     int vary = 100;
     int speed = 10;
@@ -61,6 +63,7 @@ public class PanelGame extends JPanel implements Runnable{
 
     public void setupGame(){
         assetM.placeMonster();
+        SoundM.LoopMusicEffect(0);
     }
     
     //funzione builtin di swing chiamata in gamethread.start
@@ -101,13 +104,25 @@ public class PanelGame extends JPanel implements Runnable{
 
         if(playState == gameState){
             player.update();
+            if(bullets.size() > 0){
+                Utils.checkCollisionBulletsEnemy(Skeletrons, bullets);
+                Utils.checkCollisionBulletsEnemy(Dragonites, bullets);
+            }
             for(int i = 0; i < Skeletrons.length; i++ ){
                 if(Skeletrons[i] != null){
                     Skeletrons[i].update();
                 }
             }
+            for(int i = 0; i < Dragonites.length; i++ ){
+                if(Dragonites[i] != null){
+                    Dragonites[i].update();
+                }
+            }
+            Bullet b;
             for(int i = 0; i < bullets.size(); i++){
-                bullets.get(i).update(bullets.get(i).angle); 
+                b = bullets.get(i);
+                if(b != null)
+                b.update(b.angle); 
             }
         }
 
@@ -131,8 +146,15 @@ public class PanelGame extends JPanel implements Runnable{
                     Skeletrons[i].draw(g2);
                 }
             }
+            for(int i = 0; i < Dragonites.length; i++ ){
+                if(Dragonites[i] != null){
+                    Dragonites[i].draw(g2);
+                }
+            }
             for(int i = 0; i < bullets.size(); i++ ){
-                bullets.get(i).draw(g2); 
+                if(bullets.get(i) != null){
+                    bullets.get(i).draw(g2); 
+                }
             }
             uiManager.draw(g2);
         }
