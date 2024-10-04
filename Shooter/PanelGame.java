@@ -12,8 +12,8 @@ import javax.swing.plaf.DimensionUIResource;
 public class PanelGame extends JPanel implements Runnable{
 
     //variabili globali del PanelGame
-    public int maxWorldCol = 32;
-    public int maxWorldRow = 24;
+    public int maxWorldCol = 120;
+    public int maxWorldRow = 67;
     public int tileSize = 16;
     public Sound SoundM = new Sound();
     public List<Bullet> bullets = new ArrayList<Bullet>();

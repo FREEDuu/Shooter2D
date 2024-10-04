@@ -10,7 +10,7 @@ public class TileManager {
 
     PanelGame gp;
     Tile [] tiles;
-    int[] [] mapTileNum  = new int[68][68];
+    int[] [] mapTileNum  = new int[67][120];
 
     public TileManager(PanelGame gp){
         this.gp = gp;
@@ -37,6 +37,7 @@ public class TileManager {
 
             tiles[5] = new Tile();
             tiles[5].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/005.png"));
+            tiles[5].collision = true;
             
         } catch (Exception e) {
             System.out.println(e);
