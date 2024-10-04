@@ -44,26 +44,59 @@ public class ControllerKey implements KeyListener {
                 }
             }
         }
+        if(pg.gameState == pg.nextLevelState){
+            if(keycode == KeyEvent.VK_S){
+                pg.uiManager.arrawPos++;
+                    if(pg.uiManager.arrawPos > 2){
+                        pg.uiManager.arrawPos = 0;
+                    }
+            }
+            if(keycode == KeyEvent.VK_W){
+                pg.uiManager.arrawPos--;
+                if(pg.uiManager.arrawPos < 0){
+                    pg.uiManager.arrawPos = 2;
+                }
+            }
+            if (keycode == KeyEvent.VK_ENTER) {
+                pg.setupStartGame();
+                pg.gameState = pg.playState;
+            }
+        }
 
         if (pg.gameState == pg.startState) {
             if (pg.uiManager.startPage == 0) {
+                if(keycode == KeyEvent.VK_D && pg.uiManager.arrawPos == 1){
+                    pg.uiManager.selectionDif++;
+                    if(pg.uiManager.selectionDif > 3){
+                        pg.uiManager.selectionDif = 1;
+                    }
+                }
+                if(keycode == KeyEvent.VK_A && pg.uiManager.arrawPos == 1){
+                    pg.uiManager.selectionDif--;
+                    if(pg.uiManager.selectionDif < 1){
+                        pg.uiManager.selectionDif = 3;
+                    }
+                }
                 if(keycode == KeyEvent.VK_W){
-                    pg.uiManager.arrawPos++;
-                    pg.uiManager.arrawPos = pg.uiManager.arrawPos % 2 ;
-    
+                    pg.uiManager.arrawPos--;
+                    if(pg.uiManager.arrawPos < 0){
+                        pg.uiManager.arrawPos =2;
+                    }
                 }
                 if(keycode == KeyEvent.VK_S){
-                    pg.uiManager.arrawPos--;
+                    pg.uiManager.arrawPos++;
                     pg.uiManager.arrawPos = Math.abs(pg.uiManager.arrawPos);
-                    pg.uiManager.arrawPos = pg.uiManager.arrawPos % 2 ;
+                    pg.uiManager.arrawPos = pg.uiManager.arrawPos % 3 ;
                 }
                 if (keycode == KeyEvent.VK_ENTER) {
-                    if(pg.uiManager.arrawPos == 0){
-                        pg.uiManager.startPage++;
-                        pg.uiManager.arrawPos = 0;
+                    if(pg.uiManager.arrawPos == 2){
+                        System.exit(0);
+                        
                     }
                     else{
-                        System.exit(0);
+                        pg.uiManager.startPage++;
+                        pg.uiManager.arrawPos = 0;
+                        pg.difficolta = pg.uiManager.selectionDif;
                     }
                 }
             }

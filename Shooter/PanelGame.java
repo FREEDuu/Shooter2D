@@ -30,18 +30,20 @@ public class PanelGame extends JPanel implements Runnable{
     boolean ret = true;
     Thread gameThread;
     public int Lvl = 1;
+    public int difficolta;
     public int startState = 0;
     public int gameState = startState;
     public int playState = 1;
     public int pauseState = 2;
-    public int loseState = 2;
+    public int loseState = 3;
+    public int nextLevelState = 4;
     public Player player;
     CollisionDetector cDetector = new CollisionDetector(this);
     ControllerKey controllK = new ControllerKey(this);
     AssetManager assetM = new AssetManager(this);
-    public Skeletron[] Skeletrons = new Skeletron[20]; 
-    public Dragonite[] Dragonites = new Dragonite[20]; 
-    public WhiteMonster[] WhiteMonsters = new WhiteMonster[20]; 
+    public Skeletron[] Skeletrons = new Skeletron[100]; 
+    public Dragonite[] Dragonites = new Dragonite[100]; 
+    public WhiteMonster[] WhiteMonsters = new WhiteMonster[100]; 
     public Entity[][] enemies ={ Skeletrons, Dragonites };
     int varx = 100;
     int vary = 100;
@@ -98,7 +100,7 @@ public class PanelGame extends JPanel implements Runnable{
     public void setupStartGame(){
         player = new Player(this, controllK);
         assetM.placeMonster();
-        SoundM.LoopMusicEffect(0);
+        //SoundM.LoopMusicEffect(0); da migliorare è bruttissimo xD
     }
     // funzione update chiamata nel gameloop
 
@@ -196,11 +198,13 @@ public class PanelGame extends JPanel implements Runnable{
 
     public void nextLevel(){
         this.Lvl ++;
+        this.gameState = nextLevelState;
         this.setupStartGame();
     }
 
     public void RestartGame(){
         this.gameState = this.playState;
+        this.Lvl = 1;
         this.setupStartGame();
     }
 }

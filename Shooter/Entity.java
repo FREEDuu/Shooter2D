@@ -11,9 +11,14 @@ public class Entity {
     public Rectangle hitBox, HP;
     public BufferedImage img;
     public String direction , name;
-    public int solidAreaDefaultX, solidAreaDefaultY;
-    public boolean idle, collision;
+    public int solidAreaDefaultX, solidAreaDefaultY, defaultSpeed, knockbackCounter;
+    public boolean idle, collision, knockback;
     public PanelGame gp;
 
     public void onDeath(){};
+    public void knockback(Entity Collider){
+        Collider.direction = this.direction;
+        Collider.speed += 12;
+        Collider.knockback = true;
+    }
 }

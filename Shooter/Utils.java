@@ -49,9 +49,9 @@ public class Utils{
         }
     }
 
-    public static void checkCollisionPlayerEnemy(Player player, Entity[][] enemy){
+    public static void checkCollisionPlayerEnemy(Player player, Entity[][] enemy, boolean CallPlayer){
         for(int i = 0; i < enemy.length; i++){
-            CollisionDetector.checkEnemy(player, enemy[i]);
+            CollisionDetector.checkEnemy(player, enemy[i], CallPlayer);
         }
 
     }   

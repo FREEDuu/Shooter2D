@@ -162,6 +162,7 @@ public class Dragonite extends Entity{
             }
         }
         gp.cDetector.checkTile(this);
+        Utils.checkCollisionPlayerEnemy(gp.player, gp.enemies, false);
         if(collision == false){
         switch(direction){
             case "up": y -= speed; break;

@@ -91,7 +91,7 @@ public class CollisionDetector {
         return index;
     }
 
-    public static void checkEnemy(Entity entity, Entity[] target) {
+    public static void checkEnemy(Entity entity, Entity[] target, boolean CallPlayer) {
         
         Entity element;
         for(int i=0; i< target.length; i++ ){
@@ -106,7 +106,6 @@ public class CollisionDetector {
                 element.hitBox.y = element.hitBox.y + element.y;
 
                 switch(entity.direction) {
-                    //if the player is attacking we offset his solid area to the weapon and check collision
                     case "up": entity.hitBox.y -= entity.speed; break;
                     case "down": entity.hitBox.y += entity.speed; break;
                     case "left": entity.hitBox.x -= entity.speed; break;
@@ -116,9 +115,27 @@ public class CollisionDetector {
                     
                 if( entity.hitBox.intersects(element.hitBox)) {
                     if( element != entity){
-                        entity.collision = true;
-                        element.collision = true;
-                        entity.HP.width -= 10;
+                        if(CallPlayer){
+                            entity.collision = true;
+                            if(entity.HP.width - 10 > 0){
+                                entity.HP.width -= 10;
+                                //element.knockback(entity);
+                            }
+                            else{
+                                entity.onDeath();
+                            }
+                        }
+                        else{
+                            element.collision = true;
+                            if(entity.HP.width - 10 > 0){
+                                entity.HP.width -= 10;
+                                //element.knockback(entity);
+                            }
+                            else{
+                                entity.onDeath();
+                            }
+                            
+                        }
                     }
                 }                    
                     //restore dafaults

@@ -138,6 +138,7 @@ public class Skeletron extends Entity{
             direction = "down";
         }
         }
+        Utils.checkCollisionPlayerEnemy(gp.player, gp.enemies, false);
         gp.cDetector.checkTile(this);
         if(collision == false){
         switch(direction){

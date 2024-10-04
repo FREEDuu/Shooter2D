@@ -112,6 +112,7 @@ public class Player extends Entity{
         this.x = 500;
         this.y = 500;
         this.speed = 10;
+        this.defaultSpeed = speed;
         this.direction = "down";
         this.imageCounter = 0;
         this.imageNumber = 0;
@@ -153,7 +154,7 @@ public class Player extends Entity{
             idle = false;
             collision = false;
             pg.cDetector.checkTile(this);
-            Utils.checkCollisionPlayerEnemy(this, pg.enemies);
+            Utils.checkCollisionPlayerEnemy(this, pg.enemies, true);
             if(collision == false){
 
                 switch(direction){

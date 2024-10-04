@@ -6,6 +6,7 @@ public class UI {
     PanelGame pg;
     Graphics2D g2;
     int arrawPos = 0;
+    int selectionDif = 1;
     int startPage = 0;
 
     public UI(PanelGame pg){
@@ -52,6 +53,38 @@ public class UI {
 
 
         }
+        else if(pg.gameState == pg.nextLevelState){
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+            String test = "Livello : "+ Integer.toString(pg.Lvl-1) + " Superato";
+            g2.setColor(Color.white);
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 - pg.tileSize*12);
+        
+            test = "Potenziamento 1";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2);
+            if (arrawPos == 0) {
+                this.g2.drawString(">", pg.width/2 - getXofText(g2, test) , pg.height/2);
+                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2);
+        
+            }
+            test = "Potenziamento 2";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*8);
+            if (arrawPos == 1) {
+                this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*8);
+                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*8);
+            }
+            test = "Potenziamento 3";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*16);
+            if (arrawPos == 2) {
+                this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*16);
+                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*16);
+            }
+    
+    
+            test = "SCEGLI IL TUO POTENZIAMENTO";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*25);
+
+
+        }
         else if(pg.gameState == pg.pauseState){
             // metti in pausa
             drawPausedScreen();
@@ -80,14 +113,18 @@ public class UI {
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2);
         
             }
-    
-    
-    
-            test = "Esci dal Gioco";
-            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*10);
+            test = "Difficoltà "+Integer.toString(selectionDif);
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*8);
             if (arrawPos == 1) {
-                this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*10);
-                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*10);
+                this.g2.drawString(">", pg.width/2 - getXofText(g2, test) ,  pg.height/2 + pg.tileSize*8);
+                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) ,  pg.height/2 + pg.tileSize*8);
+        
+            }
+            test = "Esci dal Gioco";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*16);
+            if (arrawPos == 2) {
+                this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*16);
+                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*16);
             }
     
     
