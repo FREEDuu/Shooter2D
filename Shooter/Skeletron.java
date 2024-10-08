@@ -125,18 +125,23 @@ public class Skeletron extends Entity{
             imageNumber = imageNumber % 4;
             imageCounter = 0;
             rand = choice.nextInt(4);
-        if(rand == 0) {
-            direction = "up";
-        }
-        else if (rand == 1) {
-            direction = "left";
-        }
-        else if (rand == 2) {
-            direction = "right";
-        }
-        else if(rand == 3){
-            direction = "down";
-        }
+            int pgx = Math.abs(gp.player.x - this.x);
+            int pgy = Math.abs(gp.player.y - this.y);
+            if(pgy > pgx){
+                if(this.y > gp.player.y){
+                    direction = "up";
+                }
+                else{
+                    direction = "down";
+                }
+            }
+            else{
+                if(this.x > gp.player.x){
+                    direction = "left";
+                }else{
+                    direction = "right";
+                }
+            }
         }
         Utils.checkCollisionPlayerEnemy(gp.player, gp.enemies, false);
         gp.cDetector.checkTile(this);

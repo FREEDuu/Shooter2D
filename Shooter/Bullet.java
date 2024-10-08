@@ -61,7 +61,7 @@ public class Bullet extends Projectile{
         return (int)Math.floor(this.speed * Math.sin(angle));
     }
 
-    public void update(double angle){
+    public void update(){
         x +=  AddTrajectoriesX(angle);
         y +=  AddTrajectoriesY(angle);        
     }

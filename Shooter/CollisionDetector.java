@@ -58,7 +58,7 @@ public class CollisionDetector {
 
         }
     }
-    public static int checkEntity(Entity entity, List<Bullet> target) {
+    public static int checkEntity(Entity entity, List<Projectile> target) {
         
         int index = 999999;
         Entity element;

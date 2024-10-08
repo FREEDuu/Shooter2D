@@ -13,11 +13,13 @@ public class PanelGame extends JPanel implements Runnable{
 
     //variabili globali del PanelGame
     public int maxWorldCol = 120;
+    public Graphics2D g2;
     public int maxWorldRow = 67;
     public int tileSize = 16;
     public Sound SoundM = new Sound();
-    public List<Bullet> bullets = new ArrayList<Bullet>();
-    public List<Bullet> WhiteMonsterbullets = new ArrayList<Bullet>();
+    public List<Projectile> bullets = new ArrayList<Projectile>();
+    public List<Projectile> WhiteMonsterbullets = new ArrayList<Projectile>();
+    public List<Projectile> BombPlayerList = new ArrayList<Projectile>();
     public int WorldH = tileSize * maxWorldCol;
     public int WorldY = tileSize * maxWorldRow;
     GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
@@ -115,6 +117,9 @@ public class PanelGame extends JPanel implements Runnable{
             if(WhiteMonsterbullets.size() > 0){
                 Utils.checkWhiteBulletPlayer(player, WhiteMonsterbullets);
             }
+            if(BombPlayerList.size() > 0){
+                Utils.checkCollisionBombEnemy(enemies, BombPlayerList);
+            }
             player.update();
             for(int i = 0; i < Skeletrons.length; i++ ){
                 if(Skeletrons[i] != null){
@@ -134,16 +139,21 @@ public class PanelGame extends JPanel implements Runnable{
                     ret = false;
                 }
             }
-            Bullet b;
+            Projectile b;
             for(int i = 0; i < bullets.size(); i++){
                 b = bullets.get(i);
                 if(b != null)
-                b.update(b.angle); 
+                b.update(); 
             }
             for(int i = 0; i < WhiteMonsterbullets.size(); i++){
                 b = WhiteMonsterbullets.get(i);
                 if(b != null)
-                b.update(b.angle); 
+                b.update(); 
+            }
+            for(int i = 0; i < BombPlayerList.size(); i++){
+                b = BombPlayerList.get(i);
+                if(b != null)
+                b.update(); 
             }
             if(ret){
                 this.nextLevel();
@@ -189,6 +199,11 @@ public class PanelGame extends JPanel implements Runnable{
             for(int i = 0; i < WhiteMonsterbullets.size(); i++ ){
                 if(WhiteMonsterbullets.get(i) != null){
                     WhiteMonsterbullets.get(i).draw(g2); 
+                }
+            }
+            for(int i = 0; i < BombPlayerList.size(); i++ ){
+                if(BombPlayerList.get(i) != null){
+                    BombPlayerList.get(i).draw(g2); 
                 }
             }
             uiManager.draw(g2);

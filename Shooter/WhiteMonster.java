@@ -128,9 +128,13 @@ public class WhiteMonster extends Entity{
             imageNumber++;
             imageNumber = imageNumber % 4;
             imageCounter = 0;
-            rand = choice.nextInt(3);
+            rand = choice.nextInt(4);
         //Implementazione di una rudimentale AI che segue il pg
-            if(rand > 0){
+            if(rand == 3){
+                this.shoot();
+            }
+                
+            }else{
                 int pgx = Math.abs(gp.player.x - this.x);
                 int pgy = Math.abs(gp.player.y - this.y);
                 if(pgy + pgx > 500){
@@ -153,10 +157,8 @@ public class WhiteMonster extends Entity{
                 else{
                     direction= "idle";
                 }
-            }else{
-                this.shoot();
             }
-       }
+    
         
         gp.cDetector.checkTile(this);
         if(collision == false){

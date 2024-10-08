@@ -6,7 +6,7 @@ public class ControllerKey implements KeyListener {
 
     // variabili che servono per capire che tasto wasd si sta premendo, vengono cambiate a t/f quando viene premuto/rilasciato wasd
 
-    boolean up, down, left, right, shoot;
+    boolean up, down, left, right, shoot, bomb;
     PanelGame pg;
 
     public ControllerKey(PanelGame pg){
@@ -158,6 +158,9 @@ public class ControllerKey implements KeyListener {
                     pg.gameState = 1;
                 }
             }
+            if(keycode == KeyEvent.VK_R){
+                bomb = true;
+            }
         }
 
 
@@ -182,6 +185,9 @@ public class ControllerKey implements KeyListener {
         }
         if(keycode == KeyEvent.VK_SPACE){
             shoot = false;
+        }
+        if(keycode == KeyEvent.VK_R){
+            bomb = false;
         }
     }
 

@@ -32,7 +32,7 @@ public class Utils{
         return Math.atan(dify/difx);
     }
 
-    public static void checkCollisionBulletsEnemy(Entity[] enemy, List<Bullet> bullets){
+    public static void checkCollisionBulletsEnemy(Entity[] enemy, List<Projectile> bullets){
         int indice = 0;
         for(int i = 0; i < enemy.length; i++){
             indice = CollisionDetector.checkEntity(enemy[i], bullets);
@@ -49,6 +49,26 @@ public class Utils{
         }
     }
 
+    public static void checkCollisionBombEnemy(Entity[][] enemy, List<Projectile> bombs){
+        int indice = 0;
+        for(int i = 0; i < enemy.length; i++){
+            for(int j = 0; j < enemy[i].length; j++){
+                indice = CollisionDetector.checkEntity(enemy[i][j], bombs);
+
+                if(indice != 999999){
+                    if(enemy[i][j].HP.width - 100 > 0){
+                        enemy[i][j].HP.width -= 100;
+                    }
+                    else{
+                        enemy[i][j] = null;
+                    }
+                    bombs.set(indice, null);
+                }
+            }
+
+        }
+    }
+
     public static void checkCollisionPlayerEnemy(Player player, Entity[][] enemy, boolean CallPlayer){
         for(int i = 0; i < enemy.length; i++){
             CollisionDetector.checkEnemy(player, enemy[i], CallPlayer);
@@ -56,7 +76,7 @@ public class Utils{
 
     }   
 
-    public static void checkWhiteBulletPlayer(Entity entity, List<Bullet> Wbullets){
+    public static void checkWhiteBulletPlayer(Entity entity, List<Projectile> Wbullets){
         int indice = 0;
         indice = CollisionDetector.checkEntity(entity, Wbullets);
         if(indice != 999999){

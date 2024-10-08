@@ -8,14 +8,15 @@ public class Player extends Entity{
     int cameraX, cameraY;
     ControllerKey controllerK;
     PanelGame pg;
-    boolean reload;
-    int reloadCounter;
-    Rectangle RectReload;
+    boolean reload, reloadBomb;
+    int reloadCounter, reloadBombCounter;
+    Rectangle RectReload, rectReloadBomb;
     int wLife;
 
     public Player(PanelGame pg, ControllerKey controllerK){
         this.pg = pg;
         this.RectReload = new Rectangle(0 ,0, 350, 50);
+        this.rectReloadBomb = new Rectangle(0 ,0, 100, 50);
         this.controllerK = controllerK;
         this.reloadCounter = 0;
         this.SetDefault();
@@ -107,6 +108,9 @@ public class Player extends Entity{
         pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x , MouseInfo.getPointerInfo().getLocation().y, true));
         //pg.SoundM.PlaySoundEffect(1);
     }
+    public void shootBomb(){
+        pg.BombPlayerList.add(new Bomb(pg, pg.player.x, pg.player.y));
+    }
 
     public void SetDefault(){
         this.x = 500;
@@ -120,17 +124,30 @@ public class Player extends Entity{
 
     public void update(){
         reloadCounter++;
+        reloadBombCounter++;
         if(RectReload.width < 350){
             RectReload.width += 10;
+        }
+        if(rectReloadBomb.width < 100){
+            rectReloadBomb.width += 2;
         }
         if(reloadCounter > 35){
             reload = true;
             reloadCounter = 0;
         }
+        if(reloadBombCounter > 50){
+            reloadBomb = true;
+            reloadBombCounter = 0;
+        }
         if(controllerK.shoot && reload){
             shoot();
             reload = false;
             RectReload.width = 0;
+        }
+        if(controllerK.bomb && reloadBomb){
+            shootBomb();
+            reloadBomb = false;
+            rectReloadBomb.width = 0;
         }
         if(controllerK.up || controllerK.down || controllerK.left || controllerK.right){
             if(controllerK.up == true){
@@ -216,7 +233,11 @@ public class Player extends Entity{
         g2.drawImage(image, cameraX, cameraY, pg.tileSize*8, pg.tileSize*8, null);
         g2.drawRect(cameraX + hitBox.x, cameraY + hitBox.y , hitBox.width, hitBox.height);
         g2.setColor(Color.gray);
+        g2.fillRect(HP.x + pg.tileSize, HP.y + pg.tileSize*10 , rectReloadBomb.width, rectReloadBomb.height);
+        g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize*10 , 100, 50);
+        g2.setColor(Color.BLACK);
         g2.fillRect(HP.x + pg.tileSize, HP.y + pg.tileSize*5 , RectReload.width, RectReload.height);
+        g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize*5 , 350, 50);
         g2.setColor(Color.red);
         g2.fillRect(HP.x + pg.tileSize, HP.y + pg.tileSize, HP.width, HP.height);
         g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize, wLife, HP.height);
