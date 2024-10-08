@@ -58,8 +58,17 @@ public class ControllerKey implements KeyListener {
                 }
             }
             if (keycode == KeyEvent.VK_ENTER) {
-                pg.setupStartGame();
-                pg.gameState = pg.playState;
+
+                if(pg.uiManager.arrawPos == 0){
+                    pg.player.DamageIncrease();
+                }
+                if(pg.uiManager.arrawPos == 1){
+                    pg.player.HealtIncrease();
+                }
+                if(pg.uiManager.arrawPos == 2){
+                    pg.player.SpeedIncrease();
+                }
+                pg.setupStartGameLevel();
             }
         }
 

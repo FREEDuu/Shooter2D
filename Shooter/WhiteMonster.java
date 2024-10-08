@@ -15,6 +15,7 @@ public class WhiteMonster extends Entity{
         this.direction = "down";
         this.collision = false;
         this.speed = 4;
+        this.onLife = true;
         this.hitBox = new Rectangle((gp.tileSize * 3), (4 * gp.tileSize), gp.tileSize * 2, gp.tileSize * 3);
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;
@@ -173,6 +174,8 @@ public class WhiteMonster extends Entity{
         collision = false;
         idle = false;
     }
-        
+    public void onDeath(){
+        this.onLife = false;
+    }
     
 }

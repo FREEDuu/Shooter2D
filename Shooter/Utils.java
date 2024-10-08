@@ -49,24 +49,13 @@ public class Utils{
         }
     }
 
-    public static void checkCollisionBombEnemy(Entity[][] enemy, List<Projectile> bombs){
-        int indice = 0;
-        for(int i = 0; i < enemy.length; i++){
-            for(int j = 0; j < enemy[i].length; j++){
-                indice = CollisionDetector.checkEntity(enemy[i][j], bombs);
-
-                if(indice != 999999){
-                    if(enemy[i][j].HP.width - 100 > 0){
-                        enemy[i][j].HP.width -= 100;
-                    }
-                    else{
-                        enemy[i][j] = null;
-                    }
-                    bombs.set(indice, null);
-                }
-            }
-
+    public static void makeExplotion(Entity bomb, Entity[][] enemy){
+        for(int i = 0; i < enemy.length; i++){            
+            CollisionDetector.checkEnemy(bomb, enemy[i], false);
+            bomb.collision = true;
         }
+
+        
     }
 
     public static void checkCollisionPlayerEnemy(Player player, Entity[][] enemy, boolean CallPlayer){
@@ -89,6 +78,15 @@ public class Utils{
             Wbullets.set(indice, null);
         }
         
+    }
+    public static void onLifeEnemy(Entity [] [] enemy){
+        for(int i = 0; i < enemy.length; i++){
+            for(int j = 0; j < enemy[i].length; j++){
+                if(enemy[i][j] != null && !enemy[i][j].onLife){
+                    enemy[i][j] = null;
+                }
+            }
+        }
     }
 }
 

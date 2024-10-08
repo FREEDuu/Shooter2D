@@ -7,20 +7,23 @@ import javax.imageio.ImageIO;
 public class Bomb extends Projectile{
 
     PanelGame pg;
+    boolean expire;
     BufferedImage[] images;
     BufferedImage img;
-    int counter ,counterImg;
-    boolean explosion;
+    int counter ,counterImg, solidAreaDefaultX, solidAreaDefaultY;
 
     public Bomb(PanelGame pg, int xCoord, int Ycoord){
         this.gp = pg;
+        this.speed = 0;
         this.counter = 0;
         this.counterImg = 0;
         this.damage = 1000;
         this.x = xCoord;
+        this.expire = false;
         this.y = Ycoord;
-        this.explosion = false;
-        this.hitBox = new Rectangle(gp.tileSize,gp.tileSize,gp.tileSize*2,gp.tileSize*2);
+        this.hitBox = new Rectangle(-(pg.tileSize * 9),-(9 * pg.tileSize), pg.tileSize * 25, pg.tileSize * 25);
+        this.solidAreaDefaultX = hitBox.x;
+        this.solidAreaDefaultY = hitBox.y;
         this.getBombImg();
     }
 
@@ -67,15 +70,10 @@ public class Bomb extends Projectile{
 
     }
 
-    public void explode(){
+    public void onDeath(){
 
-        this.hitBox = new Rectangle(hitBox.x, hitBox.y, 300, 300);
+        Utils.makeExplotion(this, gp.enemies);
 
     }
-
-    public void onDeath(){
-        explode();
-        explosion = true;
-        }
 
 }

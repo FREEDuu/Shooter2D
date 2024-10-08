@@ -12,7 +12,7 @@ public class Entity {
     public BufferedImage img;
     public String direction , name;
     public int solidAreaDefaultX, solidAreaDefaultY, defaultSpeed, knockbackCounter;
-    public boolean idle, collision, knockback;
+    public boolean idle, collision, knockback, onLife;
     public PanelGame gp;
 
     public void onDeath(){};

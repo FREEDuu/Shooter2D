@@ -104,15 +104,14 @@ public class CollisionDetector {
                 
                 element.hitBox.x = element.hitBox.x + element.x;
                 element.hitBox.y = element.hitBox.y + element.y;
-
-                switch(entity.direction) {
-                    case "up": entity.hitBox.y -= entity.speed; break;
-                    case "down": entity.hitBox.y += entity.speed; break;
-                    case "left": entity.hitBox.x -= entity.speed; break;
-                    case "right": entity.hitBox.x += entity.speed;  break;
-                }
-                    
-                    
+                if(entity.speed != 0){
+                    switch(entity.direction) {
+                        case "up": entity.hitBox.y -= entity.speed; break;
+                        case "down": entity.hitBox.y += entity.speed; break;
+                        case "left": entity.hitBox.x -= entity.speed; break;
+                        case "right": entity.hitBox.x += entity.speed;  break;
+                    }
+                }                    
                 if( entity.hitBox.intersects(element.hitBox)) {
                     if( element != entity){
                         if(CallPlayer){
@@ -126,15 +125,25 @@ public class CollisionDetector {
                             }
                         }
                         else{
-                            element.collision = true;
-                            if(entity.HP.width - 10 > 0){
-                                entity.HP.width -= 10;
-                                //element.knockback(entity);
+                            if(entity.speed == 0) {
+                                if(element.HP.width - 70 > 0){
+                                    element.HP.width -= 70;
+                                    //element.knockback(entity);
+                                }
+                                else{
+                                    element.onDeath();
+                                }
                             }
                             else{
-                                entity.onDeath();
-                            }
-                            
+                                element.collision = true;
+                                if(entity.HP.width - 10 > 0){
+                                    entity.HP.width -= 10;
+                                    //element.knockback(entity);
+                                }
+                                else{
+                                    entity.onDeath();
+                                }
+                            }                            
                         }
                     }
                 }                    

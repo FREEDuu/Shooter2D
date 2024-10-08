@@ -13,6 +13,7 @@ public class Dragonite extends Entity{
 
         this.name = "dragonite";
         this.direction = "down";
+        this.onLife = true;
         this.collision = false;
         this.speed = 4;
         this.hitBox = new Rectangle((gp.tileSize * 3), (4 * gp.tileSize), gp.tileSize * 2, gp.tileSize * 3);
@@ -174,6 +175,9 @@ public class Dragonite extends Entity{
         }
         collision = false;
         idle = false;
+    }
+    public void onDeath(){
+        this.onLife = false;
     }
         
     

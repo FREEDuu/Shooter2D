@@ -5,7 +5,7 @@ import javax.imageio.ImageIO;
 
 public class Player extends Entity{
 
-    int cameraX, cameraY;
+    int cameraX, cameraY, damage, maxHealth;
     ControllerKey controllerK;
     PanelGame pg;
     boolean reload, reloadBomb;
@@ -19,6 +19,7 @@ public class Player extends Entity{
         this.rectReloadBomb = new Rectangle(0 ,0, 100, 50);
         this.controllerK = controllerK;
         this.reloadCounter = 0;
+        this.damage = 0;
         this.SetDefault();
         this.getPgImgs();
         cameraY = ( pg.height / 2);
@@ -26,6 +27,7 @@ public class Player extends Entity{
         this.reload = true;
         this.HP = new Rectangle(0,0, 500, 50);
         this.hitBox = new Rectangle((pg.tileSize * 3), (4 * pg.tileSize), pg.tileSize * 2, pg.tileSize * 3);
+        this.maxHealth = hitBox.width;
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;
         this.wLife = HP.width;
@@ -240,10 +242,20 @@ public class Player extends Entity{
         g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize*5 , 350, 50);
         g2.setColor(Color.red);
         g2.fillRect(HP.x + pg.tileSize, HP.y + pg.tileSize, HP.width, HP.height);
-        g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize, wLife, HP.height);
+        g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize, HP.width, HP.height);
     }
 
     public void onDeath(){
         pg.gameState = pg.loseState;
+    }
+
+    public void DamageIncrease(){
+        this.damage++;
+    }
+    public void SpeedIncrease(){
+        this.speed += 7;
+    }
+    public void HealtIncrease(){
+        HP.width += 100;
     }
 }

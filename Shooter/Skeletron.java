@@ -14,6 +14,7 @@ public class Skeletron extends Entity{
         this.name = "mini-drago";
         this.direction = "down";
         this.collision = false;
+        this.onLife = true;
         this.speed = 4;
         this.hitBox = new Rectangle((gp.tileSize * 3), (4 * gp.tileSize), gp.tileSize * 2, gp.tileSize * 3);
         this.solidAreaDefaultX = this.hitBox.x;
@@ -156,6 +157,10 @@ public class Skeletron extends Entity{
         }
         collision = false;
         idle = false;
+    }
+
+    public void onDeath(){
+        this.onLife = false;
     }
         
     

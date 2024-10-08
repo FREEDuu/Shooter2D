@@ -13,7 +13,6 @@ public class PanelGame extends JPanel implements Runnable{
 
     //variabili globali del PanelGame
     public int maxWorldCol = 120;
-    public Graphics2D g2;
     public int maxWorldRow = 67;
     public int tileSize = 16;
     public Sound SoundM = new Sound();
@@ -46,7 +45,7 @@ public class PanelGame extends JPanel implements Runnable{
     public Skeletron[] Skeletrons = new Skeletron[100]; 
     public Dragonite[] Dragonites = new Dragonite[100]; 
     public WhiteMonster[] WhiteMonsters = new WhiteMonster[100]; 
-    public Entity[][] enemies ={ Skeletrons, Dragonites };
+    public Entity[][] enemies ={ Skeletrons, Dragonites, WhiteMonsters };
     int varx = 100;
     int vary = 100;
     int speed = 10;
@@ -104,11 +103,22 @@ public class PanelGame extends JPanel implements Runnable{
         assetM.placeMonster();
         //SoundM.LoopMusicEffect(0); da migliorare è bruttissimo xD
     }
+    public void setupStartGameLevel(){
+        gameState = playState;
+        System.out.println(player.HP.width);
+        player.x = 500;
+        player.y = 500;
+        assetM.placeMonster();
+        //SoundM.LoopMusicEffect(0); da migliorare è bruttissimo xD
+    }
     // funzione update chiamata nel gameloop
 
     public void update(){
 
         if(playState == gameState){
+            if(enemies != null){
+                Utils.onLifeEnemy(enemies);
+            }
             if(bullets.size() > 0){
                 Utils.checkCollisionBulletsEnemy(Skeletrons, bullets);
                 Utils.checkCollisionBulletsEnemy(Dragonites, bullets);
@@ -116,9 +126,6 @@ public class PanelGame extends JPanel implements Runnable{
             }
             if(WhiteMonsterbullets.size() > 0){
                 Utils.checkWhiteBulletPlayer(player, WhiteMonsterbullets);
-            }
-            if(BombPlayerList.size() > 0){
-                Utils.checkCollisionBombEnemy(enemies, BombPlayerList);
             }
             player.update();
             for(int i = 0; i < Skeletrons.length; i++ ){
@@ -152,7 +159,7 @@ public class PanelGame extends JPanel implements Runnable{
             }
             for(int i = 0; i < BombPlayerList.size(); i++){
                 b = BombPlayerList.get(i);
-                if(b != null)
+                if(b != null && !b.collision)
                 b.update(); 
             }
             if(ret){
@@ -202,7 +209,7 @@ public class PanelGame extends JPanel implements Runnable{
                 }
             }
             for(int i = 0; i < BombPlayerList.size(); i++ ){
-                if(BombPlayerList.get(i) != null){
+                if(BombPlayerList.get(i) != null && BombPlayerList.get(i).collision == false){
                     BombPlayerList.get(i).draw(g2); 
                 }
             }
@@ -214,7 +221,6 @@ public class PanelGame extends JPanel implements Runnable{
     public void nextLevel(){
         this.Lvl ++;
         this.gameState = nextLevelState;
-        this.setupStartGame();
     }
 
     public void RestartGame(){
