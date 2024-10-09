@@ -26,5 +26,8 @@ public class AssetManager {
             pg.WhiteMonsters[i].x = choice.nextInt(150, 400);
             pg.WhiteMonsters[i].y = choice.nextInt(150, 400);
         }
+
+        pg.boss.x = 200;
+        pg.boss.y = 200;
     }
 }

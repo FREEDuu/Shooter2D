@@ -45,7 +45,8 @@ public class PanelGame extends JPanel implements Runnable{
     public Skeletron[] Skeletrons = new Skeletron[100]; 
     public Dragonite[] Dragonites = new Dragonite[100]; 
     public WhiteMonster[] WhiteMonsters = new WhiteMonster[100]; 
-    public Entity[][] enemies ={ Skeletrons, Dragonites, WhiteMonsters };
+    public Boss boss = new Boss(this);
+    public Entity[][] enemies ={ Skeletrons, Dragonites, WhiteMonsters};
     int varx = 100;
     int vary = 100;
     int speed = 10;
@@ -128,6 +129,7 @@ public class PanelGame extends JPanel implements Runnable{
                 Utils.checkWhiteBulletPlayer(player, WhiteMonsterbullets);
             }
             player.update();
+            boss.update();
             for(int i = 0; i < Skeletrons.length; i++ ){
                 if(Skeletrons[i] != null){
                     Skeletrons[i].update();
@@ -213,6 +215,7 @@ public class PanelGame extends JPanel implements Runnable{
                     BombPlayerList.get(i).draw(g2); 
                 }
             }
+            boss.draw(g2);
             uiManager.draw(g2);
         }
         
