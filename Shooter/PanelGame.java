@@ -45,8 +45,8 @@ public class PanelGame extends JPanel implements Runnable{
     public Skeletron[] Skeletrons = new Skeletron[100]; 
     public Dragonite[] Dragonites = new Dragonite[100]; 
     public WhiteMonster[] WhiteMonsters = new WhiteMonster[100]; 
-    public Boss boss = new Boss(this);
-    public Entity[][] enemies ={ Skeletrons, Dragonites, WhiteMonsters};
+    public Boss[] boss = {new Boss(this)};
+    public Entity[][] enemies ={ Skeletrons, Dragonites, WhiteMonsters, boss};
     int varx = 100;
     int vary = 100;
     int speed = 10;
@@ -106,9 +106,11 @@ public class PanelGame extends JPanel implements Runnable{
     }
     public void setupStartGameLevel(){
         gameState = playState;
-        System.out.println(player.HP.width);
-        player.x = 500;
-        player.y = 500;
+        BombPlayerList = new ArrayList<Projectile>(); 
+        bullets = new ArrayList<Projectile>();
+        WhiteMonsterbullets = new ArrayList<Projectile>();
+        player.x = 700;
+        player.y = 700;
         assetM.placeMonster();
         //SoundM.LoopMusicEffect(0); da migliorare è bruttissimo xD
     }
@@ -121,15 +123,17 @@ public class PanelGame extends JPanel implements Runnable{
                 Utils.onLifeEnemy(enemies);
             }
             if(bullets.size() > 0){
-                Utils.checkCollisionBulletsEnemy(Skeletrons, bullets);
-                Utils.checkCollisionBulletsEnemy(Dragonites, bullets);
-                Utils.checkCollisionBulletsEnemy(WhiteMonsters, bullets);
+                Utils.checkCollisionBulletsEnemy(Skeletrons, bullets, player.damage);
+                Utils.checkCollisionBulletsEnemy(Dragonites, bullets, player.damage);
+                Utils.checkCollisionBulletsEnemy(WhiteMonsters, bullets, player.damage);
             }
             if(WhiteMonsterbullets.size() > 0){
                 Utils.checkWhiteBulletPlayer(player, WhiteMonsterbullets);
             }
             player.update();
-            boss.update();
+            if(boss[0] != null){
+                boss[0].update();
+            }
             for(int i = 0; i < Skeletrons.length; i++ ){
                 if(Skeletrons[i] != null){
                     Skeletrons[i].update();
@@ -215,7 +219,9 @@ public class PanelGame extends JPanel implements Runnable{
                     BombPlayerList.get(i).draw(g2); 
                 }
             }
-            boss.draw(g2);
+            if(boss[0] != null){
+                boss[0].draw(g2);
+            }
             uiManager.draw(g2);
         }
         

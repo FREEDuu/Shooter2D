@@ -13,11 +13,11 @@ public class Bomb extends Projectile{
     int counter ,counterImg, solidAreaDefaultX, solidAreaDefaultY;
 
     public Bomb(PanelGame pg, int xCoord, int Ycoord){
-        this.gp = pg;
+        this.pg = pg;
         this.speed = 0;
         this.counter = 0;
         this.counterImg = 0;
-        this.damage = 1000;
+        this.damage = 90;
         this.x = xCoord;
         this.expire = false;
         this.y = Ycoord;
@@ -62,17 +62,17 @@ public class Bomb extends Projectile{
 
         int screenX, screenY;
 
-        screenX = x - gp.player.x + gp.player.cameraX;
-        screenY = y - gp.player.y + gp.player.cameraY;
+        screenX = x - pg.player.x + pg.player.cameraX;
+        screenY = y - pg.player.y + pg.player.cameraY;
 
-        g2.drawImage(img, screenX , screenY, gp.tileSize*8, gp.tileSize*8, null);
+        g2.drawImage(img, screenX , screenY, pg.tileSize*8, pg.tileSize*8, null);
         g2.drawRect(screenX + hitBox.x , screenY + hitBox.y, hitBox.width, hitBox.height);
 
     }
 
     public void onDeath(){
 
-        Utils.makeExplotion(this, gp.enemies);
+        Utils.makeExplotion(this, pg.enemies);
 
     }
 

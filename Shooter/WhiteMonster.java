@@ -21,6 +21,7 @@ public class WhiteMonster extends Entity{
         this.solidAreaDefaultY = this.hitBox.y;
         this.life = 10;
         this.gp = gp;
+        this.damage = 0;
         this.HP = new Rectangle(0,0,120,25);
         this.lifeW = HP.width;
         this.imageCounter = 0;

@@ -19,15 +19,15 @@ public class Player extends Entity{
         this.rectReloadBomb = new Rectangle(0 ,0, 100, 50);
         this.controllerK = controllerK;
         this.reloadCounter = 0;
-        this.damage = 0;
-        this.SetDefault();
+        this.damage = 30;
         this.getPgImgs();
+        this.SetDefault();
         cameraY = ( pg.height / 2);
         cameraX = ( pg.width / 2) ;
         this.reload = true;
         this.HP = new Rectangle(0,0, 500, 50);
         this.hitBox = new Rectangle((pg.tileSize * 3), (4 * pg.tileSize), pg.tileSize * 2, pg.tileSize * 3);
-        this.maxHealth = hitBox.width;
+        this.maxHealth = HP.width;
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;
         this.wLife = HP.width;
@@ -42,6 +42,7 @@ public class Player extends Entity{
         try{
             String Path;
             if (pg.playerChoice.equals("babypunk")) {
+                this.name = "babypunk";
                 Path = "Shooter/images/16x16/babypunk.png";
                 down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
                 down[1] = ImageIO.read(new File(Path)).getSubimage(24, 0, 24, 24);
@@ -62,6 +63,7 @@ public class Player extends Entity{
             }
             
             else if(pg.playerChoice.equals("queen")){
+                this.name = "queen";
                 Path = "Shooter/images/16x16/queen.png";
                 down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
                 down[1] = ImageIO.read(new File(Path)).getSubimage(24, 0, 24, 24);
@@ -81,6 +83,7 @@ public class Player extends Entity{
                 up[3] =ImageIO.read(new File(Path)).getSubimage(72, 72, 24, 24);
             }
             else if(pg.playerChoice.equals("erbiondo")){
+                this.name = "erbiondo";
                 Path = "Shooter/images/16x16/erbiondo.png";
                 down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
                 down[1] = ImageIO.read(new File(Path)).getSubimage(24, 0, 24, 24);
@@ -108,16 +111,26 @@ public class Player extends Entity{
 
     public void shoot(){
         pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x , MouseInfo.getPointerInfo().getLocation().y, true));
+        if(this.name.equals("babypunk")){
+            pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x+2 , MouseInfo.getPointerInfo().getLocation().y+2, true));
+        }
         //pg.SoundM.PlaySoundEffect(1);
     }
     public void shootBomb(){
         pg.BombPlayerList.add(new Bomb(pg, pg.player.x, pg.player.y));
+        if(this.name.equals("queen")){
+            pg.BombPlayerList.add(new Bomb(pg, pg.player.x+5, pg.player.y+5));
+        }
     }
 
     public void SetDefault(){
         this.x = 500;
         this.y = 500;
         this.speed = 10;
+        if(this.name.equals("erbiondo")){
+            this.speed = 15;
+            this.damage = 50;
+        }
         this.defaultSpeed = speed;
         this.direction = "down";
         this.imageCounter = 0;
@@ -242,7 +255,7 @@ public class Player extends Entity{
         g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize*5 , 350, 50);
         g2.setColor(Color.red);
         g2.fillRect(HP.x + pg.tileSize, HP.y + pg.tileSize, HP.width, HP.height);
-        g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize, HP.width, HP.height);
+        g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize, maxHealth, HP.height);
     }
 
     public void onDeath(){
@@ -250,12 +263,13 @@ public class Player extends Entity{
     }
 
     public void DamageIncrease(){
-        this.damage++;
+        this.damage += 10;
     }
     public void SpeedIncrease(){
-        this.speed += 7;
+        this.speed += 5;
     }
     public void HealtIncrease(){
-        HP.width += 100;
+        maxHealth += 200;
+        HP.width = maxHealth;
     }
 }

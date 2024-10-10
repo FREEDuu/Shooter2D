@@ -71,42 +71,32 @@ public class Boss extends Entity{
 
                 switch (direction) {
                     case "up":
-                        if(idle){
-                            image = up[0];
-                        }
-                        else{
-                            image = up[imageNumber];
-                        }
+                        
+                        image = up[imageNumber];
+                        
                         break;
-                    case "down":
-                        if(idle){
-                            image = down[0];
-                        }
-                        else{
-                            image = down[imageNumber];
-                        }
+                    case "down":                        
+                   
+                        image = down[imageNumber];
+                        
                         break;
                     case "right":
-                        if(idle){
-                            image = right[0];
-                        }
-                        else{
-                            image = right[imageNumber];
-                        }
+
+                        image = right[imageNumber];
+                        
                         break;
                     case "left":
-                        image = right[imageNumber];
-                        if(idle){
-                            image = left[0];
-                        }
-                        else{
-                            image = left[imageNumber];
-                        }
+
+                        image = left[imageNumber];
+                    
                         break;
                 }
-                if (imageNumber == 0 || imageNumber == 1) {
-                    g2.drawImage(image, screenX , screenY, gp.tileSize*10, gp.tileSize*10, null );
-                }else{
+                if ((imageNumber == 0 || imageNumber == 1) && (direction == "left" || direction == "right")) {
+                    g2.drawImage(image, screenX , screenY, gp.tileSize*16, gp.tileSize*8, null );
+                }else if((imageNumber == 0 || imageNumber == 1) && (direction == "up" || direction == "down")){
+                    g2.drawImage(image, screenX , screenY, gp.tileSize*8, gp.tileSize*16, null );
+                }
+                else{
                     g2.drawImage(image, screenX , screenY, gp.tileSize*8, gp.tileSize*8, null );
                 }
                 g2.drawRect(screenX + hitBox.x, screenY + hitBox.y, hitBox.width, hitBox.height);
@@ -117,6 +107,14 @@ public class Boss extends Entity{
 
     }
 
+    public boolean onRange(){
+        switch(direction){
+            case "right":
+            break;
+        }
+        return false;
+    }
+
     public void update(){
 
         
@@ -124,6 +122,9 @@ public class Boss extends Entity{
         if(imageCounter > 15){
             imageNumber++;
             imageNumber = imageNumber % 4;
+            if(onRange()){
+                
+            }
             imageCounter = 0;
             rand = choice.nextInt(3);
         //Implementazione di una rudimentale AI che segue il pg

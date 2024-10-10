@@ -1,7 +1,7 @@
 import java.awt.Graphics2D;
 
 public class Projectile extends Entity{
-    int cost, damage;
+    int cost;
     double angle;
 
     public void update(){

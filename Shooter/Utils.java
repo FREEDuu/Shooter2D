@@ -32,25 +32,26 @@ public class Utils{
         return Math.atan(dify/difx);
     }
 
-    public static void checkCollisionBulletsEnemy(Entity[] enemy, List<Projectile> bullets){
+    public static void checkCollisionBulletsEnemy(Entity[] enemy, List<Projectile> bull, int damage){
         int indice = 0;
         for(int i = 0; i < enemy.length; i++){
-            indice = CollisionDetector.checkEntity(enemy[i], bullets);
-
+            indice = CollisionDetector.checkEntity(enemy[i], bull);
+            
             if(indice != 999999){
-                if(enemy[i].HP.width - 50 > 0){
-                    enemy[i].HP.width -= 50;
+                bull.remove(indice);
+                if(enemy[i].HP.width - damage > 0){
+                    enemy[i].HP.width -= damage;
                 }
                 else{
                     enemy[i] = null;
                 }
-                bullets.set(indice, null);
+                
             }
         }
     }
 
     public static void makeExplotion(Entity bomb, Entity[][] enemy){
-        for(int i = 0; i < enemy.length; i++){            
+        for(int i = 0; i < enemy.length; i++){   
             CollisionDetector.checkEnemy(bomb, enemy[i], false);
             bomb.collision = true;
         }
@@ -69,8 +70,8 @@ public class Utils{
         int indice = 0;
         indice = CollisionDetector.checkEntity(entity, Wbullets);
         if(indice != 999999){
-            if(entity.HP.width - 50 > 0){
-                entity.HP.width -= 50;
+            if(entity.HP.width - 0 > 0){
+                entity.HP.width -= 0;
             }
             else{
                 entity.onDeath();

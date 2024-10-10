@@ -20,6 +20,7 @@ public class Dragonite extends Entity{
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;
         this.life = 10;
+        this.damage = 0;
         this.gp = gp;
         this.HP = new Rectangle(0,0,120,25);
         this.lifeW = HP.width;
