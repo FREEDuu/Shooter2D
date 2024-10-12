@@ -21,11 +21,13 @@ public class PanelGame extends JPanel implements Runnable{
     public List<Projectile> BombPlayerList = new ArrayList<Projectile>();
     public int WorldH = tileSize * maxWorldCol;
     public int WorldY = tileSize * maxWorldRow;
+
     GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
     public int width = gd.getDisplayMode().getWidth();
     public int height = gd.getDisplayMode().getHeight();
     TileManager tileM = new TileManager(this);
     UI uiManager = new UI(this);
+
     public String playerChoice ; 
     int FPS = 60;
     boolean ret = true;
@@ -39,9 +41,11 @@ public class PanelGame extends JPanel implements Runnable{
     public int loseState = 3;
     public int nextLevelState = 4;
     public Player player;
+
     CollisionDetector cDetector = new CollisionDetector(this);
     ControllerKey controllK = new ControllerKey(this);
     AssetManager assetM = new AssetManager(this);
+
     public Skeletron[] Skeletrons = new Skeletron[100]; 
     public Dragonite[] Dragonites = new Dragonite[100]; 
     public WhiteMonster[] WhiteMonsters = new WhiteMonster[100]; 
@@ -53,7 +57,7 @@ public class PanelGame extends JPanel implements Runnable{
 
     // Costruttore PanelGame, qui con startGame viene avviato il Mainloop del gioco, viene aggiunto il keyListener ecc.
     public PanelGame(){
-        this.playerChoice = "toChoise";
+        this.playerChoice = "toChoice";
         this.gameState = startState;
         this.setPreferredSize(new DimensionUIResource(width, height));
         this.setDoubleBuffered(true);
@@ -126,6 +130,7 @@ public class PanelGame extends JPanel implements Runnable{
                 Utils.checkCollisionBulletsEnemy(Skeletrons, bullets, player.damage);
                 Utils.checkCollisionBulletsEnemy(Dragonites, bullets, player.damage);
                 Utils.checkCollisionBulletsEnemy(WhiteMonsters, bullets, player.damage);
+                Utils.checkCollisionBulletsEnemy(boss, bullets, player.damage);
             }
             if(WhiteMonsterbullets.size() > 0){
                 Utils.checkWhiteBulletPlayer(player, WhiteMonsterbullets);

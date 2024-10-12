@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 public class UI {
     PanelGame pg;
     Graphics2D g2;
-    int arrawPos = 0;
+    int arrowPos = 0;
     int selectionDif = 1;
     int startPage = 0;
 
@@ -36,17 +36,16 @@ public class UI {
         
             test = "Riavvia Parita";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2);
-            if (arrawPos == 0) {
+            if (arrowPos == 0) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test) , pg.height/2);
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2);
         
             }
     
     
-    
             test = "Esci dal Gioco";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*10);
-            if (arrawPos == 1) {
+            if (arrowPos == 1) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*10);
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*10);
             }
@@ -71,20 +70,20 @@ public class UI {
         
             test = "Attacco";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2);
-            if (arrawPos == 0) {
+            if (arrowPos == 0) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test) , pg.height/2);
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2);
         
             }
             test = "Salute";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*8);
-            if (arrawPos == 1) {
+            if (arrowPos == 1) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*8);
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*8);
             }
             test = "Velocità";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*16);
-            if (arrawPos == 2) {
+            if (arrowPos == 2) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*16);
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*16);
             }
@@ -117,21 +116,21 @@ public class UI {
         
             test = "Avvia Parita";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2);
-            if (arrawPos == 0) {
+            if (arrowPos == 0) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test) , pg.height/2);
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2);
         
             }
             test = "Difficoltà "+Integer.toString(selectionDif);
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*8);
-            if (arrawPos == 1) {
+            if (arrowPos == 1) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test) ,  pg.height/2 + pg.tileSize*8);
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) ,  pg.height/2 + pg.tileSize*8);
         
             }
             test = "Esci dal Gioco";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*16);
-            if (arrawPos == 2) {
+            if (arrowPos == 2) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*16);
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*16);
             }
@@ -148,24 +147,22 @@ public class UI {
         
             test = "Baby Punk";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2);
-            if (arrawPos == 0) {
+            if (arrowPos == 0) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test) , pg.height/2);
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2);
         
             }
     
-    
-    
             test = "Queen";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*10);
-            if (arrawPos == 1) {
+            if (arrowPos == 1) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*10);
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*10);
             }
 
             test = "Er Biondo";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*20);
-            if (arrawPos == 2) {
+            if (arrowPos == 2) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*20);
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*20);
             }

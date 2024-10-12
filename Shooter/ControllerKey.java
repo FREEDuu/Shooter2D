@@ -24,48 +24,55 @@ public class ControllerKey implements KeyListener {
         int keycode = e.getKeyCode();
 
         if(pg.gameState == pg.loseState){
-            if(keycode == KeyEvent.VK_W){
-                pg.uiManager.arrawPos++;
-                pg.uiManager.arrawPos = pg.uiManager.arrawPos % 2 ;
+            switch (keycode){
 
-            }
-            if(keycode == KeyEvent.VK_S){
-                pg.uiManager.arrawPos--;
-                pg.uiManager.arrawPos = Math.abs(pg.uiManager.arrawPos);
-                pg.uiManager.arrawPos = pg.uiManager.arrawPos % 2 ;
-            }
-            if (keycode == KeyEvent.VK_ENTER) {
-                if(pg.uiManager.arrawPos == 0){
-                    pg.RestartGame();
-                    pg.uiManager.arrawPos = 0;
-                }
-                else{
-                    System.exit(0);
-                }
+                case KeyEvent.VK_S:
+                    pg.uiManager.arrowPos++;
+                    if(pg.uiManager.arrowPos > 2){
+                        pg.uiManager.arrowPos = 0;
+                    }
+                case KeyEvent.VK_W:
+                    pg.uiManager.arrowPos--;
+                    if(pg.uiManager.arrowPos < 0){
+                        pg.uiManager.arrowPos = 2;
+                    }
+                case KeyEvent.VK_ENTER:
+                    if(pg.uiManager.arrowPos == 0){
+                        pg.player.DamageIncrease();
+                    }
+                    if(pg.uiManager.arrowPos == 1){
+                        pg.player.HealthIncrease();
+                    }
+                    if(pg.uiManager.arrowPos == 2){
+                        pg.player.SpeedIncrease();
+                    }
+                    pg.setupStartGameLevel();
             }
         }
+
         if(pg.gameState == pg.nextLevelState){
+            
             if(keycode == KeyEvent.VK_S){
-                pg.uiManager.arrawPos++;
-                    if(pg.uiManager.arrawPos > 2){
-                        pg.uiManager.arrawPos = 0;
+                pg.uiManager.arrowPos++;
+                    if(pg.uiManager.arrowPos > 2){
+                        pg.uiManager.arrowPos = 0;
                     }
             }
             if(keycode == KeyEvent.VK_W){
-                pg.uiManager.arrawPos--;
-                if(pg.uiManager.arrawPos < 0){
-                    pg.uiManager.arrawPos = 2;
+                pg.uiManager.arrowPos--;
+                if(pg.uiManager.arrowPos < 0){
+                    pg.uiManager.arrowPos = 2;
                 }
             }
             if (keycode == KeyEvent.VK_ENTER) {
 
-                if(pg.uiManager.arrawPos == 0){
+                if(pg.uiManager.arrowPos == 0){
                     pg.player.DamageIncrease();
                 }
-                if(pg.uiManager.arrawPos == 1){
-                    pg.player.HealtIncrease();
+                if(pg.uiManager.arrowPos == 1){
+                    pg.player.HealthIncrease();
                 }
-                if(pg.uiManager.arrawPos == 2){
+                if(pg.uiManager.arrowPos == 2){
                     pg.player.SpeedIncrease();
                 }
                 pg.setupStartGameLevel();
@@ -74,62 +81,62 @@ public class ControllerKey implements KeyListener {
 
         if (pg.gameState == pg.startState) {
             if (pg.uiManager.startPage == 0) {
-                if(keycode == KeyEvent.VK_D && pg.uiManager.arrawPos == 1){
+                if(keycode == KeyEvent.VK_D && pg.uiManager.arrowPos == 1){
                     pg.uiManager.selectionDif++;
                     if(pg.uiManager.selectionDif > 3){
                         pg.uiManager.selectionDif = 1;
                     }
                 }
-                if(keycode == KeyEvent.VK_A && pg.uiManager.arrawPos == 1){
+                if(keycode == KeyEvent.VK_A && pg.uiManager.arrowPos == 1){
                     pg.uiManager.selectionDif--;
                     if(pg.uiManager.selectionDif < 1){
                         pg.uiManager.selectionDif = 3;
                     }
                 }
                 if(keycode == KeyEvent.VK_W){
-                    pg.uiManager.arrawPos--;
-                    if(pg.uiManager.arrawPos < 0){
-                        pg.uiManager.arrawPos =2;
+                    pg.uiManager.arrowPos--;
+                    if(pg.uiManager.arrowPos < 0){
+                        pg.uiManager.arrowPos =2;
                     }
                 }
                 if(keycode == KeyEvent.VK_S){
-                    pg.uiManager.arrawPos++;
-                    pg.uiManager.arrawPos = Math.abs(pg.uiManager.arrawPos);
-                    pg.uiManager.arrawPos = pg.uiManager.arrawPos % 3 ;
+                    pg.uiManager.arrowPos++;
+                    pg.uiManager.arrowPos = Math.abs(pg.uiManager.arrowPos);
+                    pg.uiManager.arrowPos = pg.uiManager.arrowPos % 3 ;
                 }
                 if (keycode == KeyEvent.VK_ENTER) {
-                    if(pg.uiManager.arrawPos == 2){
+                    if(pg.uiManager.arrowPos == 2){
                         System.exit(0);
                         
                     }
                     else{
                         pg.uiManager.startPage++;
-                        pg.uiManager.arrawPos = 0;
+                        pg.uiManager.arrowPos = 0;
                         pg.difficolta = pg.uiManager.selectionDif;
                     }
                 }
             }
             else{
                 if(keycode == KeyEvent.VK_W){
-                    pg.uiManager.arrawPos--;
-                    if(pg.uiManager.arrawPos == -1){
-                        pg.uiManager.arrawPos = 2;
+                    pg.uiManager.arrowPos--;
+                    if(pg.uiManager.arrowPos == -1){
+                        pg.uiManager.arrowPos = 2;
                     }
 
                 }
                 if(keycode == KeyEvent.VK_S){
-                    pg.uiManager.arrawPos++;
-                    pg.uiManager.arrawPos = Math.abs(pg.uiManager.arrawPos);
-                    pg.uiManager.arrawPos = pg.uiManager.arrawPos % 3 ;
+                    pg.uiManager.arrowPos++;
+                    pg.uiManager.arrowPos = Math.abs(pg.uiManager.arrowPos);
+                    pg.uiManager.arrowPos = pg.uiManager.arrowPos % 3 ;
                 }
                 if (keycode == KeyEvent.VK_ENTER) {
-                    if(pg.uiManager.arrawPos == 0){
+                    if(pg.uiManager.arrowPos == 0){
                         pg.playerChoice = "babypunk";
                         pg.setupStartGame();
                         pg.gameState = pg.playState;
 
                     }
-                    else if (pg.uiManager.arrawPos == 1) {
+                    else if (pg.uiManager.arrowPos == 1) {
                         pg.playerChoice = "queen";
                         pg.setupStartGame();
                         pg.gameState = pg.playState; 

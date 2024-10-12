@@ -25,13 +25,13 @@ public class Bullet extends Projectile{
         if(ShootbyPlayer){
             this.x = pg.player.x - (img.getWidth()/2)*2 + ( pg.tileSize*8/2);
             this.y = pg.player.y - (img.getHeight()/2)*2 + (pg.tileSize*8/2);
-            this.angle = Utils.getAngle(pg.width/2, pg.height/2, x, y);
+            this.angle = Utils.getMouseAngle(pg.width/2, pg.height/2, x, y);
             this.speed = 40;
         }
         else{
             this.x = x;
             this.y = y;
-            this.angle = Utils.getAngle(this.x, this.y, pg.player.x, pg.player.y);
+            this.angle = Utils.getMouseAngle(this.x, this.y, pg.player.x, pg.player.y);
             this.speed = 20;
 
         }

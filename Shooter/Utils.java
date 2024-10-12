@@ -14,22 +14,13 @@ public class Utils{
         return bimg;
     }
 
-    public static double getAngle(int midx, int midy, int mousex, int mousey){
+    public static double getMouseAngle(int midx, int midy, int mousex, int mousey){
 
         
-        double difx = Math.abs(midx - mousex);
-        double dify = Math.abs(midy - mousey);
-
-        if(midx > mousex && midy > mousey){
-            return +Math.atan(dify/difx) - (Math.PI/2 * 2) ;
-        }
-        else if(midx < mousex && midy > mousey){
-            return -Math.atan(dify/difx) ;
-        }
-        else if(midx > mousex && midy < mousey){
-            return (Math.PI/2 * 2) - Math.atan(dify/difx);
-        }
-        return Math.atan(dify/difx);
+        double dx =  mousex - midx;
+        double dy =  mousey - midy;
+        //meglio usare builtin quando possibile 
+        return Math.atan2(dy, dx); 
     }
 
     public static void checkCollisionBulletsEnemy(Entity[] enemy, List<Projectile> bull, int damage){

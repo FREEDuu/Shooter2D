@@ -172,7 +172,7 @@ public class WhiteMonster extends Entity{
         }
 
         }
-        collision = false;
+        collision = true;
         idle = false;
     }
     public void onDeath(){

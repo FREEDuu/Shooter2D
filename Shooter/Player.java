@@ -110,6 +110,7 @@ public class Player extends Entity{
     }
 
     public void shoot(){
+        
         pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x , MouseInfo.getPointerInfo().getLocation().y, true));
         if(this.name.equals("babypunk")){
             pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x+2 , MouseInfo.getPointerInfo().getLocation().y+2, true));
@@ -268,7 +269,7 @@ public class Player extends Entity{
     public void SpeedIncrease(){
         this.speed += 5;
     }
-    public void HealtIncrease(){
+    public void HealthIncrease(){
         maxHealth += 200;
         HP.width = maxHealth;
     }
