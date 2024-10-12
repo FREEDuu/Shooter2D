@@ -4,157 +4,158 @@ public class CollisionDetector {
 
     PanelGame pg;
 
-    public CollisionDetector(PanelGame pg){
+    public CollisionDetector(PanelGame pg) {
         this.pg = pg;
     }
 
-    public void checkTile(Entity entity){
+    public void checkTile(Entity entity) {
 
         int leftWorldX = entity.x + entity.hitBox.x;
         int rightWorldX = entity.x + entity.hitBox.x + entity.hitBox.width;
         int topWorldY = entity.y + entity.hitBox.y;
         int bottomWorldY = entity.y + entity.hitBox.y + entity.hitBox.height;
-        
+
         int leftCol = leftWorldX / (pg.tileSize * 4);
-        int rightCol = rightWorldX / (pg.tileSize* 4);
+        int rightCol = rightWorldX / (pg.tileSize * 4);
         int topRow = topWorldY / (pg.tileSize * 4);
         int bottomRow = bottomWorldY / (pg.tileSize * 4);
 
         int tileNum1, tileNum2;
 
-        switch(entity.direction){
-            case "up": 
-                topRow = (topWorldY - entity.speed)/ (pg.tileSize * 4);
+        switch (entity.direction) {
+            case "up":
+                topRow = (topWorldY - entity.speed) / (pg.tileSize * 4);
                 tileNum1 = pg.tileM.mapTileNum[topRow][leftCol];
                 tileNum2 = pg.tileM.mapTileNum[topRow][rightCol];
-                if(pg.tileM.tiles[tileNum1].collision == true || pg.tileM.tiles[tileNum2].collision == true){
+                if (pg.tileM.tiles[tileNum1].collision == true || pg.tileM.tiles[tileNum2].collision == true) {
                     entity.collision = true;
                 }
                 break;
-            case "down": 
-                bottomRow = (bottomWorldY + entity.speed)/(pg.tileSize * 4);
+            case "down":
+                bottomRow = (bottomWorldY + entity.speed) / (pg.tileSize * 4);
                 tileNum1 = pg.tileM.mapTileNum[bottomRow][leftCol];
                 tileNum2 = pg.tileM.mapTileNum[bottomRow][rightCol];
-                if(pg.tileM.tiles[tileNum1].collision == true || pg.tileM.tiles[tileNum2].collision == true){
+                if (pg.tileM.tiles[tileNum1].collision == true || pg.tileM.tiles[tileNum2].collision == true) {
                     entity.collision = true;
                 }
                 break;
-            case "left": 
-                leftCol = (leftWorldX - entity.speed)/ (pg.tileSize * 4);
+            case "left":
+                leftCol = (leftWorldX - entity.speed) / (pg.tileSize * 4);
                 tileNum1 = pg.tileM.mapTileNum[topRow][leftCol];
                 tileNum2 = pg.tileM.mapTileNum[bottomRow][leftCol];
-                if(pg.tileM.tiles[tileNum1].collision == true || pg.tileM.tiles[tileNum2].collision == true){
+                if (pg.tileM.tiles[tileNum1].collision == true || pg.tileM.tiles[tileNum2].collision == true) {
                     entity.collision = true;
                 }
                 break;
-            case "right": 
-                rightCol = (rightWorldX + entity.speed)/(pg.tileSize * 4);
+            case "right":
+                rightCol = (rightWorldX + entity.speed) / (pg.tileSize * 4);
                 tileNum1 = pg.tileM.mapTileNum[topRow][rightCol];
                 tileNum2 = pg.tileM.mapTileNum[bottomRow][rightCol];
-                if(pg.tileM.tiles[tileNum1].collision == true || pg.tileM.tiles[tileNum2].collision == true){
+                if (pg.tileM.tiles[tileNum1].collision == true || pg.tileM.tiles[tileNum2].collision == true) {
                     entity.collision = true;
                 }
                 break;
 
         }
     }
+
     public static int checkEntity(Entity entity, List<Projectile> target) {
-        
+
         int index = 999999;
         Entity element;
-        for(int i=0; i< target.size(); i++ ){
+        for (int i = 0; i < target.size(); i++) {
             element = target.get(i);
-            if( element != null && entity != null){ 
-                    //imposta le posizioni delle aree dei rettangoli "come sono nello spazio" (e poi reset)
-                    
-                entity.hitBox.x = entity.hitBox.x + entity.x;    
+            if (element != null && entity != null) {
+                // imposta le posizioni delle aree dei rettangoli "come sono nello spazio" (e
+                // poi reset)
+
+                entity.hitBox.x = entity.hitBox.x + entity.x;
                 entity.hitBox.y = entity.hitBox.y + entity.y;
-                
+
                 element.hitBox.x = element.hitBox.x + element.x;
                 element.hitBox.y = element.hitBox.y + element.y;
-                    
-                    
-                if( entity.hitBox.intersects(element.hitBox)) {
-                    if( element != entity){
+
+                if (entity.hitBox.intersects(element.hitBox)) {
+                    if (element != entity) {
                         return i;
                     }
-                }                    
-                    //restore dafaults
+                }
+                // restore dafaults
                 entity.hitBox.x = entity.solidAreaDefaultX;
                 entity.hitBox.y = entity.solidAreaDefaultY;
                 element.hitBox.x = element.solidAreaDefaultX;
                 element.hitBox.y = element.solidAreaDefaultY;
 
-                
             }
         }
         return index;
     }
 
     public static void checkEnemy(Entity entity, Entity[] target, boolean CallPlayer) {
-        
+
         Entity element;
-        for(int i=0; i< target.length; i++ ){
+        for (int i = 0; i < target.length; i++) {
             element = target[i];
-            if( element != null && entity != null){ 
-                    //imposta le posizioni delle aree dei rettangoli "come sono nello spazio" (e poi reset)
-                    
-                entity.hitBox.x = entity.hitBox.x + entity.x;    
+            if (element != null && entity != null) {
+                // imposta le posizioni delle aree dei rettangoli "come sono nello spazio" (e
+                // poi reset)
+
+                entity.hitBox.x = entity.hitBox.x + entity.x;
                 entity.hitBox.y = entity.hitBox.y + entity.y;
-                
+
                 element.hitBox.x = element.hitBox.x + element.x;
                 element.hitBox.y = element.hitBox.y + element.y;
 
-                if(entity.speed != 0){
-                    switch(entity.direction) {
-                        case "up": entity.hitBox.y -= entity.speed; break;
-                        case "down": entity.hitBox.y += entity.speed; break;
-                        case "left": entity.hitBox.x -= entity.speed; break;
-                        case "right": entity.hitBox.x += entity.speed;  break;
+                if (entity.speed != 0) {
+                    switch (entity.direction) {
+                        case "up":
+                            entity.hitBox.y -= entity.speed;
+                            break;
+                        case "down":
+                            entity.hitBox.y += entity.speed;
+                            break;
+                        case "left":
+                            entity.hitBox.x -= entity.speed;
+                            break;
+                        case "right":
+                            entity.hitBox.x += entity.speed;
+                            break;
                     }
-                }                    
-                if( entity.hitBox.intersects(element.hitBox)) {
-                    if( element != entity){
-                        if(CallPlayer){
+                }
+                if (entity.hitBox.intersects(element.hitBox)) {
+                    if (element != entity) {
+                        if (CallPlayer) {
                             entity.collision = true;
-                            if(entity.HP.width - element.damage > 0){
+                            if (entity.HP.width - element.damage > 0) {
                                 entity.HP.width -= element.damage;
-                                //element.knockback(entity);
-                            }
-                            else{
+                                // element.knockback(entity);
+                            } else {
                                 entity.onDeath();
                             }
-                        }
-                        else{
-                    
-                            if(element.HP.width - entity.damage > 0){
+                        } else {
+
+                            if (element.HP.width - entity.damage > 0) {
                                 element.HP.width -= entity.damage;
-                                //element.knockback(entity);
-                            }
-                            else{
+                                // element.knockback(entity);
+                            } else {
                                 element.onDeath();
                             }
-                            if(entity.speed!= 0){
+                            if (entity.speed != 0) {
                                 element.collision = true;
                             }
-                    
-                      
+
                         }
                     }
-                }                    
-                    //restore dafaults
+                }
+                // restore dafaults
                 entity.hitBox.x = entity.solidAreaDefaultX;
                 entity.hitBox.y = entity.solidAreaDefaultY;
                 element.hitBox.x = element.solidAreaDefaultX;
                 element.hitBox.y = element.solidAreaDefaultY;
 
-                
             }
         }
-        
+
     }
 
-
 }
-
-    

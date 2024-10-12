@@ -72,7 +72,7 @@ public class Bomb extends Projectile{
 
     public void onDeath(){
 
-        Utils.makeExplotion(this, pg.enemies);
+        Utils.makeExplosion(this, pg.enemies);
 
     }
 

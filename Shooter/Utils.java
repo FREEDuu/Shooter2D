@@ -2,7 +2,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-public class Utils{
+public class Utils {
 
     public static BufferedImage rotate(BufferedImage bimg, double angle) {
         int w = bimg.getWidth();
@@ -14,71 +14,82 @@ public class Utils{
         return bimg;
     }
 
-    public static double getMouseAngle(int midx, int midy, int mousex, int mousey){
-
-        
-        double dx =  mousex - midx;
-        double dy =  mousey - midy;
-        //meglio usare builtin quando possibile 
-        return Math.atan2(dy, dx); 
+    public static double getMouseAngle(int midx, int midy, int mousex, int mousey) {
+        double dx = mousex - midx;
+        double dy = mousey - midy;
+        // meglio usare builtin quando possibile
+        return Math.atan2(dy, dx);
     }
 
-    public static void checkCollisionBulletsEnemy(Entity[] enemy, List<Projectile> bull, int damage){
+    public static void checkCollisionBulletsEnemy(Entity[] enemy, List<Projectile> bull, int damage) {
         int indice = 0;
-        for(int i = 0; i < enemy.length; i++){
+        for (int i = 0; i < enemy.length; i++) {
             indice = CollisionDetector.checkEntity(enemy[i], bull);
-            
-            if(indice != 999999){
+
+            if (indice != 999999) {
                 bull.remove(indice);
-                if(enemy[i].HP.width - damage > 0){
+                if (enemy[i].HP.width - damage > 0) {
                     enemy[i].HP.width -= damage;
-                }
-                else{
+                } else {
                     enemy[i] = null;
                 }
-                
+
             }
         }
     }
 
-    public static void makeExplotion(Entity bomb, Entity[][] enemy){
-        for(int i = 0; i < enemy.length; i++){   
+    public static void makeExplosion(Entity bomb, Entity[][] enemy) {
+        for (int i = 0; i < enemy.length; i++) {
             CollisionDetector.checkEnemy(bomb, enemy[i], false);
             bomb.collision = true;
         }
 
-        
     }
 
-    public static void checkCollisionPlayerEnemy(Player player, Entity[][] enemy, boolean CallPlayer){
-        for(int i = 0; i < enemy.length; i++){
+    public static void checkCollisionPlayerEnemy(Player player, Entity[][] enemy, boolean CallPlayer) {
+        for (int i = 0; i < enemy.length; i++) {
             CollisionDetector.checkEnemy(player, enemy[i], CallPlayer);
         }
 
-    }   
+    }
 
-    public static void checkWhiteBulletPlayer(Entity entity, List<Projectile> Wbullets){
+    public static void checkWhiteBulletPlayer(Entity entity, List<Projectile> Wbullets) {
         int indice = 0;
         indice = CollisionDetector.checkEntity(entity, Wbullets);
-        if(indice != 999999){
-            if(entity.HP.width - 0 > 0){
+        if (indice != 999999) {
+            if (entity.HP.width - 1 > 0) {
                 entity.HP.width -= 0;
-            }
-            else{
+            } else {
                 entity.onDeath();
             }
             Wbullets.set(indice, null);
         }
-        
+
     }
-    public static void onLifeEnemy(Entity [] [] enemy){
-        for(int i = 0; i < enemy.length; i++){
-            for(int j = 0; j < enemy[i].length; j++){
-                if(enemy[i][j] != null && !enemy[i][j].onLife){
+
+    public static void onLifeEnemy(Entity[][] enemy) {
+        for (int i = 0; i < enemy.length; i++) {
+            for (int j = 0; j < enemy[i].length; j++) {
+                if (enemy[i][j] != null && !enemy[i][j].onLife) {
                     enemy[i][j] = null;
                 }
             }
         }
     }
-}
 
+    // semplice distanza euclidea
+    public static double getPointDistance(int x1, int y1, int x2, int y2){
+        return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
+    }
+
+    public static double getEntityDistance(Entity e1, Entity e2) {
+        return getPointDistance(e1.x, e1.y, e2.x, e2.y)
+    }
+
+    public static boolean isColliding(Entity e1, Entity e2) {
+        if (e1.hitBox.intersects(e2.hitBox)) return true;
+        else return false; 
+    }
+
+
+}
