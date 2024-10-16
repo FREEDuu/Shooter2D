@@ -38,27 +38,24 @@ public class ControllerKey implements KeyListener {
                     }
                 case KeyEvent.VK_ENTER:
                     if(pg.uiManager.arrowPos == 0){
-                        pg.player.DamageIncrease();
+                        pg.setupStartGame();
                     }
-                    if(pg.uiManager.arrowPos == 1){
-                        pg.player.HealthIncrease();
-                    }
+
                     if(pg.uiManager.arrowPos == 2){
-                        pg.player.SpeedIncrease();
+                        System.exit(0);
                     }
-                    pg.setupStartGameLevel();
             }
         }
 
         if(pg.gameState == pg.nextLevelState){
             
-            if(keycode == KeyEvent.VK_S){
+            if(keycode == KeyEvent.VK_D){
                 pg.uiManager.arrowPos++;
                     if(pg.uiManager.arrowPos > 2){
                         pg.uiManager.arrowPos = 0;
                     }
             }
-            if(keycode == KeyEvent.VK_W){
+            if(keycode == KeyEvent.VK_A){
                 pg.uiManager.arrowPos--;
                 if(pg.uiManager.arrowPos < 0){
                     pg.uiManager.arrowPos = 2;

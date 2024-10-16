@@ -19,6 +19,7 @@ public class PanelGame extends JPanel implements Runnable{
     public List<Projectile> bullets = new ArrayList<Projectile>();
     public List<Projectile> WhiteMonsterbullets = new ArrayList<Projectile>();
     public List<Projectile> BombPlayerList = new ArrayList<Projectile>();
+    public List<Entity> Potions = new ArrayList<Entity>();
     public int WorldH = tileSize * maxWorldCol;
     public int WorldY = tileSize * maxWorldRow;
 
@@ -126,11 +127,14 @@ public class PanelGame extends JPanel implements Runnable{
             if(enemies != null){
                 Utils.onLifeEnemy(enemies);
             }
+            if(Potions.size() > 0){
+                Utils.checkPotions(player, Potions);
+            }
             if(bullets.size() > 0){
-                Utils.checkCollisionBulletsEnemy(Skeletrons, bullets, player.damage);
-                Utils.checkCollisionBulletsEnemy(Dragonites, bullets, player.damage);
-                Utils.checkCollisionBulletsEnemy(WhiteMonsters, bullets, player.damage);
-                Utils.checkCollisionBulletsEnemy(boss, bullets, player.damage);
+                Utils.checkCollisionBulletsEnemy(Skeletrons, bullets);
+                Utils.checkCollisionBulletsEnemy(Dragonites, bullets);
+                Utils.checkCollisionBulletsEnemy(WhiteMonsters, bullets);
+                Utils.checkCollisionBulletsEnemy(boss, bullets);
             }
             if(WhiteMonsterbullets.size() > 0){
                 Utils.checkWhiteBulletPlayer(player, WhiteMonsterbullets);
@@ -222,6 +226,12 @@ public class PanelGame extends JPanel implements Runnable{
             for(int i = 0; i < BombPlayerList.size(); i++ ){
                 if(BombPlayerList.get(i) != null && BombPlayerList.get(i).collision == false){
                     BombPlayerList.get(i).draw(g2); 
+                }
+            }
+            for(int i = 0; i < Potions.size(); i++ ){
+
+                if(Potions.get(i) != null){
+                    Potions.get(i).draw(g2);
                 }
             }
             if(boss[0] != null){

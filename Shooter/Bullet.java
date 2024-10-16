@@ -8,18 +8,17 @@ import java.util.Random;
 public class Bullet extends Projectile{
 
     PanelGame gp;
-    double angle;
     BufferedImage img;
     Random rand = new Random();
     int bulletx, bullety;
     boolean PlayerShoot;
 
-    public Bullet(PanelGame pg, int x, int y, boolean ShootbyPlayer){
+    public Bullet(PanelGame pg, int x, int y, boolean ShootbyPlayer, int damage){
         this.gp = pg; 
+        this.damage = damage;
         this.name = "Bullet";
         this.cost = 3;
         this.PlayerShoot = ShootbyPlayer;
-        this.damage = 2;
         
         this.getBulletImg();
         if(ShootbyPlayer){

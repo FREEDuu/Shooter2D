@@ -11,17 +11,17 @@ public class AssetManager {
 
     public void placeMonster(){
 
-        for(int i = 0; i < 1; i++){
+        for(int i = 0; i < pg.Lvl * pg.difficolta *choice.nextInt(4, 7); i++){
             pg.Skeletrons[i] = new Skeletron(pg);
             pg.Skeletrons[i].x = choice.nextInt(150, 400);
             pg.Skeletrons[i].y = choice.nextInt(150, 400);
         }
-        for(int i = 0; i < 1; i++){
+        for(int i = 0; i < pg.Lvl * pg.difficolta *choice.nextInt(4, 7); i++){
             pg.Dragonites[i] = new Dragonite(pg);
             pg.Dragonites[i].x = choice.nextInt(100, 400);
             pg.Dragonites[i].y = choice.nextInt(100, 400);
         }
-        for(int i = 0; i < 1; i++){
+        for(int i = 0; i < pg.Lvl * pg.difficolta *choice.nextInt(4, 7); i++){
             pg.WhiteMonsters[i] = new WhiteMonster(pg);
             pg.WhiteMonsters[i].x = choice.nextInt(150, 400);
             pg.WhiteMonsters[i].y = choice.nextInt(150, 400);

@@ -19,7 +19,6 @@ public class Player extends Entity{
         this.rectReloadBomb = new Rectangle(0 ,0, 100, 50);
         this.controllerK = controllerK;
         this.reloadCounter = 0;
-        this.damage = 30;
         this.getPgImgs();
         this.SetDefault();
         cameraY = ( pg.height / 2);
@@ -111,9 +110,9 @@ public class Player extends Entity{
 
     public void shoot(){
         
-        pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x , MouseInfo.getPointerInfo().getLocation().y, true));
+        pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x , MouseInfo.getPointerInfo().getLocation().y, true, 50));
         if(this.name.equals("babypunk")){
-            pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x+2 , MouseInfo.getPointerInfo().getLocation().y+2, true));
+            pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x+2 , MouseInfo.getPointerInfo().getLocation().y+2, true, 50));
         }
         //pg.SoundM.PlaySoundEffect(1);
     }
@@ -267,10 +266,10 @@ public class Player extends Entity{
         this.damage += 10;
     }
     public void SpeedIncrease(){
-        this.speed += 5;
+        this.speed += 2;
     }
     public void HealthIncrease(){
-        maxHealth += 200;
+        maxHealth += 120;
         HP.width = maxHealth;
     }
 }

@@ -1,5 +1,6 @@
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.awt.Graphics2D;
 
 public class Entity {
 
@@ -20,5 +21,8 @@ public class Entity {
         Collider.direction = this.direction;
         Collider.speed += 12;
         Collider.knockback = true;
+    }
+    public void draw(Graphics2D g2){
+        
     }
 }

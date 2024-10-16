@@ -161,8 +161,28 @@ public class Skeletron extends Entity{
     }
 
     public void onDeath(){
+
         this.onLife = false;
+
+        int randPotion = choice.nextInt(7);
+        if(randPotion < 4){
+            switch (randPotion) {
+                case 0:
+                    gp.Potions.add(new Potion(gp, x, y, "maxHealtIncrease"));
+                    break;
+                case 1:
+                    gp.Potions.add(new Potion(gp, x, y, "HealthRegen"));
+                    break;
+                case 2:
+                    gp.Potions.add(new Potion(gp, x, y, "SpeedIncrease"));
+                    break;
+                case 3:
+                    gp.Potions.add(new Potion(gp, x, y, "AttackIncrease"));
+                    break;
+            
+                default:
+                    break;
+            }
+        }
     }
-        
-    
 }

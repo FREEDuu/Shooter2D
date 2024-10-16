@@ -21,20 +21,26 @@ public class Utils {
         return Math.atan2(dy, dx);
     }
 
-    public static void checkCollisionBulletsEnemy(Entity[] enemy, List<Projectile> bull, int damage) {
+    public static void checkCollisionBulletsEnemy(Entity[] enemy, List<Projectile> bull) {
         int indice = 0;
         for (int i = 0; i < enemy.length; i++) {
             indice = CollisionDetector.checkEntity(enemy[i], bull);
 
             if (indice != 999999) {
-                bull.remove(indice);
-                if (enemy[i].HP.width - damage > 0) {
-                    enemy[i].HP.width -= damage;
+                if (enemy[i].HP.width - bull.get(indice).damage > 0) {
+                    enemy[i].HP.width -= bull.get(indice).damage;
                 } else {
+                    enemy[i].onDeath();
                     enemy[i] = null;
                 }
-
+                bull.remove(indice);
             }
+        }
+    }
+
+    public static void checkPotions(Entity player, List<Entity> Potions){
+        for( int i = 0; i < Potions.size(); i++){
+            CollisionDetector.checkEnemy(player, Potions);
         }
     }
 
@@ -57,12 +63,12 @@ public class Utils {
         int indice = 0;
         indice = CollisionDetector.checkEntity(entity, Wbullets);
         if (indice != 999999) {
-            if (entity.HP.width - 1 > 0) {
-                entity.HP.width -= 0;
+            if (entity.HP.width - Wbullets.get(indice).damage > 0) {
+                entity.HP.width -= Wbullets.get(indice).damage;
             } else {
                 entity.onDeath();
             }
-            Wbullets.set(indice, null);
+            Wbullets.remove(indice);
         }
 
     }
@@ -83,7 +89,7 @@ public class Utils {
     }
 
     public static double getEntityDistance(Entity e1, Entity e2) {
-        return getPointDistance(e1.x, e1.y, e2.x, e2.y)
+        return getPointDistance(e1.x, e1.y, e2.x, e2.y);
     }
 
     public static boolean isColliding(Entity e1, Entity e2) {

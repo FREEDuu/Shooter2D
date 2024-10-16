@@ -158,4 +158,52 @@ public class CollisionDetector {
 
     }
 
+    public static void checkEnemy(Entity entity, List<Entity> target) {
+
+        Entity element;
+        for (int i = 0; i < target.size(); i++) {
+            element = target.get(i);
+            if (element != null && entity != null) {
+                // imposta le posizioni delle aree dei rettangoli "come sono nello spazio" (e
+                // poi reset)
+
+                entity.hitBox.x = entity.hitBox.x + entity.x;
+                entity.hitBox.y = entity.hitBox.y + entity.y;
+
+                element.hitBox.x = element.hitBox.x + element.x;
+                element.hitBox.y = element.hitBox.y + element.y;
+
+                if (entity.speed != 0) {
+                    switch (entity.direction) {
+                        case "up":
+                            entity.hitBox.y -= entity.speed;
+                            break;
+                        case "down":
+                            entity.hitBox.y += entity.speed;
+                            break;
+                        case "left":
+                            entity.hitBox.x -= entity.speed;
+                            break;
+                        case "right":
+                            entity.hitBox.x += entity.speed;
+                            break;
+                    }
+                }
+                if (entity.hitBox.intersects(element.hitBox)) {
+                    if (element != entity) {
+                        element.onDeath();
+                        target.remove(i);
+                    }
+                }
+                // restore dafaults
+                entity.hitBox.x = entity.solidAreaDefaultX;
+                entity.hitBox.y = entity.solidAreaDefaultY;
+                element.hitBox.x = element.solidAreaDefaultX;
+                element.hitBox.y = element.solidAreaDefaultY;
+
+            }
+        }
+
+    }
+
 }

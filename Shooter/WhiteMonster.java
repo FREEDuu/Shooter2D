@@ -21,7 +21,7 @@ public class WhiteMonster extends Entity{
         this.solidAreaDefaultY = this.hitBox.y;
         this.life = 10;
         this.gp = gp;
-        this.damage = 5;
+        this.damage = 0;
         this.HP = new Rectangle(0,0,120,25);
         this.lifeW = HP.width;
         this.imageCounter = 0;
@@ -31,7 +31,7 @@ public class WhiteMonster extends Entity{
     }
 
     public void shoot(){
-        gp.WhiteMonsterbullets.add(new Bullet(gp, this.x , this.y, false));
+        gp.WhiteMonsterbullets.add(new Bullet(gp, this.x , this.y, false, 0));
     }
 
     public void getSkImgs(){
@@ -177,6 +177,27 @@ public class WhiteMonster extends Entity{
     }
     public void onDeath(){
         this.onLife = false;
+
+        int randPotion = choice.nextInt(7);
+        if(randPotion < 4){
+            switch (randPotion) {
+                case 0:
+                    gp.Potions.add(new Potion(gp, x, y, "maxHealtIncrease"));
+                    break;
+                case 1:
+                    gp.Potions.add(new Potion(gp, x, y, "HealthRegen"));
+                    break;
+                case 2:
+                    gp.Potions.add(new Potion(gp, x, y, "SpeedIncrease"));
+                    break;
+                case 3:
+                    gp.Potions.add(new Potion(gp, x, y, "AttackIncrease"));
+                    break;
+            
+                default:
+                    break;
+            }
+        }
     }
     
 }

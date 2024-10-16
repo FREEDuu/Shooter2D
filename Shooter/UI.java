@@ -1,6 +1,9 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.File;
 
 public class UI {
     PanelGame pg;
@@ -57,6 +60,17 @@ public class UI {
 
         }
         else if(pg.gameState == pg.nextLevelState){
+            BufferedImage img1, img2;
+            img1 = null;
+            img2 = null;
+            try{
+                img1 = ImageIO.read(new File("Shooter/images/projectile/BulletProjectile.png"));
+                img2 = ImageIO.read(new File("Shooter/images/Bomb/jump.png"));
+
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
 
             g2.setColor(Color.BLACK);
             g2.fillRect(0, 0, pg.width, pg.height);
@@ -67,25 +81,32 @@ public class UI {
      
             test = "Cosa Vuoi Aumentare ?";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 - pg.tileSize*12);
-        
-            test = "Attacco";
-            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2);
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 35F));
+
+            test = "Potenza Sparo ++";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2  - pg.tileSize*30,  pg.height/2 - pg.tileSize*2);
             if (arrowPos == 0) {
-                this.g2.drawString(">", pg.width/2 - getXofText(g2, test) , pg.height/2);
-                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2);
+                this.g2.drawString(">", pg.width/2 - getXofText(g2, test)/2  - pg.tileSize*35,  pg.height/2 - pg.tileSize*2);
+                this.g2.drawString("<", pg.width/2 + getXofText(g2, test)/2  - pg.tileSize*28,  pg.height/2 - pg.tileSize*2);
+                g2.drawImage(img1,  pg.width/2 - getXofText(g2, test)/2  - pg.tileSize*30 ,  pg.height/2 + pg.tileSize*6, pg.tileSize*16, pg.tileSize*16, null);
         
             }
-            test = "Salute";
-            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*8);
+            test = "Potenza Bomba ++";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2, pg.height/2-pg.tileSize*2);
             if (arrowPos == 1) {
-                this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*8);
-                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*8);
+                this.g2.drawString(">", pg.width/2 - getXofText(g2, test)/2 - pg.tileSize*4, pg.height/2 -pg.tileSize*2);
+                this.g2.drawString("<", pg.width/2 + getXofText(g2, test)/2 + pg.tileSize*2, pg.height/2 - pg.tileSize*2);
+                g2.drawImage(img2,  pg.width/2 - getXofText(g2, test)/2 ,  pg.height/2 + pg.tileSize*6, pg.tileSize*16, pg.tileSize*16, null);
+
             }
-            test = "Velocità";
-            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*16);
+            test = "Entrambi +";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2  + pg.tileSize*30,  pg.height/2 - pg.tileSize*2);
             if (arrowPos == 2) {
-                this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*16);
-                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*16);
+                this.g2.drawString(">", pg.width/2 - getXofText(g2, test)/2  + pg.tileSize*25, pg.height/2 - pg.tileSize*2);
+                this.g2.drawString("<", pg.width/2 + getXofText(g2, test)/2  + pg.tileSize*32, pg.height/2 - pg.tileSize*2);
+                g2.drawImage(img1,  pg.width/2 - getXofText(g2, test)/2  + pg.tileSize*32 ,  pg.height/2 + pg.tileSize*6, pg.tileSize*16, pg.tileSize*16, null);
+                g2.drawImage(img2,  pg.width/2 - getXofText(g2, test)/2  + pg.tileSize*30,  pg.height/2 + pg.tileSize*6, pg.tileSize*16, pg.tileSize*16, null);
+
             }
     
             test = "SCEGLI IL TUO POTENZIAMENTO";
