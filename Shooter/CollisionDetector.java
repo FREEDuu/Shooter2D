@@ -25,32 +25,32 @@ public class CollisionDetector {
         switch (entity.direction) {
             case "up":
                 topRow = (topWorldY - entity.speed) / (pg.tileSize * 4);
-                tileNum1 = pg.tileM.mapTileNum[topRow][leftCol];
-                tileNum2 = pg.tileM.mapTileNum[topRow][rightCol];
+                tileNum1 = pg.tileM.mapTileArrayIndex[topRow][leftCol];
+                tileNum2 = pg.tileM.mapTileArrayIndex[topRow][rightCol];
                 if (pg.tileM.tiles[tileNum1].collision == true || pg.tileM.tiles[tileNum2].collision == true) {
                     entity.collision = true;
                 }
                 break;
             case "down":
                 bottomRow = (bottomWorldY + entity.speed) / (pg.tileSize * 4);
-                tileNum1 = pg.tileM.mapTileNum[bottomRow][leftCol];
-                tileNum2 = pg.tileM.mapTileNum[bottomRow][rightCol];
+                tileNum1 = pg.tileM.mapTileArrayIndex[bottomRow][leftCol];
+                tileNum2 = pg.tileM.mapTileArrayIndex[bottomRow][rightCol];
                 if (pg.tileM.tiles[tileNum1].collision == true || pg.tileM.tiles[tileNum2].collision == true) {
                     entity.collision = true;
                 }
                 break;
             case "left":
                 leftCol = (leftWorldX - entity.speed) / (pg.tileSize * 4);
-                tileNum1 = pg.tileM.mapTileNum[topRow][leftCol];
-                tileNum2 = pg.tileM.mapTileNum[bottomRow][leftCol];
+                tileNum1 = pg.tileM.mapTileArrayIndex[topRow][leftCol];
+                tileNum2 = pg.tileM.mapTileArrayIndex[bottomRow][leftCol];
                 if (pg.tileM.tiles[tileNum1].collision == true || pg.tileM.tiles[tileNum2].collision == true) {
                     entity.collision = true;
                 }
                 break;
             case "right":
                 rightCol = (rightWorldX + entity.speed) / (pg.tileSize * 4);
-                tileNum1 = pg.tileM.mapTileNum[topRow][rightCol];
-                tileNum2 = pg.tileM.mapTileNum[bottomRow][rightCol];
+                tileNum1 = pg.tileM.mapTileArrayIndex[topRow][rightCol];
+                tileNum2 = pg.tileM.mapTileArrayIndex[bottomRow][rightCol];
                 if (pg.tileM.tiles[tileNum1].collision == true || pg.tileM.tiles[tileNum2].collision == true) {
                     entity.collision = true;
                 }
