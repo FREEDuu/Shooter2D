@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import javax
+
 public class TileManager {
     //classe per la gestione della mappa (insieme di tile)
 
@@ -20,19 +22,19 @@ public class TileManager {
     public void getImgTiles(){
         try {
             tiles[0] = new Tile();
-            tiles[0].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/000.png"));
+            tiles[0].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/0.png"));
             
             tiles[1] = new Tile();
-            tiles[1].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/001.png"));
+            tiles[1].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/1.png"));
 
             tiles[2] = new Tile();
-            tiles[2].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/002.png"));
+            tiles[2].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/2.png"));
             
             tiles[3] = new Tile();
-            tiles[3].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/003.png"));
+            tiles[3].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/3.png"));
         
             tiles[4] = new Tile();
-            tiles[4].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/004.png"));
+            tiles[4].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/4.png"));
             tiles[4].collision = true;
 
             tiles[5] = new Tile();
