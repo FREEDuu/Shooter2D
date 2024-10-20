@@ -1,6 +1,7 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "Shooter/javax.json-api-1.1.jar"
+        "/json-simple-1.1.1.jar",
+        "json-simple-1.1.1.jar"
     ]
 }
