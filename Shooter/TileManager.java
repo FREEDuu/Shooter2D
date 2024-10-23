@@ -1,6 +1,7 @@
 import javax.imageio.ImageIO;
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -9,25 +10,27 @@ public class TileManager {
     // classe per la gestione della mappa (insieme di tile)
 
     PanelGame gp;
-    Tile[] tiles;
+    Tile[] tiles = new Tile[32];
     int numTiles = 7;
     int[][] mapTileArrayIndex = new int[68][120];
 
     public TileManager(PanelGame gp) {
         this.gp = gp;
-        this.tiles = new Tile[32];
-        getImgTiles();
+        this.getImgTiles();
     }
 
     public void getImgTiles() {
         try {
             for (int i = 0; i < numTiles; i++) {
                 tiles[i] = new Tile();
-                tiles[i].image = ImageIO.read(getClass().getResourceAsStream("images/Environment/Tiles/" + i + ".png"));
+                tiles[i].image = ImageIO.read(new File("Shooter/images/Environment/Tiles/" + i + ".png"));
             }
+            
             tiles[5].collision = true;
         } catch (Exception e) {
             System.out.println(e);
+        }
+        for (int i = 0; i < 6; i++) {
         }
     }
 
@@ -44,10 +47,11 @@ public class TileManager {
                         int num = Integer.parseInt(nums[j]);
                         mapTileArrayIndex[i][j] = num;
 
+
                     }
                 }
             }
-
+            
         } catch (IOException | NumberFormatException e) {
         }
     }
@@ -70,7 +74,7 @@ public class TileManager {
                         worldY > gp.player.y - gp.player.cameraY - (8 * gp.tileSize) &&
 
                         worldY < gp.player.y + gp.player.cameraY + (8 * gp.tileSize)) {
-
+                        
                     g2.drawImage(tiles[mapTileArrayIndex[i][j]].image, screenX, screenY, gp.tileSize * 4,
                             gp.tileSize * 4, null);
                 }

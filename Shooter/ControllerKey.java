@@ -46,6 +46,29 @@ public class ControllerKey implements KeyListener {
                     }
             }
         }
+        if(pg.gameState == pg.winGameState){
+            switch (keycode){
+
+                case KeyEvent.VK_S:
+                    pg.uiManager.arrowPos++;
+                    if(pg.uiManager.arrowPos > 2){
+                        pg.uiManager.arrowPos = 0;
+                    }
+                case KeyEvent.VK_W:
+                    pg.uiManager.arrowPos--;
+                    if(pg.uiManager.arrowPos < 0){
+                        pg.uiManager.arrowPos = 2;
+                    }
+                case KeyEvent.VK_ENTER:
+                    if(pg.uiManager.arrowPos == 0){
+                        pg.setupStartGame();
+                    }
+
+                    if(pg.uiManager.arrowPos == 2){
+                        System.exit(0);
+                    }
+            }
+        }
 
         if(pg.gameState == pg.nextLevelState){
             

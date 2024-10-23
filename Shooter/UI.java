@@ -59,6 +59,38 @@ public class UI {
 
 
         }
+        else if(pg.gameState == pg.winGameState){
+
+            g2.setColor(Color.BLACK);
+            g2.fillRect(0, 0, pg.width, pg.height);
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+            String test = "Hai Vinto il Gioco !!";
+            g2.setColor(Color.white);
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 - pg.tileSize*12);
+        
+            test = "Riavvia Parita";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2);
+            if (arrowPos == 0) {
+                this.g2.drawString(">", pg.width/2 - getXofText(g2, test) , pg.height/2);
+                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2);
+        
+            }
+    
+    
+            test = "Esci dal Gioco";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*10);
+            if (arrowPos == 1) {
+                this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*10);
+                this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*10);
+            }
+    
+    
+            test = "Best Record : LvL 3";
+            this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*25);
+
+
+        }
         else if(pg.gameState == pg.nextLevelState){
             BufferedImage img1, img2;
             img1 = null;
