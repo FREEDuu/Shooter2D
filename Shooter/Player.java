@@ -7,17 +7,19 @@ public class Player extends Entity{
 
     int cameraX, cameraY, damage, maxHealth;
     ControllerKey controllerK;
+    mouseController mouseC;
     PanelGame pg;
     boolean reload, reloadBomb;
     int reloadCounter, reloadBombCounter;
     Rectangle RectReload, rectReloadBomb;
     int wLife;
 
-    public Player(PanelGame pg, ControllerKey controllerK){
+    public Player(PanelGame pg, ControllerKey controllerK, mouseController mouseC){
         this.pg = pg;
         this.RectReload = new Rectangle(0 ,0, 350, 50);
         this.rectReloadBomb = new Rectangle(0 ,0, 100, 50);
         this.controllerK = controllerK;
+        this.mouseC = mouseC;
         this.reloadCounter = 0;
         this.getPgImgs();
         this.SetDefault();
@@ -154,7 +156,7 @@ public class Player extends Entity{
             reloadBomb = true;
             reloadBombCounter = 0;
         }
-        if(controllerK.shoot && reload){
+        if(mouseC.shoot && reload){
             shoot();
             reload = false;
             RectReload.width = 0;

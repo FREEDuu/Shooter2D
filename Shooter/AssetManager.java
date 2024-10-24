@@ -18,8 +18,10 @@ public class AssetManager {
         pg.BombPlayerList = new ArrayList<Projectile>(); 
         pg.bullets = new ArrayList<Projectile>();
         pg.WhiteMonsterbullets = new ArrayList<Projectile>();
-
-        for(int i = 0; i < pg.Lvl * pg.difficolta *choice.nextInt(4, 7); i++){
+    /*
+     * 
+     * 
+     * for(int i = 0; i < pg.Lvl * pg.difficolta *choice.nextInt(4, 7); i++){
             pg.Skeletrons[i] = new Skeletron(pg);
             pg.Skeletrons[i].x = choice.nextInt(150, 1500);
             pg.Skeletrons[i].y = choice.nextInt(150, 1500);
@@ -34,7 +36,16 @@ public class AssetManager {
             pg.WhiteMonsters[i].x = choice.nextInt(150, 1500);
             pg.WhiteMonsters[i].y = choice.nextInt(150, 1500);
         }
-        if(pg.Lvl == 3){
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     */
+
+        
+        if(true){
             pg.boss[0] = new Boss(pg);
             pg.boss[0].x = 200;
             pg.boss[0].y = 200;
@@ -48,6 +59,7 @@ public class AssetManager {
         pg.player.update();
             if(pg.boss[0] != null){
                 pg.boss[0].update();
+                pg.ret = false;
             }
             for(int i = 0; i < pg.Skeletrons.length; i++ ){
                 if(pg.Skeletrons[i] != null){
@@ -90,7 +102,7 @@ public class AssetManager {
 
     public void allPaint(Graphics2D g2){
             g2.setColor(Color.red);
-            pg.tileM.draw(g2, "map.txt");
+            pg.tileM.draw(g2, pg.mapPath[pg.Lvl-1]);
             pg.player.draw(g2);
             for(int i = 0; i < pg.Skeletrons.length; i++ ){
                 if(pg.Skeletrons[i] != null){

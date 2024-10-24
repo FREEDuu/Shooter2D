@@ -5,7 +5,6 @@ import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
@@ -46,13 +45,16 @@ public class PanelGame extends JPanel implements Runnable{
 
     CollisionDetector cDetector = new CollisionDetector(this);
     ControllerKey controllK = new ControllerKey(this);
+    mouseController mouseC = new mouseController(this);
     AssetManager assetM = new AssetManager(this);
+
 
     public Skeletron[] Skeletrons = new Skeletron[100]; 
     public Dragonite[] Dragonites = new Dragonite[100]; 
     public WhiteMonster[] WhiteMonsters = new WhiteMonster[100]; 
     public Boss[] boss = {new Boss(this)};
     public Entity[][] enemies ={ Skeletrons, Dragonites, WhiteMonsters, boss};
+    public String[] mapPath = {"map1.txt", "map1.txt", "map1.txt"};
     int varx = 100;
     int vary = 100;
     int speed = 10;
@@ -65,6 +67,7 @@ public class PanelGame extends JPanel implements Runnable{
         this.setDoubleBuffered(true);
         this.setBackground(Color.black);
         this.addKeyListener(controllK);
+        this.addMouseListener(mouseC);
         this.setFocusable(true);
         this.startGame();
     }
@@ -106,7 +109,7 @@ public class PanelGame extends JPanel implements Runnable{
         }
     }
     public void setupStartGame(){
-        player = new Player(this, controllK);
+        player = new Player(this, controllK, mouseC);
         assetM.replaceAll();
         //SoundM.LoopMusicEffect(0); da migliorare è bruttissimo xD
     }

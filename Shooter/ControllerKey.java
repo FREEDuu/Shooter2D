@@ -3,10 +3,11 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 
 public class ControllerKey implements KeyListener {
+    
 
     // variabili che servono per capire che tasto wasd si sta premendo, vengono cambiate a t/f quando viene premuto/rilasciato wasd
 
-    boolean up, down, left, right, shoot, bomb;
+    boolean up, down, left, right, bomb;
     PanelGame pg;
 
     public ControllerKey(PanelGame pg){
@@ -183,9 +184,6 @@ public class ControllerKey implements KeyListener {
             if(keycode == KeyEvent.VK_D){
                 right = true;
             }
-            if(keycode == KeyEvent.VK_SPACE){
-                shoot = true;
-            }
             if(keycode == KeyEvent.VK_ESCAPE){
                 if(pg.gameState == 1){
                     pg.gameState = 2;
@@ -219,9 +217,6 @@ public class ControllerKey implements KeyListener {
         if(keycode == KeyEvent.VK_D){
             right = false;
         }
-        if(keycode == KeyEvent.VK_SPACE){
-            shoot = false;
-        }
         if(keycode == KeyEvent.VK_R){
             bomb = false;
         }
@@ -232,4 +227,5 @@ public class ControllerKey implements KeyListener {
             System.out.println("Left button clicked");
         }
     }
+    
 }

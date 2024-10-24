@@ -6,14 +6,19 @@ import javax.imageio.ImageIO;
 
 public class Boss extends Entity{
 
+    BufferedImage image;
     Random choice = new Random();
+    BufferedImage[] up_a, down_a, right_a, left_a;
     int rand, lifeW;
+    boolean onRange = false;
+    int distanceToPlayer, distanceToAttack;
 
     public Boss(PanelGame gp){
 
         this.name = "Boss";
         this.direction = "down";
         this.onLife = true;
+        this.distanceToAttack = 200;
         this.collision = false;
         this.speed = 4;
         this.hitBox = new Rectangle((gp.tileSize * 3), (4 * gp.tileSize), gp.tileSize * 2, gp.tileSize * 3);
@@ -30,28 +35,34 @@ public class Boss extends Entity{
     }
 
     public void getSkImgs(){
-        up = new BufferedImage[4];
-        down = new BufferedImage[4];
-        left = new BufferedImage[4];
-        right = new BufferedImage[4];
+        up = new BufferedImage[2];
+        down = new BufferedImage[2];
+        left = new BufferedImage[2];
+        right = new BufferedImage[2];
+
+        up_a = new BufferedImage[2];
+        down_a = new BufferedImage[2];
+        left_a = new BufferedImage[2];
+        right_a = new BufferedImage[2];
+
 
         try{
-                down[0] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_down_1.png"));
-                down[1] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_down_2.png"));
-                down[2] = ImageIO.read(new File("Shooter/images/Boss/orc_down_1.png"));
-                down[3] = ImageIO.read(new File("Shooter/images/Boss/orc_down_2.png"));
-                up[0] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_up_1.png"));
-                up[1] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_up_2.png"));
-                up[2] = ImageIO.read(new File("Shooter/images/Boss/orc_up_1.png"));
-                up[3] = ImageIO.read(new File("Shooter/images/Boss/orc_up_2.png"));               
-                left[0] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_left_1.png"));
-                left[1] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_left_2.png"));
-                left[2] = ImageIO.read(new File("Shooter/images/Boss/orc_left_1.png"));    
-                left[3] = ImageIO.read(new File("Shooter/images/Boss/orc_left_2.png"));                        
-                right[0] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_right_1.png"));
-                right[1] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_right_2.png"));
-                right[2] = ImageIO.read(new File("Shooter/images/Boss/orc_right_1.png"));
-                right[3] = ImageIO.read(new File("Shooter/images/Boss/orc_right_2.png"));
+                down_a[0] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_down_1.png"));
+                down_a[1] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_down_2.png"));
+                down[0] = ImageIO.read(new File("Shooter/images/Boss/orc_down_1.png"));
+                down[1] = ImageIO.read(new File("Shooter/images/Boss/orc_down_2.png"));
+                up_a[0] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_up_1.png"));
+                up_a[1] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_up_2.png"));
+                up[0] = ImageIO.read(new File("Shooter/images/Boss/orc_up_1.png"));
+                up[1] = ImageIO.read(new File("Shooter/images/Boss/orc_up_2.png"));               
+                left_a[0] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_left_1.png"));
+                left_a[1] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_left_2.png"));
+                left[0] = ImageIO.read(new File("Shooter/images/Boss/orc_left_1.png"));    
+                left[1] = ImageIO.read(new File("Shooter/images/Boss/orc_left_2.png"));                        
+                right_a[0] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_right_1.png"));
+                right_a[1] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_right_2.png"));
+                right[0] = ImageIO.read(new File("Shooter/images/Boss/orc_right_1.png"));
+                right[1] = ImageIO.read(new File("Shooter/images/Boss/orc_right_2.png"));
         }   
         catch(Exception e){
             e.printStackTrace();
@@ -59,7 +70,7 @@ public class Boss extends Entity{
     }
 
     public void draw(Graphics2D g2){
-        BufferedImage image = down[0];
+        image = down[0];
         int screenX, screenY;
 
         screenX = x - gp.player.x + gp.player.cameraX;
@@ -71,38 +82,60 @@ public class Boss extends Entity{
 
                 switch (direction) {
                     case "up":
-                        
-                        image = up[imageNumber];
-                        
+                        if (distanceToPlayer < distanceToAttack) {
+                            image = up_a[imageNumber];
+                            onRange = true;
+                        }
+                        else{
+                            image = up[imageNumber];
+                        }
                         break;
                     case "down":                        
                    
-                        image = down[imageNumber];
-                        
+                        if (distanceToPlayer < distanceToAttack) {
+                            image = down_a[imageNumber];
+                            onRange = true;
+                        }
+                        else{
+                            image = down[imageNumber];
+                        }                        
                         break;
                     case "right":
 
-                        image = right[imageNumber];
-                        
+                        if (distanceToPlayer < distanceToAttack) {
+                            image = right_a[imageNumber];
+                            onRange = true;
+                        }
+                        else{
+                            image = right[imageNumber];
+                        }                        
                         break;
                     case "left":
 
-                        image = left[imageNumber];
-                    
+                        if (distanceToPlayer < distanceToAttack) {
+                            image = left_a[imageNumber];
+                            onRange = true;
+                        }
+                        else{
+                            image = left[imageNumber];
+                        }                    
                         break;
                 }
-                if ((imageNumber == 0 || imageNumber == 1) && (direction == "left" || direction == "right")) {
+
+                
+                if (onRange && (direction == "left" || direction == "right")) {
                     g2.drawImage(image, screenX , screenY, gp.tileSize*16, gp.tileSize*8, null );
-                }else if((imageNumber == 0 || imageNumber == 1) && (direction == "up" || direction == "down")){
+                }else if(onRange && (direction == "up" || direction == "down")){
                     g2.drawImage(image, screenX , screenY, gp.tileSize*8, gp.tileSize*16, null );
                 }
                 else{
                     g2.drawImage(image, screenX , screenY, gp.tileSize*8, gp.tileSize*8, null );
                 }
+
                 g2.drawRect(screenX + hitBox.x, screenY + hitBox.y, hitBox.width, hitBox.height);
                 g2.fillRect(screenX, screenY + gp.tileSize, HP.width, HP.height);
                 g2.drawRect(screenX, screenY + gp.tileSize, lifeW, HP.height);
-
+                onRange = false;
             }
 
     }
@@ -117,54 +150,35 @@ public class Boss extends Entity{
 
     public void update(){
 
-        
         imageCounter++;
         if(imageCounter > 15){
             imageNumber++;
-            imageNumber = imageNumber % 4;
-            if(onRange()){
-                
-            }
+            imageNumber = imageNumber % 2;
             imageCounter = 0;
-            rand = choice.nextInt(3);
-        //Implementazione di una rudimentale AI che segue il pg
-            if(rand == 2){
-                rand = choice.nextInt(4);
-                if(rand == 0) {
+            rand = choice.nextInt(4);
+            int pgx = Math.abs(gp.player.x - this.x);
+            int pgy = Math.abs(gp.player.y - this.y);
+            if(pgy > pgx){
+                distanceToPlayer = pgy;
+                if(this.y > gp.player.y){
                     direction = "up";
                 }
-                else if (rand == 1) {
-                    direction = "left";
-                }
-                else if (rand == 2) {
-                    direction = "right";
-                }
-                else if(rand == 3){
+                else{
                     direction = "down";
                 }
             }
             else{
-                int pgx = Math.abs(gp.player.x - this.x);
-                int pgy = Math.abs(gp.player.y - this.y);
-                if(pgy > pgx){
-                    if(this.y > gp.player.y){
-                        direction = "up";
-                    }
-                    else{
-                        direction = "down";
-                    }
-                }
-                else{
-                    if(this.x > gp.player.x){
-                        direction = "left";
-                    }else{
-                        direction = "right";
-                    }
+                distanceToPlayer = pgx;
+                if(this.x > gp.player.x){
+                    direction = "left";
+                }else{
+                    direction = "right";
                 }
             }
         }
+        
+    
         gp.cDetector.checkTile(this);
-        Utils.checkCollisionPlayerEnemy(gp.player, gp.enemies, false);
         if(collision == false){
         switch(direction){
             case "up": y -= speed; break;
@@ -173,10 +187,23 @@ public class Boss extends Entity{
             case "right": x += speed; break;
         }
 
+
         }
+
         collision = false;
         idle = false;
+           
     }
+
+    public void distanceAttack(){
+        /*
+         * 
+         *         
+         * 
+         */
+
+    }
+
     public void onDeath(){
         this.onLife = false;
     }
