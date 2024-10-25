@@ -84,6 +84,8 @@ public class Potion extends Entity{
             gp.player.DamageIncrease();
         }
 
+        gp.SoundM.PlaySoundEffect(3);
+
     }
 
     

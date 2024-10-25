@@ -24,27 +24,31 @@ public class ControllerKey implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int keycode = e.getKeyCode();
 
-        if(pg.gameState == pg.loseState){
+        if(pg.gameState == pg.loseState || pg.gameState == pg.winGameState){
             switch (keycode){
 
                 case KeyEvent.VK_S:
                     pg.uiManager.arrowPos++;
-                    if(pg.uiManager.arrowPos > 2){
+                    if(pg.uiManager.arrowPos > 1){
                         pg.uiManager.arrowPos = 0;
                     }
+                    break;
                 case KeyEvent.VK_W:
                     pg.uiManager.arrowPos--;
                     if(pg.uiManager.arrowPos < 0){
-                        pg.uiManager.arrowPos = 2;
+                        pg.uiManager.arrowPos = 1;
                     }
+                    break;
                 case KeyEvent.VK_ENTER:
                     if(pg.uiManager.arrowPos == 0){
                         pg.setupStartGame();
+
                     }
 
-                    if(pg.uiManager.arrowPos == 2){
+                    if(pg.uiManager.arrowPos == 1){
                         System.exit(0);
                     }
+                    break;
             }
         }
         if(pg.gameState == pg.winGameState){
@@ -52,13 +56,13 @@ public class ControllerKey implements KeyListener {
 
                 case KeyEvent.VK_S:
                     pg.uiManager.arrowPos++;
-                    if(pg.uiManager.arrowPos > 2){
+                    if(pg.uiManager.arrowPos > 1){
                         pg.uiManager.arrowPos = 0;
                     }
                 case KeyEvent.VK_W:
                     pg.uiManager.arrowPos--;
                     if(pg.uiManager.arrowPos < 0){
-                        pg.uiManager.arrowPos = 2;
+                        pg.uiManager.arrowPos = 1;
                     }
                 case KeyEvent.VK_ENTER:
                     if(pg.uiManager.arrowPos == 0){
@@ -96,6 +100,9 @@ public class ControllerKey implements KeyListener {
                 if(pg.uiManager.arrowPos == 2){
                     pg.player.SpeedIncrease();
                 }
+                pg.uiManager.arrowPos = 0;
+                pg.SoundM.stop();
+                pg.SoundM.PlaySoundEffect(7);
                 pg.setupStartGameLevel();
             }
         }
@@ -166,6 +173,8 @@ public class ControllerKey implements KeyListener {
                         pg.setupStartGame();
                         pg.gameState = pg.playState; 
                     }
+                    pg.SoundM.stop();
+                    pg.uiManager.arrowPos = 0;
                 }
             }
 

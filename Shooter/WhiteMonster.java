@@ -21,7 +21,7 @@ public class WhiteMonster extends Entity{
         this.solidAreaDefaultY = this.hitBox.y;
         this.life = 10;
         this.gp = gp;
-        this.damage = 0;
+        this.damage = 10;
         this.HP = new Rectangle(0,0,120,25);
         this.lifeW = HP.width;
         this.imageCounter = 0;
@@ -31,7 +31,7 @@ public class WhiteMonster extends Entity{
     }
 
     public void shoot(){
-        gp.WhiteMonsterbullets.add(new Bullet(gp, this.x , this.y, false, 0));
+        gp.WhiteMonsterbullets.add(new Bullet(gp, this.x , this.y, false, 20));
     }
 
     public void getSkImgs(){

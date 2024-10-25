@@ -128,16 +128,20 @@ public class CollisionDetector {
                             entity.collision = true;
                             if (entity.HP.width - element.damage > 0) {
                                 entity.HP.width -= element.damage;
+                                //entity.getSoundHit();
                                 // element.knockback(entity);
                             } else {
+                                entity.playDeath();
                                 entity.onDeath();
                             }
                         } else {
 
                             if (element.HP.width - entity.damage > 0) {
                                 element.HP.width -= entity.damage;
+                                //element.getSoundHit();
                                 // element.knockback(entity);
                             } else {
+                                element.playDeath();
                                 element.onDeath();
                             }
                             if (entity.speed != 0) {
@@ -191,6 +195,7 @@ public class CollisionDetector {
                 }
                 if (entity.hitBox.intersects(element.hitBox)) {
                     if (element != entity) {
+                        element.playDeath();
                         element.onDeath();
                         target.remove(i);
                     }

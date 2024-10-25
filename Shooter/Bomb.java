@@ -71,7 +71,7 @@ public class Bomb extends Projectile{
     }
 
     public void onDeath(){
-
+        pg.SoundM.PlaySoundEffect(2);
         Utils.makeExplosion(this, pg.enemies);
 
     }

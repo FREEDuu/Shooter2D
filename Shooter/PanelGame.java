@@ -76,7 +76,7 @@ public class PanelGame extends JPanel implements Runnable{
 
         this.gameThread = new Thread(this);
         this.gameThread.start();
-
+        SoundM.LoopMusicEffect(10);
     }
     
     //funzione builtin di swing chiamata in gamethread.start
@@ -109,8 +109,12 @@ public class PanelGame extends JPanel implements Runnable{
         }
     }
     public void setupStartGame(){
+        SoundM.stop();
+        SoundM.LoopMusicEffect(9);
         player = new Player(this, controllK, mouseC);
         assetM.replaceAll();
+        SoundM.LoopMusicEffect(9);
+        gameState = playState;
         //SoundM.LoopMusicEffect(0); da migliorare è bruttissimo xD
     }
     public void setupStartGameLevel(){
@@ -164,18 +168,16 @@ public class PanelGame extends JPanel implements Runnable{
     }
 
     public void nextLevel(){
+        SoundM.stop();
         if(this.Lvl == 3){
+            this.SoundM.PlaySoundEffect(6);
             this.gameState = winGameState;
         }
         else{
+            SoundM.PlaySoundEffect(1);
             this.Lvl ++;
             this.gameState = nextLevelState;
         }
     }
 
-    public void RestartGame(){
-        this.gameState = this.playState;
-        this.Lvl = 1;
-        this.setupStartGame();
-    }
 }

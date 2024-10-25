@@ -8,14 +8,13 @@ public class Player extends Entity{
     int cameraX, cameraY, damage, maxHealth;
     ControllerKey controllerK;
     mouseController mouseC;
-    PanelGame pg;
     boolean reload, reloadBomb;
     int reloadCounter, reloadBombCounter;
     Rectangle RectReload, rectReloadBomb;
     int wLife;
 
-    public Player(PanelGame pg, ControllerKey controllerK, mouseController mouseC){
-        this.pg = pg;
+    public Player(PanelGame gp, ControllerKey controllerK, mouseController mouseC){
+        this.gp = gp;
         this.RectReload = new Rectangle(0 ,0, 350, 50);
         this.rectReloadBomb = new Rectangle(0 ,0, 100, 50);
         this.controllerK = controllerK;
@@ -23,11 +22,11 @@ public class Player extends Entity{
         this.reloadCounter = 0;
         this.getPgImgs();
         this.SetDefault();
-        cameraY = ( pg.height / 2);
-        cameraX = ( pg.width / 2) ;
+        cameraY = ( gp.height / 2);
+        cameraX = ( gp.width / 2) ;
         this.reload = true;
         this.HP = new Rectangle(0,0, 500, 50);
-        this.hitBox = new Rectangle((pg.tileSize * 3), (4 * pg.tileSize), pg.tileSize * 2, pg.tileSize * 3);
+        this.hitBox = new Rectangle((gp.tileSize * 3), (4 * gp.tileSize), gp.tileSize * 2, gp.tileSize * 3);
         this.maxHealth = HP.width;
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;
@@ -42,7 +41,7 @@ public class Player extends Entity{
 
         try{
             String Path;
-            if (pg.playerChoice.equals("babypunk")) {
+            if (gp.playerChoice.equals("babypunk")) {
                 this.name = "babypunk";
                 Path = "Shooter/images/16x16/babypunk.png";
                 down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
@@ -63,7 +62,7 @@ public class Player extends Entity{
                 up[3] =ImageIO.read(new File(Path)).getSubimage(72, 72, 24, 24);
             }
             
-            else if(pg.playerChoice.equals("queen")){
+            else if(gp.playerChoice.equals("queen")){
                 this.name = "queen";
                 Path = "Shooter/images/16x16/queen.png";
                 down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
@@ -83,7 +82,7 @@ public class Player extends Entity{
                 up[2] = ImageIO.read(new File(Path)).getSubimage(48, 72, 24, 24);
                 up[3] =ImageIO.read(new File(Path)).getSubimage(72, 72, 24, 24);
             }
-            else if(pg.playerChoice.equals("erbiondo")){
+            else if(gp.playerChoice.equals("erbiondo")){
                 this.name = "erbiondo";
                 Path = "Shooter/images/16x16/erbiondo.png";
                 down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
@@ -112,16 +111,16 @@ public class Player extends Entity{
 
     public void shoot(){
         
-        pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x , MouseInfo.getPointerInfo().getLocation().y, true, 50));
+        gp.bullets.add(new Bullet(gp, MouseInfo.getPointerInfo().getLocation().x , MouseInfo.getPointerInfo().getLocation().y, true, 50));
         if(this.name.equals("babypunk")){
-            pg.bullets.add(new Bullet(pg, MouseInfo.getPointerInfo().getLocation().x+2 , MouseInfo.getPointerInfo().getLocation().y+2, true, 50));
+            gp.bullets.add(new Bullet(gp, MouseInfo.getPointerInfo().getLocation().x+2 , MouseInfo.getPointerInfo().getLocation().y+2, true, 50));
         }
-        //pg.SoundM.PlaySoundEffect(1);
+        gp.SoundM.PlaySoundEffect(0);
     }
     public void shootBomb(){
-        pg.BombPlayerList.add(new Bomb(pg, pg.player.x, pg.player.y));
+        gp.BombPlayerList.add(new Bomb(gp, gp.player.x, gp.player.y));
         if(this.name.equals("queen")){
-            pg.BombPlayerList.add(new Bomb(pg, pg.player.x+5, pg.player.y+5));
+            gp.BombPlayerList.add(new Bomb(gp, gp.player.x+5, gp.player.y+5));
         }
     }
 
@@ -187,8 +186,8 @@ public class Player extends Entity{
             }
             idle = false;
             collision = false;
-            pg.cDetector.checkTile(this);
-            Utils.checkCollisionPlayerEnemy(this, pg.enemies, true);
+            gp.cDetector.checkTile(this);
+            Utils.checkCollisionPlayerEnemy(this, gp.enemies, true);
             if(collision == false){
 
                 switch(direction){
@@ -247,21 +246,24 @@ public class Player extends Entity{
                 break;
         }
 
-        g2.drawImage(image, cameraX, cameraY, pg.tileSize*8, pg.tileSize*8, null);
+        g2.drawImage(image, cameraX, cameraY, gp.tileSize*8, gp.tileSize*8, null);
         g2.drawRect(cameraX + hitBox.x, cameraY + hitBox.y , hitBox.width, hitBox.height);
         g2.setColor(Color.gray);
-        g2.fillRect(HP.x + pg.tileSize, HP.y + pg.tileSize*10 , rectReloadBomb.width, rectReloadBomb.height);
-        g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize*10 , 100, 50);
+        g2.fillRect(HP.x + gp.tileSize, HP.y + gp.tileSize*10 , rectReloadBomb.width, rectReloadBomb.height);
+        g2.drawRect(HP.x + gp.tileSize, HP.y + gp.tileSize*10 , 100, 50);
         g2.setColor(Color.BLACK);
-        g2.fillRect(HP.x + pg.tileSize, HP.y + pg.tileSize*5 , RectReload.width, RectReload.height);
-        g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize*5 , 350, 50);
+        g2.fillRect(HP.x + gp.tileSize, HP.y + gp.tileSize*5 , RectReload.width, RectReload.height);
+        g2.drawRect(HP.x + gp.tileSize, HP.y + gp.tileSize*5 , 350, 50);
         g2.setColor(Color.red);
-        g2.fillRect(HP.x + pg.tileSize, HP.y + pg.tileSize, HP.width, HP.height);
-        g2.drawRect(HP.x + pg.tileSize, HP.y + pg.tileSize, maxHealth, HP.height);
+        g2.fillRect(HP.x + gp.tileSize, HP.y + gp.tileSize, HP.width, HP.height);
+        g2.drawRect(HP.x + gp.tileSize, HP.y + gp.tileSize, maxHealth, HP.height);
     }
 
     public void onDeath(){
-        pg.gameState = pg.loseState;
+        gp.SoundM.stop();
+        gp.SoundM.LoopMusicEffect(10);
+        gp.SoundM.PlaySoundEffect(8);
+        gp.gameState = gp.loseState;
     }
 
     public void DamageIncrease(){
@@ -274,4 +276,11 @@ public class Player extends Entity{
         maxHealth += 120;
         HP.width = maxHealth;
     }
-}
+
+    public void getSoundHit(){
+        //gp.SoundM.PlaySoundEffect(4);
+    }
+    public void playDeath(){
+        //gp.SoundM.PlaySoundEffect(5);
+
+    }}

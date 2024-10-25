@@ -30,6 +30,7 @@ public class Utils {
                 if (enemy[i].HP.width - bull.get(indice).damage > 0) {
                     enemy[i].HP.width -= bull.get(indice).damage;
                 } else {
+                    enemy[i].playDeath();
                     enemy[i].onDeath();
                     enemy[i] = null;
                 }
@@ -66,6 +67,7 @@ public class Utils {
             if (entity.HP.width - Wbullets.get(indice).damage > 0) {
                 entity.HP.width -= Wbullets.get(indice).damage;
             } else {
+                entity.playDeath();
                 entity.onDeath();
             }
             Wbullets.remove(indice);

@@ -25,4 +25,11 @@ public class Entity {
     public void draw(Graphics2D g2){
         
     }
+    public void getSoundHit(){
+        gp.SoundM.PlaySoundEffect(4);
+    }
+    public void playDeath(){
+        gp.SoundM.PlaySoundEffect(5);
+
+    }
 }
