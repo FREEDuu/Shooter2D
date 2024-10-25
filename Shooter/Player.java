@@ -260,8 +260,7 @@ public class Player extends Entity{
     }
 
     public void onDeath(){
-        gp.SoundM.stop();
-        gp.SoundM.LoopMusicEffect(10);
+        gp.SoundWhilePlay.stop();
         gp.SoundM.PlaySoundEffect(8);
         gp.gameState = gp.loseState;
     }

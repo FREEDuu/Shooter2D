@@ -23,7 +23,7 @@ public class ControllerKey implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int keycode = e.getKeyCode();
-
+        
         if(pg.gameState == pg.loseState || pg.gameState == pg.winGameState){
             switch (keycode){
 
@@ -101,7 +101,8 @@ public class ControllerKey implements KeyListener {
                     pg.player.SpeedIncrease();
                 }
                 pg.uiManager.arrowPos = 0;
-                pg.SoundM.stop();
+                pg.SoundIntroMusic.stop();
+                pg.SoundWhilePlay.LoopMusicEffect(9);
                 pg.SoundM.PlaySoundEffect(7);
                 pg.setupStartGameLevel();
             }
@@ -173,7 +174,7 @@ public class ControllerKey implements KeyListener {
                         pg.setupStartGame();
                         pg.gameState = pg.playState; 
                     }
-                    pg.SoundM.stop();
+                    pg.SoundIntroMusic.stop();
                     pg.uiManager.arrowPos = 0;
                 }
             }

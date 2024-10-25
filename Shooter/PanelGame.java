@@ -15,6 +15,10 @@ public class PanelGame extends JPanel implements Runnable{
     public int maxWorldRow = 60;
     public int tileSize = 16;
     public Sound SoundM = new Sound();
+    public Sound SoundIntroMusic = new Sound();
+    public Sound SoundWhilePlay = new Sound();
+    public Sound SoundBoss = new Sound();
+
     public List<Projectile> bullets = new ArrayList<Projectile>();
     public List<Projectile> WhiteMonsterbullets = new ArrayList<Projectile>();
     public List<Projectile> BombPlayerList = new ArrayList<Projectile>();
@@ -76,7 +80,7 @@ public class PanelGame extends JPanel implements Runnable{
 
         this.gameThread = new Thread(this);
         this.gameThread.start();
-        SoundM.LoopMusicEffect(10);
+        SoundIntroMusic.LoopMusicEffect(10);
     }
     
     //funzione builtin di swing chiamata in gamethread.start
@@ -109,15 +113,15 @@ public class PanelGame extends JPanel implements Runnable{
         }
     }
     public void setupStartGame(){
-        SoundM.stop();
-        SoundM.LoopMusicEffect(9);
+        SoundIntroMusic.stop();
+        SoundWhilePlay.LoopMusicEffect(9);
         player = new Player(this, controllK, mouseC);
         assetM.replaceAll();
-        SoundM.LoopMusicEffect(9);
         gameState = playState;
         //SoundM.LoopMusicEffect(0); da migliorare è bruttissimo xD
     }
     public void setupStartGameLevel(){
+        SoundWhilePlay.play();
         gameState = playState;
         player.x = 1000;
         player.y = 1000;
@@ -156,21 +160,18 @@ public class PanelGame extends JPanel implements Runnable{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-
         if(gameState == startState){
             uiManager.draw(g2);
         }
         else{
-
             assetM.allPaint(g2);
         }
-        
     }
 
     public void nextLevel(){
-        SoundM.stop();
+        SoundWhilePlay.stop();
         if(this.Lvl == 3){
-            this.SoundM.PlaySoundEffect(6);
+            this.SoundBoss.PlaySoundEffect(6);
             this.gameState = winGameState;
         }
         else{
@@ -179,5 +180,4 @@ public class PanelGame extends JPanel implements Runnable{
             this.gameState = nextLevelState;
         }
     }
-
 }
