@@ -12,7 +12,7 @@ public class TileManager {
     PanelGame gp;
     Tile[] tiles = new Tile[32];
     int numTiles = 7;
-    int[][] mapTileArrayIndex = new int[68][120];
+    int[][] mapTileArrayIndex = new int[100][100];
 
     public TileManager(PanelGame gp) {
         this.gp = gp;
@@ -21,12 +21,12 @@ public class TileManager {
 
     public void getImgTiles() {
         try {
-            for (int i = 0; i < numTiles; i++) {
+            for (int i = 1; i < numTiles; i++) {
                 tiles[i] = new Tile();
-                tiles[i].image = ImageIO.read(new File("Shooter/images/Environment/Tiles/" + i + ".png"));
+                tiles[i].image = ImageIO.read(new File("Shooter/images/Environment/Tiles/" + (i - 1) + ".png"));
             }
             
-            tiles[5].collision = true;
+            tiles[6].collision = true;
         } catch (Exception e) {
             System.out.println(e);
         }

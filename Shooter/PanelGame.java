@@ -11,8 +11,8 @@ import javax.swing.plaf.DimensionUIResource;
 public class PanelGame extends JPanel implements Runnable{
 
     //variabili globali del PanelGame
-    public int maxWorldCol = 60;
-    public int maxWorldRow = 60;
+    public int maxWorldCol = 100;
+    public int maxWorldRow = 100;
     public int tileSize = 16;
     public Sound SoundM = new Sound();
     public Sound SoundIntroMusic = new Sound();
@@ -58,7 +58,7 @@ public class PanelGame extends JPanel implements Runnable{
     public WhiteMonster[] WhiteMonsters = new WhiteMonster[100]; 
     public Boss[] boss = {new Boss(this)};
     public Entity[][] enemies ={ Skeletrons, Dragonites, WhiteMonsters, boss};
-    public String[] mapPath = {"map1.txt", "map1.txt", "map1.txt"};
+    public String[] mapPath = {"map0.txt", "map0.txt", "map0.txt"};
     int varx = 100;
     int vary = 100;
     int speed = 10;

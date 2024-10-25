@@ -3,12 +3,12 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "Shooter/images/Tiled_assets/map0.tmj",
+    "activeFile": "Shooter/images/Tiled_assets/map0.json",
     "expandedProjectPaths": [
-        ".",
-        "Shooter/images/Tiled_assets",
         "Shooter/images",
-        "Shooter"
+        "Shooter/images/Tiled_assets",
+        "Shooter",
+        "."
     ],
     "fileStates": {
         "": {
@@ -17,6 +17,14 @@
         ":/automap-tiles.tsx": {
             "dynamicWrapping": false,
             "scaleInDock": 1
+        },
+        "Shooter/images/Tiled_assets/map0.json": {
+            "scale": 0.7689062499999999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": -32.51371672424304,
+                "y": 566.388945336314
+            }
         },
         "Shooter/images/Tiled_assets/map0.tmj": {
             "scale": 0.75,
@@ -50,8 +58,8 @@
             "scale": 0.75,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 874.6666666666667,
-                "y": 884.6666666666666
+                "x": 799.9999999999999,
+                "y": 799.3333333333333
             }
         },
         "Shooter/images/Tiled_assets/nero.tsx": {
@@ -82,14 +90,17 @@
     "map.tileWidth": 16,
     "map.width": 120,
     "openFiles": [
-        "Shooter/images/Tiled_assets/map0.tmj"
+        "Shooter/images/Tiled_assets/map2.json",
+        "Shooter/images/Tiled_assets/tileset.tsx",
+        "Shooter/images/Tiled_assets/map0.json"
     ],
     "project": "progetto_mappa.tiled-project",
     "recentFiles": [
-        "Shooter/images/Tiled_assets/map0.tmj",
-        "Shooter/images/Tiled_assets/tileset.tsx",
-        "Shooter/images/Tiled_assets/map0.tmx",
         "Shooter/images/Tiled_assets/map2.json",
+        "Shooter/images/Tiled_assets/tileset.tsx",
+        "Shooter/images/Tiled_assets/map0.json",
+        "Shooter/images/Tiled_assets/map0.tmj",
+        "Shooter/images/Tiled_assets/map0.tmx",
         "Shooter/images/Tiled_assets/map1.json",
         "Shooter/images/Tiled_assets/untitled.tmx",
         "Shooter/images/Tiled_assets/nero.tsx"
