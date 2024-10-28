@@ -10,6 +10,9 @@ public class CollisionDetector {
 
     public void checkTile(Entity entity) {
 
+        entity.hitBox.x = entity.solidAreaDefaultX;
+        entity.hitBox.y = entity.solidAreaDefaultY;
+
         int leftWorldX = entity.x + entity.hitBox.x;
         int rightWorldX = entity.x + entity.hitBox.x + entity.hitBox.width;
         int topWorldY = entity.y + entity.hitBox.y;
@@ -24,6 +27,7 @@ public class CollisionDetector {
 
         switch (entity.direction) {
             case "up":
+
                 topRow = (topWorldY - entity.speed) / (pg.tileSize * 4);
                 tileNum1 = pg.tileM.mapTileArrayIndex[topRow][leftCol];
                 tileNum2 = pg.tileM.mapTileArrayIndex[topRow][rightCol];
@@ -56,6 +60,7 @@ public class CollisionDetector {
                 }
                 break;
 
+
         }
     }
 
@@ -68,7 +73,7 @@ public class CollisionDetector {
             if (element != null && entity != null) {
                 // imposta le posizioni delle aree dei rettangoli "come sono nello spazio" (e
                 // poi reset)
-
+                
                 entity.hitBox.x = entity.hitBox.x + entity.x;
                 entity.hitBox.y = entity.hitBox.y + entity.y;
 
@@ -131,7 +136,6 @@ public class CollisionDetector {
                                 //entity.getSoundHit();
                                 // element.knockback(entity);
                             } else {
-                                entity.playDeath();
                                 entity.onDeath();
                             }
                         } else {
@@ -141,7 +145,6 @@ public class CollisionDetector {
                                 //element.getSoundHit();
                                 // element.knockback(entity);
                             } else {
-                                element.playDeath();
                                 element.onDeath();
                             }
                             if (entity.speed != 0) {
@@ -195,7 +198,6 @@ public class CollisionDetector {
                 }
                 if (entity.hitBox.intersects(element.hitBox)) {
                     if (element != entity) {
-                        element.playDeath();
                         element.onDeath();
                         target.remove(i);
                     }

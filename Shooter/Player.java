@@ -125,8 +125,8 @@ public class Player extends Entity{
     }
 
     public void SetDefault(){
-        this.x = 2000;
-        this.y = 2000;
+        this.x = 2600;
+        this.y = 2600;
         this.speed = 10;
         if(this.name.equals("erbiondo")){
             this.speed = 15;

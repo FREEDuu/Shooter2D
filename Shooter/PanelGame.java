@@ -58,7 +58,7 @@ public class PanelGame extends JPanel implements Runnable{
     public WhiteMonster[] WhiteMonsters = new WhiteMonster[100]; 
     public Boss[] boss = {new Boss(this)};
     public Entity[][] enemies ={ Skeletrons, Dragonites, WhiteMonsters, boss};
-    public String[] mapPath = {"map0.txt", "map0.txt", "map0.txt"};
+    public String[] mapPath = {"map0.txt", "map1.txt", "map2.txt"};
     int varx = 100;
     int vary = 100;
     int speed = 10;
@@ -67,6 +67,7 @@ public class PanelGame extends JPanel implements Runnable{
     public PanelGame(){
         this.playerChoice = "toChoice";
         this.gameState = startState;
+        this.tileM.loadMap(mapPath[0]);
         this.setPreferredSize(new DimensionUIResource(width, height));
         this.setDoubleBuffered(true);
         this.setBackground(Color.black);
@@ -115,16 +116,23 @@ public class PanelGame extends JPanel implements Runnable{
     public void setupStartGame(){
         SoundIntroMusic.stop();
         SoundWhilePlay.LoopMusicEffect(9);
+        Lvl =1;
         player = new Player(this, controllK, mouseC);
         assetM.replaceAll();
         gameState = playState;
         //SoundM.LoopMusicEffect(0); da migliorare è bruttissimo xD
     }
     public void setupStartGameLevel(){
-        SoundWhilePlay.play();
+        if(Lvl < 3){
+            SoundWhilePlay.play();
+        }
+        else{
+            SoundWhilePlay.stop();
+            SoundBoss.LoopMusicEffect(11);
+        }
         gameState = playState;
-        player.x = 1000;
-        player.y = 1000;
+        player.x = 1300;
+        player.y = 1300;
         assetM.replaceAll();
         //SoundM.LoopMusicEffect(0); da migliorare è bruttissimo xD
     }
@@ -171,6 +179,7 @@ public class PanelGame extends JPanel implements Runnable{
     public void nextLevel(){
         SoundWhilePlay.stop();
         if(this.Lvl == 3){
+            this.SoundBoss.stop();
             this.SoundBoss.PlaySoundEffect(6);
             this.gameState = winGameState;
         }

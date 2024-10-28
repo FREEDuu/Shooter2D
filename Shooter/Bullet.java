@@ -36,6 +36,8 @@ public class Bullet extends Projectile{
         }
   
         this.hitBox = new Rectangle(gp.tileSize,gp.tileSize,gp.tileSize*2,gp.tileSize*2);
+        this.solidAreaDefaultX = this.hitBox.x;
+        this.solidAreaDefaultY = this.hitBox.y;
     }
 
     public void getBulletImg() {

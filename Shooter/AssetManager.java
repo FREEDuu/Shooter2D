@@ -18,26 +18,26 @@ public class AssetManager {
         pg.BombPlayerList = new ArrayList<Projectile>(); 
         pg.bullets = new ArrayList<Projectile>();
         pg.WhiteMonsterbullets = new ArrayList<Projectile>();
-    for(int i = 0; i < pg.Lvl * pg.difficolta *choice.nextInt(4, 7); i++){
+    for(int i = 0; i < pg.Lvl * pg.difficolta * choice.nextInt(3,6); i++){
             pg.Skeletrons[i] = new Skeletron(pg);
-            pg.Skeletrons[i].x = choice.nextInt(150, 1500);
-            pg.Skeletrons[i].y = choice.nextInt(150, 1500);
+            pg.Skeletrons[i].x = choice.nextInt(3500, 3700);
+            pg.Skeletrons[i].y = choice.nextInt(3500, 3700);
         }
-        for(int i = 0; i < pg.Lvl * pg.difficolta *choice.nextInt(4, 7); i++){
+        for(int i = 0; i < pg.Lvl * pg.difficolta * choice.nextInt(3,6); i++){
             pg.Dragonites[i] = new Dragonite(pg);
-            pg.Dragonites[i].x = choice.nextInt(100, 1500);
-            pg.Dragonites[i].y = choice.nextInt(100, 1500);
+            pg.Dragonites[i].x = choice.nextInt(3500, 3700);
+            pg.Dragonites[i].y = choice.nextInt(3500, 3700);
         }
-        for(int i = 0; i < pg.Lvl * pg.difficolta *choice.nextInt(4, 7); i++){
+        for(int i = 0; i < pg.Lvl * pg.difficolta * choice.nextInt(3,6); i++){
             pg.WhiteMonsters[i] = new WhiteMonster(pg);
-            pg.WhiteMonsters[i].x = choice.nextInt(150, 1500);
-            pg.WhiteMonsters[i].y = choice.nextInt(150, 1500);
+            pg.WhiteMonsters[i].x = choice.nextInt(3500, 3700);
+            pg.WhiteMonsters[i].y = choice.nextInt(3500, 3700);
         }
     
         if(pg.Lvl == 3){
             pg.boss[0] = new Boss(pg);
-            pg.boss[0].x = 200;
-            pg.boss[0].y = 200;
+            pg.boss[0].x = choice.nextInt(3500, 3700);
+            pg.boss[0].y = choice.nextInt(3500, 3700);
         }
         else{
             pg.boss[0] = null;

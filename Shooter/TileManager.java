@@ -11,7 +11,7 @@ public class TileManager {
 
     PanelGame gp;
     Tile[] tiles = new Tile[32];
-    int numTiles = 7;
+    int numTiles = 8;
     int[][] mapTileArrayIndex = new int[100][100];
 
     public TileManager(PanelGame gp) {
@@ -27,6 +27,7 @@ public class TileManager {
             }
             
             tiles[6].collision = true;
+            tiles[5].collision = true;
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -34,7 +35,7 @@ public class TileManager {
         }
     }
 
-    private void loadMap(String mapPath) {
+    public void loadMap(String mapPath) {
 
         try {
             InputStream is = getClass().getResourceAsStream(mapPath);

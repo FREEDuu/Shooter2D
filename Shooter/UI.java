@@ -11,9 +11,34 @@ public class UI {
     int arrowPos = 0;
     int selectionDif = 1;
     int startPage = 0;
+    BufferedImage imageBoss, imageDrg, imageWhiteMns, imageSklt, imgPG1, imgPG2, imgPG3;
 
     public UI(PanelGame pg){
         this.pg = pg;
+        imageBoss = null;
+        imageDrg = null;
+        imageWhiteMns = null;
+        imageSklt = null;
+        imgPG1 = null;
+        imgPG2 = null;
+        imgPG3 = null;
+        this.LoadImg();
+    }
+
+    public void LoadImg(){
+        try{
+            imgPG3= ImageIO.read(new File("Shooter/images/16x16/erbiondo.png")).getSubimage(0, 0, 24, 24);
+            imgPG2 = ImageIO.read(new File("Shooter/images/16x16/queen.png")).getSubimage(0, 0, 24, 24);
+            imgPG1 = ImageIO.read(new File("Shooter/images/16x16/babypunk.png")).getSubimage(0, 0, 24, 24);
+            imageSklt = ImageIO.read(new File("Shooter/images/16x16/dragon.png")).getSubimage(0, 0, 24, 24);
+            imageWhiteMns = ImageIO.read(new File("Shooter/images/16x16/white.png")).getSubimage(0, 0, 24, 24);
+            imageBoss = ImageIO.read(new File("Shooter/images/Boss/orc_attack_down_2.png"));
+            imageDrg = ImageIO.read(new File( "Shooter/images/16x16/dragonite.png")).getSubimage(0, 0, 24, 24);
+
+    }   
+    catch(Exception e){
+        e.printStackTrace();
+    }
     }
 
     public void draw(Graphics2D g2){
@@ -163,8 +188,14 @@ public class UI {
     public void drawStartScreen(){
 
         if (startPage == 0) {
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
             String test = "SHOOTER 2D";
+
+            g2.drawImage(imageBoss, pg.width/32 - getXofText(g2, test)/4 , pg.height/16, pg.tileSize*48, pg.tileSize*48, null );
+            g2.drawImage(imageDrg, pg.width - getXofText(g2, test)*2 , pg.height/2 - pg.tileSize*20, pg.tileSize*16, pg.tileSize*16, null );
+            g2.drawImage(imageSklt, pg.width - getXofText(g2, test)*2 , pg.height/2 - pg.tileSize*7 , pg.tileSize*16, pg.tileSize*16, null );
+            g2.drawImage(imageWhiteMns, pg.width - getXofText(g2, test)*2 , pg.height/2 + pg.tileSize*6, pg.tileSize*16, pg.tileSize*16, null );
+
+            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
             g2.setColor(Color.white);
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 - pg.tileSize*12);
         
@@ -203,6 +234,7 @@ public class UI {
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2);
             if (arrowPos == 0) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test) , pg.height/2);
+                g2.drawImage(imgPG1, pg.width/2 - pg.tileSize*8 , pg.height/32, pg.tileSize*16, pg.tileSize*16, null );
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2);
         
             }
@@ -211,6 +243,7 @@ public class UI {
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*10);
             if (arrowPos == 1) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*10);
+                g2.drawImage(imgPG2, pg.width/2 - pg.tileSize*8 , pg.height/32, pg.tileSize*16, pg.tileSize*16, null );
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*10);
             }
 
@@ -218,10 +251,10 @@ public class UI {
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*20);
             if (arrowPos == 2) {
                 this.g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*20);
+                g2.drawImage(imgPG3, pg.width/2 - pg.tileSize*8, pg.height/32, pg.tileSize*16, pg.tileSize*16, null );
                 this.g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*20);
             }
         }
-
 
     }
 

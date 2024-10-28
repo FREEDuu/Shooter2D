@@ -25,8 +25,8 @@ public class ControllerKey implements KeyListener {
         int keycode = e.getKeyCode();
         
         if(pg.gameState == pg.loseState || pg.gameState == pg.winGameState){
-            switch (keycode){
 
+            switch (keycode){
                 case KeyEvent.VK_S:
                     pg.uiManager.arrowPos++;
                     if(pg.uiManager.arrowPos > 1){
@@ -51,29 +51,7 @@ public class ControllerKey implements KeyListener {
                     break;
             }
         }
-        if(pg.gameState == pg.winGameState){
-            switch (keycode){
-
-                case KeyEvent.VK_S:
-                    pg.uiManager.arrowPos++;
-                    if(pg.uiManager.arrowPos > 1){
-                        pg.uiManager.arrowPos = 0;
-                    }
-                case KeyEvent.VK_W:
-                    pg.uiManager.arrowPos--;
-                    if(pg.uiManager.arrowPos < 0){
-                        pg.uiManager.arrowPos = 1;
-                    }
-                case KeyEvent.VK_ENTER:
-                    if(pg.uiManager.arrowPos == 0){
-                        pg.setupStartGame();
-                    }
-
-                    if(pg.uiManager.arrowPos == 2){
-                        System.exit(0);
-                    }
-            }
-        }
+    
 
         if(pg.gameState == pg.nextLevelState){
             
