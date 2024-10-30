@@ -80,7 +80,7 @@ public class UI {
             }
     
     
-            test = "Best Record : LvL 10";
+            test = "Hai Perso ! ! ";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*25);
 
 

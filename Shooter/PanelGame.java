@@ -52,12 +52,12 @@ public class PanelGame extends JPanel implements Runnable{
     mouseController mouseC = new mouseController(this);
     AssetManager assetM = new AssetManager(this);
 
-
-    public Skeletron[] Skeletrons = new Skeletron[100]; 
-    public Dragonite[] Dragonites = new Dragonite[100]; 
-    public WhiteMonster[] WhiteMonsters = new WhiteMonster[100]; 
-    public Boss[] boss = {new Boss(this)};
-    public Entity[][] enemies ={ Skeletrons, Dragonites, WhiteMonsters, boss};
+    Entity [][] enemies;
+    public Skeletron[] Skeletrons;
+    public Dragonite[] Dragonites;
+    public WhiteMonster[] WhiteMonsters ;
+    public Boss[] boss;
+    
     public String[] mapPath = {"map0.txt", "map1.txt", "map2.txt"};
     int varx = 100;
     int vary = 100;
@@ -130,10 +130,11 @@ public class PanelGame extends JPanel implements Runnable{
             SoundWhilePlay.stop();
             SoundBoss.LoopMusicEffect(11);
         }
-        gameState = playState;
         player.x = 1300;
         player.y = 1300;
         assetM.replaceAll();
+        gameState = playState;
+
         //SoundM.LoopMusicEffect(0); da migliorare è bruttissimo xD
     }
     // funzione update chiamata nel gameloop
@@ -157,7 +158,6 @@ public class PanelGame extends JPanel implements Runnable{
             if(WhiteMonsterbullets.size() > 0){
                 Utils.checkWhiteBulletPlayer(player, WhiteMonsterbullets);
             }
-            
             assetM.allUpdate();
         }
 

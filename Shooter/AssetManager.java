@@ -18,6 +18,12 @@ public class AssetManager {
         pg.BombPlayerList = new ArrayList<Projectile>(); 
         pg.bullets = new ArrayList<Projectile>();
         pg.WhiteMonsterbullets = new ArrayList<Projectile>();
+        pg.Skeletrons = new Skeletron[100]; 
+        pg.WhiteMonsters = new WhiteMonster[100]; 
+        pg.Dragonites = new Dragonite[100]; 
+        pg.boss = new Boss[]{new Boss(pg)};
+        pg.enemies = new Entity[][]{ pg.Skeletrons, pg.Dragonites, pg.WhiteMonsters, pg.boss};
+
     for(int i = 0; i < pg.Lvl * pg.difficolta * choice.nextInt(3,6); i++){
             pg.Skeletrons[i] = new Skeletron(pg);
             pg.Skeletrons[i].x = choice.nextInt(3500, 3700);
