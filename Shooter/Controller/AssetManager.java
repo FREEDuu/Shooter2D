@@ -1,5 +1,15 @@
+package Controller;
 import java.util.ArrayList;
 import java.util.Random;
+
+import Model.Boss;
+import Model.Dragonite;
+import Model.Entity;
+import Model.Projectile;
+import Model.Skeletron;
+import Model.WhiteMonster;
+import View.PanelGame;
+
 import java.awt.Color;
 import java.awt.Graphics2D;
 

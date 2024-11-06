@@ -1,4 +1,8 @@
+package Controller;
 import javax.imageio.ImageIO;
+
+import View.PanelGame;
+
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,7 +27,7 @@ public class TileManager {
         try {
             for (int i = 1; i < numTiles; i++) {
                 tiles[i] = new Tile();
-                tiles[i].image = ImageIO.read(new File("Shooter/images/Environment/Tiles/" + (i - 1) + ".png"));
+                tiles[i].image = ImageIO.read(new File("Resources/Environment/Tiles/" + (i - 1) + ".png"));
             }
             
             tiles[6].collision = true;

@@ -1,37 +1,37 @@
+package Model;
 import java.io.File;
 import java.util.Random;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import javax.imageio.ImageIO;
 
-public class WhiteMonster extends Entity{
+import Controller.Utils;
+import View.PanelGame;
+
+public class Skeletron extends Entity{
 
     Random choice = new Random();
     int rand, lifeW;
 
-    public WhiteMonster(PanelGame gp){
+    public Skeletron(PanelGame gp){
 
-        this.name = "dragonite";
+        this.name = "mini-drago";
         this.direction = "down";
         this.collision = false;
-        this.speed = 4;
         this.onLife = true;
-        this.hitBox = new Rectangle(gp.tileSize * 3, gp.tileSize*4 , gp.tileSize * 2, gp.tileSize * 3);
+        this.damage = 5;
+        this.speed = 4;
+        this.hitBox = new Rectangle((gp.tileSize * 3), (4 * gp.tileSize), gp.tileSize * 2, gp.tileSize * 3);
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;
         this.life = 10;
-        this.gp = gp;
-        this.damage = 10;
         this.HP = new Rectangle(0,0,120,25);
-        this.lifeW = HP.width;
+        this.gp = gp;
         this.imageCounter = 0;
         this.imageNumber = 0;
+        this.lifeW = HP.width;
         this.getSkImgs();
         
-    }
-
-    public void shoot(){
-        gp.WhiteMonsterbullets.add(new Bullet(gp, this.x , this.y, false, 20));
     }
 
     public void getSkImgs(){
@@ -42,7 +42,7 @@ public class WhiteMonster extends Entity{
 
         try{
             String Path;
-                Path = "Shooter/images/16x16/white.png";
+                Path = "Resources/16x16/dragon.png";
                 down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
                 down[1] = ImageIO.read(new File(Path)).getSubimage(24, 0, 24, 24);
                 down[2] = ImageIO.read(new File(Path)).getSubimage(48, 0, 24, 24);
@@ -131,37 +131,25 @@ public class WhiteMonster extends Entity{
             imageNumber = imageNumber % 4;
             imageCounter = 0;
             rand = choice.nextInt(4);
-        //Implementazione di una rudimentale AI che segue il pg
-            if(rand == 3){
-                this.shoot();
-            }
-                
-            }else{
-                int pgx = Math.abs(gp.player.x - this.x);
-                int pgy = Math.abs(gp.player.y - this.y);
-                if(pgy + pgx > 500){
-                    if(pgy > pgx){
-                        if(this.y > gp.player.y){
-                            direction = "up";
-                        }
-                        else{
-                            direction = "down";
-                        }
-                    }
-                    else{
-                        if(this.x > gp.player.x){
-                            direction = "left";
-                        }else{
-                            direction = "right";
-                        }
-                    }
+            int pgx = Math.abs(gp.player.x - this.x);
+            int pgy = Math.abs(gp.player.y - this.y);
+            if(pgy > pgx){
+                if(this.y > gp.player.y){
+                    direction = "up";
                 }
                 else{
-                    direction= "idle";
+                    direction = "down";
                 }
             }
-    
-        
+            else{
+                if(this.x > gp.player.x){
+                    direction = "left";
+                }else{
+                    direction = "right";
+                }
+            }
+        }
+        Utils.checkCollisionPlayerEnemy(gp.player, gp.enemies, false);
         gp.cDetector.checkTile(this);
         if(collision == false){
         switch(direction){
@@ -175,7 +163,9 @@ public class WhiteMonster extends Entity{
         collision = false;
         idle = false;
     }
+
     public void onDeath(){
+
         this.onLife = false;
 
         int randPotion = choice.nextInt(7);
@@ -199,5 +189,4 @@ public class WhiteMonster extends Entity{
             }
         }
     }
-    
 }

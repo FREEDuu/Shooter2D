@@ -1,8 +1,11 @@
+package Model;
 import java.io.File;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+import Controller.Utils;
+import View.PanelGame;
 
 public class Bomb extends Projectile{
 
@@ -32,12 +35,12 @@ public class Bomb extends Projectile{
         this.images = new BufferedImage[6];
 
         try{
-            images[0] = ImageIO.read(new File("Shooter/images/Bomb/fall.png"));
-            images[1] = ImageIO.read(new File("Shooter/images/Bomb/jump.png"));
-            images[2] = ImageIO.read(new File("Shooter/images/Bomb/idle.png")).getSubimage(0,0 ,64 ,64 );
-            images[3] = ImageIO.read(new File("Shooter/images/Bomb/explode.png")).getSubimage(0,0 ,64 ,64 );
-            images[4] = ImageIO.read(new File("Shooter/images/Bomb/explode.png")).getSubimage(64,0 ,64 ,64 );
-            images[5] = ImageIO.read(new File("Shooter/images/Bomb/explode.png")).getSubimage(128,0 ,64 ,64 );
+            images[0] = ImageIO.read(new File("Resources/Bomb/fall.png"));
+            images[1] = ImageIO.read(new File("Resources//Bomb/jump.png"));
+            images[2] = ImageIO.read(new File("Resources//Bomb/idle.png")).getSubimage(0,0 ,64 ,64 );
+            images[3] = ImageIO.read(new File("Resources/Bomb/explode.png")).getSubimage(0,0 ,64 ,64 );
+            images[4] = ImageIO.read(new File("Resources/Bomb/explode.png")).getSubimage(64,0 ,64 ,64 );
+            images[5] = ImageIO.read(new File("Resources/Bomb/explode.png")).getSubimage(128,0 ,64 ,64 );
         }
         catch(Exception e){
             e.printStackTrace();

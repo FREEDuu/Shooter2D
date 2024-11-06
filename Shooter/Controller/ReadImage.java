@@ -1,3 +1,4 @@
+package Controller;
 import java.awt.image.*;
 
 public class ReadImage {

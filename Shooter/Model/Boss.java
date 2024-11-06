@@ -1,8 +1,11 @@
+package Model;
 import java.io.File;
 import java.util.Random;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import javax.imageio.ImageIO;
+
+import View.PanelGame;
 
 public class Boss extends Entity{
 
@@ -47,22 +50,22 @@ public class Boss extends Entity{
 
 
         try{
-                down_a[0] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_down_1.png"));
-                down_a[1] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_down_2.png"));
-                down[0] = ImageIO.read(new File("Shooter/images/Boss/orc_down_1.png"));
-                down[1] = ImageIO.read(new File("Shooter/images/Boss/orc_down_2.png"));
-                up_a[0] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_up_1.png"));
-                up_a[1] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_up_2.png"));
-                up[0] = ImageIO.read(new File("Shooter/images/Boss/orc_up_1.png"));
-                up[1] = ImageIO.read(new File("Shooter/images/Boss/orc_up_2.png"));               
-                left_a[0] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_left_1.png"));
-                left_a[1] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_left_2.png"));
-                left[0] = ImageIO.read(new File("Shooter/images/Boss/orc_left_1.png"));    
-                left[1] = ImageIO.read(new File("Shooter/images/Boss/orc_left_2.png"));                        
-                right_a[0] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_right_1.png"));
-                right_a[1] = ImageIO.read(new File("Shooter/images/Boss/orc_attack_right_2.png"));
-                right[0] = ImageIO.read(new File("Shooter/images/Boss/orc_right_1.png"));
-                right[1] = ImageIO.read(new File("Shooter/images/Boss/orc_right_2.png"));
+                down_a[0] = ImageIO.read(new File("Resources/Boss/orc_attack_down_1.png"));
+                down_a[1] = ImageIO.read(new File("Resources/Boss/orc_attack_down_2.png"));
+                down[0] = ImageIO.read(new File("Resources/Boss/orc_down_1.png"));
+                down[1] = ImageIO.read(new File("Resources/Boss/orc_down_2.png"));
+                up_a[0] = ImageIO.read(new File("Resources/Boss/orc_attack_up_1.png"));
+                up_a[1] = ImageIO.read(new File("Resources/Boss/orc_attack_up_2.png"));
+                up[0] = ImageIO.read(new File("Resources/Boss/orc_up_1.png"));
+                up[1] = ImageIO.read(new File("Resources/Boss/orc_up_2.png"));               
+                left_a[0] = ImageIO.read(new File("Resources/Boss/orc_attack_left_1.png"));
+                left_a[1] = ImageIO.read(new File("Resources/Boss/orc_attack_left_2.png"));
+                left[0] = ImageIO.read(new File("Resources/Boss/orc_left_1.png"));    
+                left[1] = ImageIO.read(new File("Resources/Boss/orc_left_2.png"));                        
+                right_a[0] = ImageIO.read(new File("Resources/Boss/orc_attack_right_1.png"));
+                right_a[1] = ImageIO.read(new File("Resources/Boss/orc_attack_right_2.png"));
+                right[0] = ImageIO.read(new File("Resources/Boss/orc_right_1.png"));
+                right[1] = ImageIO.read(new File("Resources/Boss/orc_right_2.png"));
         }   
         catch(Exception e){
             e.printStackTrace();

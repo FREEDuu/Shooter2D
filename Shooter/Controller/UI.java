@@ -1,8 +1,12 @@
+package Controller;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+
+import View.PanelGame;
+
 import java.io.File;
 
 public class UI {
@@ -27,13 +31,13 @@ public class UI {
 
     public void LoadImg(){
         try{
-            imgPG3= ImageIO.read(new File("Shooter/images/16x16/erbiondo.png")).getSubimage(0, 0, 24, 24);
-            imgPG2 = ImageIO.read(new File("Shooter/images/16x16/queen.png")).getSubimage(0, 0, 24, 24);
-            imgPG1 = ImageIO.read(new File("Shooter/images/16x16/babypunk.png")).getSubimage(0, 0, 24, 24);
-            imageSklt = ImageIO.read(new File("Shooter/images/16x16/dragon.png")).getSubimage(0, 0, 24, 24);
-            imageWhiteMns = ImageIO.read(new File("Shooter/images/16x16/white.png")).getSubimage(0, 0, 24, 24);
-            imageBoss = ImageIO.read(new File("Shooter/images/Boss/orc_attack_down_2.png"));
-            imageDrg = ImageIO.read(new File( "Shooter/images/16x16/dragonite.png")).getSubimage(0, 0, 24, 24);
+            imgPG3= ImageIO.read(new File("Resources/16x16/erbiondo.png")).getSubimage(0, 0, 24, 24);
+            imgPG2 = ImageIO.read(new File("Resources/16x16/queen.png")).getSubimage(0, 0, 24, 24);
+            imgPG1 = ImageIO.read(new File("Resources/16x16/babypunk.png")).getSubimage(0, 0, 24, 24);
+            imageSklt = ImageIO.read(new File("Resources/16x16/dragon.png")).getSubimage(0, 0, 24, 24);
+            imageWhiteMns = ImageIO.read(new File("Resources/16x16/white.png")).getSubimage(0, 0, 24, 24);
+            imageBoss = ImageIO.read(new File("Resources/Boss/orc_attack_down_2.png"));
+            imageDrg = ImageIO.read(new File( "Resources/16x16/dragonite.png")).getSubimage(0, 0, 24, 24);
 
     }   
     catch(Exception e){
@@ -122,8 +126,8 @@ public class UI {
             img1 = null;
             img2 = null;
             try{
-                img1 = ImageIO.read(new File("Shooter/images/projectile/BulletProjectile.png"));
-                img2 = ImageIO.read(new File("Shooter/images/Bomb/jump.png"));
+                img1 = ImageIO.read(new File("Resources/projectile/BulletProjectile.png"));
+                img2 = ImageIO.read(new File("Resources/Bomb/jump.png"));
 
             }
             catch(Exception e){

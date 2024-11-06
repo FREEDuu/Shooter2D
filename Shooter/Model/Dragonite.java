@@ -1,8 +1,12 @@
+package Model;
 import java.io.File;
 import java.util.Random;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import javax.imageio.ImageIO;
+
+import Controller.Utils;
+import View.PanelGame;
 
 public class Dragonite extends Entity{
 
@@ -38,7 +42,7 @@ public class Dragonite extends Entity{
 
         try{
             String Path;
-                Path = "Shooter/images/16x16/dragonite.png";
+                Path = "Resources/16x16/dragonite.png";
                 down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
                 down[1] = ImageIO.read(new File(Path)).getSubimage(24, 0, 24, 24);
                 down[2] = ImageIO.read(new File(Path)).getSubimage(48, 0, 24, 24);

@@ -1,8 +1,13 @@
+package Model;
 import java.io.File;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
+
+import Controller.Utils;
+import View.PanelGame;
+
 import java.util.Random;
 
 public class Bullet extends Projectile{
@@ -44,7 +49,7 @@ public class Bullet extends Projectile{
 
 
         try{
-            img = ImageIO.read(new File("Shooter/images/projectile/BulletProjectile.png"));
+            img = ImageIO.read(new File("Resources/projectile/BulletProjectile.png"));
             //img = Utils.rotate(img, 90);
         }
         catch(Exception e){

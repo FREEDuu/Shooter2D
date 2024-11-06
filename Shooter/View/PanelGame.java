@@ -1,3 +1,4 @@
+package View;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -7,6 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
+
+import Controller.AssetManager;
+import Controller.CollisionDetector;
+import Controller.ControllerKey;
+import Controller.Sound;
+import Controller.TileManager;
+import Controller.UI;
+import Controller.Utils;
+import Controller.mouseController;
+import Model.Boss;
+import Model.Dragonite;
+import Model.Entity;
+import Model.Player;
+import Model.Projectile;
+import Model.Skeletron;
+import Model.WhiteMonster;
 
 public class PanelGame extends JPanel implements Runnable{
 
@@ -29,12 +46,12 @@ public class PanelGame extends JPanel implements Runnable{
     GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
     public int width = gd.getDisplayMode().getWidth();
     public int height = gd.getDisplayMode().getHeight();
-    TileManager tileM = new TileManager(this);
-    UI uiManager = new UI(this);
+    public TileManager tileM = new TileManager(this);
+    public UI uiManager = new UI(this);
 
     public String playerChoice ; 
     int FPS = 60;
-    boolean ret = false;
+    public boolean ret = false;
     Thread gameThread;
     public int Lvl = 1;
     public int difficolta;
@@ -47,12 +64,12 @@ public class PanelGame extends JPanel implements Runnable{
     public int winGameState = 5;
     public Player player;
 
-    CollisionDetector cDetector = new CollisionDetector(this);
+    public CollisionDetector cDetector = new CollisionDetector(this);
     ControllerKey controllK = new ControllerKey(this);
     mouseController mouseC = new mouseController(this);
     AssetManager assetM = new AssetManager(this);
 
-    Entity [][] enemies;
+    public Entity [][] enemies;
     public Skeletron[] Skeletrons;
     public Dragonite[] Dragonites;
     public WhiteMonster[] WhiteMonsters ;

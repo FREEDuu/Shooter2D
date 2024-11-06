@@ -1,10 +1,11 @@
+package Controller;
 import java.awt.event.*;
-
+import View.PanelGame;
 
 public class mouseController extends MouseAdapter{
 
     PanelGame pg;
-    boolean shoot;
+    public boolean shoot;
 
     public mouseController(PanelGame pg){
         this.pg = pg;

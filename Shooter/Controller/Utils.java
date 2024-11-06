@@ -1,6 +1,11 @@
+package Controller;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
+
+import Model.Entity;
+import Model.Player;
+import Model.Projectile;
 
 public class Utils {
 

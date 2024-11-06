@@ -1,3 +1,4 @@
+package View;
 import javax.swing.JFrame;
 import java.awt.*;
 import java.io.File;
@@ -19,7 +20,7 @@ public class Main {
         Toolkit toolKit = Toolkit.getDefaultToolkit();
         Image cursore = null;
         try{
-            cursore = ImageIO.read(new File("Shooter/images/Weapons/crosshair.png")).getSubimage(38, 10, 18,18).getScaledInstance(100, 100, 0);
+            cursore = ImageIO.read(new File("Resources/Weapons/crosshair.png")).getSubimage(38, 10, 18,18).getScaledInstance(100, 100, 0);
         }
         catch(Exception e){
             e.printStackTrace();

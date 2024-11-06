@@ -1,7 +1,10 @@
+package Model;
 import java.io.File;
 import java.util.Random;
 import java.awt.*;
 import javax.imageio.ImageIO;
+
+import View.PanelGame;
 
 public class Potion extends Entity{
 
@@ -28,22 +31,22 @@ public class Potion extends Entity{
         try{
             if(name.equals("maxHealtIncrease")){
                 String Path;
-                Path = "Shooter/images/potion_red.png";
+                Path = "Resources/potion_red.png";
                 img = ImageIO.read(new File(Path));
             }
             else if(name.equals("HealthRegen")){
                 String Path;
-                Path = "Shooter/images/heart_full.png";
+                Path = "Resources/heart_full.png";
                 img = ImageIO.read(new File(Path));
             }
             else if(name.equals("SpeedIncrease")){
                 String Path;
-                Path = "Shooter/images/manacrystal_full.png";
+                Path = "Resources/manacrystal_full.png";
                 img = ImageIO.read(new File(Path));
             }
             else if(name.equals("AttackIncrease")){
                 String Path;
-                Path = "Shooter/images/sword_normal.png";
+                Path = "Resources/sword_normal.png";
                 img = ImageIO.read(new File(Path));
             }
             

@@ -1,11 +1,17 @@
+package Model;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 
+import Controller.ControllerKey;
+import Controller.Utils;
+import Controller.mouseController;
+import View.PanelGame;
+
 public class Player extends Entity{
 
-    int cameraX, cameraY, damage, maxHealth;
+    public int cameraX, cameraY, damage, maxHealth;
     ControllerKey controllerK;
     mouseController mouseC;
     boolean reload, reloadBomb;
@@ -43,7 +49,7 @@ public class Player extends Entity{
             String Path;
             if (gp.playerChoice.equals("babypunk")) {
                 this.name = "babypunk";
-                Path = "Shooter/images/16x16/babypunk.png";
+                Path = "Resources/16x16/babypunk.png";
                 down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
                 down[1] = ImageIO.read(new File(Path)).getSubimage(24, 0, 24, 24);
                 down[2] = ImageIO.read(new File(Path)).getSubimage(48, 0, 24, 24);
@@ -64,7 +70,7 @@ public class Player extends Entity{
             
             else if(gp.playerChoice.equals("queen")){
                 this.name = "queen";
-                Path = "Shooter/images/16x16/queen.png";
+                Path = "Resources/16x16/queen.png";
                 down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
                 down[1] = ImageIO.read(new File(Path)).getSubimage(24, 0, 24, 24);
                 down[2] = ImageIO.read(new File(Path)).getSubimage(48, 0, 24, 24);
@@ -84,7 +90,7 @@ public class Player extends Entity{
             }
             else if(gp.playerChoice.equals("erbiondo")){
                 this.name = "erbiondo";
-                Path = "Shooter/images/16x16/erbiondo.png";
+                Path = "Resources/16x16/erbiondo.png";
                 down[0] = ImageIO.read(new File(Path)).getSubimage(0, 0, 24, 24);
                 down[1] = ImageIO.read(new File(Path)).getSubimage(24, 0, 24, 24);
                 down[2] = ImageIO.read(new File(Path)).getSubimage(48, 0, 24, 24);
