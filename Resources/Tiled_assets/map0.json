@@ -3,8 +3,7 @@
     {
      "export":
         {
-         "format":"csv",
-         "target":"..\/..\/..\/..\/untitled."
+         "format":"csv"
         }
     },
  "height":100,

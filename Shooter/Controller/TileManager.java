@@ -15,7 +15,7 @@ public class TileManager {
 
     PanelGame gp;
     Tile[] tiles = new Tile[32];
-    int numTiles = 8;
+    int numTiles = 7;
     int[][] mapTileArrayIndex = new int[100][100];
 
     public TileManager(PanelGame gp) {
@@ -25,13 +25,13 @@ public class TileManager {
 
     public void getImgTiles() {
         try {
-            for (int i = 1; i < numTiles; i++) {
+            for (int i = 0; i < numTiles; i++) {
                 tiles[i] = new Tile();
-                tiles[i].image = ImageIO.read(new File("Resources/Environment/Tiles/" + (i - 1) + ".png"));
+                tiles[i].image = ImageIO.read(new File("Resources/Environment/Tiles/" + i + ".png"));
             }
             
-            tiles[6].collision = true;
             tiles[5].collision = true;
+            tiles[6].collision = true;
         } catch (Exception e) {
             System.out.println(e);
         }
