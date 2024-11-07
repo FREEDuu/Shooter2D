@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.awt.*;
 import javax.imageio.ImageIO;
 
+import Controller.Utils;
 import View.PanelGame;
 
 public class Boss extends Entity{
@@ -13,6 +14,7 @@ public class Boss extends Entity{
     Random choice = new Random();
     BufferedImage[] up_a, down_a, right_a, left_a;
     int rand, lifeW;
+    Rectangle hitboxAttack, normalHitbox;
     boolean onRange = false;
     int distanceToPlayer, distanceToAttack;
 
@@ -21,10 +23,13 @@ public class Boss extends Entity{
         this.name = "Boss";
         this.direction = "down";
         this.onLife = true;
+        this.damage = 10;
         this.distanceToAttack = 200;
         this.collision = false;
-        this.speed = 4;
-        this.hitBox = new Rectangle((gp.tileSize * 3), (4 * gp.tileSize), gp.tileSize * 2, gp.tileSize * 3);
+        this.speed = 6;
+        this.normalHitbox = new Rectangle(-(gp.tileSize ), -(3* gp.tileSize)/2, gp.tileSize * 2, gp.tileSize * 3);
+        this.hitboxAttack = new Rectangle(-(2*gp.tileSize ), -(3* gp.tileSize), gp.tileSize * 4, gp.tileSize * 6);
+        this.hitBox = hitboxAttack;
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;
         this.life = 10;
@@ -127,12 +132,12 @@ public class Boss extends Entity{
 
                 
                 if (onRange && (direction == "left" || direction == "right")) {
-                    g2.drawImage(image, screenX , screenY, gp.tileSize*16, gp.tileSize*8, null );
+                    g2.drawImage(image, screenX -(gp.tileSize*8), screenY -(gp.tileSize*4), gp.tileSize*16, gp.tileSize*8, null );
                 }else if(onRange && (direction == "up" || direction == "down")){
-                    g2.drawImage(image, screenX , screenY, gp.tileSize*8, gp.tileSize*16, null );
+                    g2.drawImage(image, screenX -(gp.tileSize*4), screenY -(gp.tileSize*8), gp.tileSize*8, gp.tileSize*16, null );
                 }
                 else{
-                    g2.drawImage(image, screenX , screenY, gp.tileSize*8, gp.tileSize*8, null );
+                    g2.drawImage(image, screenX -(gp.tileSize*4), screenY -(gp.tileSize*4), gp.tileSize*8, gp.tileSize*8, null );
                 }
 
                 g2.drawRect(screenX + hitBox.x, screenY + hitBox.y, hitBox.width, hitBox.height);
@@ -182,6 +187,7 @@ public class Boss extends Entity{
         
     
         gp.cDetector.checkTile(this);
+        Utils.checkCollisionPlayerEnemy(gp.player, gp.enemies, false);
         if(collision == false){
         switch(direction){
             case "up": y -= speed; break;

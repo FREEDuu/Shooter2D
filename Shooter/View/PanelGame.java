@@ -147,8 +147,8 @@ public class PanelGame extends JPanel implements Runnable{
             SoundWhilePlay.stop();
             SoundBoss.LoopMusicEffect(11);
         }
-        player.x = 1300;
-        player.y = 1300;
+        player.x = 1600;
+        player.y = 1600;
         assetM.replaceAll();
         gameState = playState;
 

@@ -20,11 +20,11 @@ public class Dragonite extends Entity{
         this.onLife = true;
         this.collision = false;
         this.speed = 4;
-        this.hitBox = new Rectangle((gp.tileSize * 3), (4 * gp.tileSize), gp.tileSize * 2, gp.tileSize * 3);
+        this.hitBox = new Rectangle(-(gp.tileSize ), -(gp.tileSize), gp.tileSize * 2, gp.tileSize * 5);
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;
         this.life = 4;
-        this.damage = 5;
+        this.damage = 1;
         this.gp = gp;
         this.HP = new Rectangle(0,0,120,25);
         this.lifeW = HP.width;
@@ -112,11 +112,10 @@ public class Dragonite extends Entity{
                         }
                         break;
                 }
-
-                g2.drawImage(image, screenX , screenY, gp.tileSize*8, gp.tileSize*8, null );
+                g2.drawImage(image, screenX - (gp.tileSize*4), screenY - (gp.tileSize*4), gp.tileSize*8, gp.tileSize*8, null );
                 g2.drawRect(screenX + hitBox.x, screenY + hitBox.y, hitBox.width, hitBox.height);
-                g2.fillRect(screenX, screenY + gp.tileSize, HP.width, HP.height);
-                g2.drawRect(screenX, screenY + gp.tileSize, lifeW, HP.height);
+                g2.fillRect(screenX  - (gp.tileSize * 4), screenY - (gp.tileSize * 4), HP.width, HP.height);
+                g2.drawRect(screenX - (gp.tileSize * 4), screenY - (gp.tileSize * 4), lifeW, HP.height);
 
             }
 

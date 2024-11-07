@@ -28,11 +28,11 @@ public class Player extends Entity{
         this.reloadCounter = 0;
         this.getPgImgs();
         this.SetDefault();
+        this.hitBox = new Rectangle(-(gp.tileSize * 2)/2, -(4 * gp.tileSize)/2, gp.tileSize * 2, gp.tileSize * 4);
         cameraY = ( gp.height / 2);
-        cameraX = ( gp.width / 2) ;
+        cameraX = ( gp.width / 2);
         this.reload = true;
         this.HP = new Rectangle(0,0, 500, 50);
-        this.hitBox = new Rectangle((gp.tileSize * 3), (4 * gp.tileSize), gp.tileSize * 2, gp.tileSize * 3);
         this.maxHealth = HP.width;
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;
@@ -252,7 +252,9 @@ public class Player extends Entity{
                 break;
         }
 
-        g2.drawImage(image, cameraX, cameraY, gp.tileSize*8, gp.tileSize*8, null);
+        g2.setColor(Color.BLUE);
+        g2.fillRect((gp.width/2)- 50, (gp.height/2)-50, 100,100);
+        g2.drawImage(image, cameraX - (gp.tileSize*4), cameraY - (gp.tileSize*4), gp.tileSize*8, gp.tileSize*8, null);
         g2.drawRect(cameraX + hitBox.x, cameraY + hitBox.y , hitBox.width, hitBox.height);
         g2.setColor(Color.gray);
         g2.fillRect(HP.x + gp.tileSize, HP.y + gp.tileSize*10 , rectReloadBomb.width, rectReloadBomb.height);
@@ -261,7 +263,7 @@ public class Player extends Entity{
         g2.fillRect(HP.x + gp.tileSize, HP.y + gp.tileSize*5 , RectReload.width, RectReload.height);
         g2.drawRect(HP.x + gp.tileSize, HP.y + gp.tileSize*5 , 350, 50);
         g2.setColor(Color.red);
-        g2.fillRect(HP.x + gp.tileSize, HP.y + gp.tileSize, HP.width, HP.height);
+        g2.fillRect(HP.x - gp.tileSize, HP.y + gp.tileSize, HP.width, HP.height);
         g2.drawRect(HP.x + gp.tileSize, HP.y + gp.tileSize, maxHealth, HP.height);
     }
 

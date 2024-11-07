@@ -25,7 +25,7 @@ public class Main {
         catch(Exception e){
             e.printStackTrace();
         }
-        Point point = new Point(0, 0);
+        Point point = new Point(50, 50);
         Cursor cursor = toolKit.createCustomCursor(cursore, point, "Cursor");
         panelgame.setCursor(cursor);
 

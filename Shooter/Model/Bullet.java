@@ -27,8 +27,8 @@ public class Bullet extends Projectile{
         
         this.getBulletImg();
         if(ShootbyPlayer){
-            this.x = pg.player.x - (img.getWidth()/2)*2 + ( pg.tileSize*8/2);
-            this.y = pg.player.y - (img.getHeight()/2)*2 + (pg.tileSize*8/2);
+            this.x = pg.player.x - pg.tileSize*2;
+            this.y = pg.player.y - pg.tileSize*2;
             this.angle = Utils.getMouseAngle(pg.width/2, pg.height/2, x, y);
             this.speed = 40;
         }
@@ -40,7 +40,7 @@ public class Bullet extends Projectile{
 
         }
   
-        this.hitBox = new Rectangle(gp.tileSize,gp.tileSize,gp.tileSize*2,gp.tileSize*2);
+        this.hitBox = new Rectangle(-gp.tileSize,-gp.tileSize,gp.tileSize*2,gp.tileSize*2);
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;
     }
@@ -79,7 +79,7 @@ public class Bullet extends Projectile{
         screenX = x - gp.player.x + gp.player.cameraX;
         screenY = y - gp.player.y + gp.player.cameraY;
 
-        g2.drawImage(img, screenX , screenY, gp.tileSize*3, gp.tileSize*3, null);
+        g2.drawImage(img, screenX -(gp.tileSize*3)/2 , screenY -(gp.tileSize*3)/2 , gp.tileSize*3, gp.tileSize*3, null);
         g2.drawRect(screenX + hitBox.x , screenY + hitBox.y, hitBox.width, hitBox.height);
 
     }

@@ -132,43 +132,52 @@ public class CollisionDetector {
                             break;
                     }
                 }
-                if (entity.hitBox.intersects(element.hitBox)) {
-                    if (element != entity) {
-                        if (CallPlayer) {
-                            entity.collision = true;
-                            if (entity.HP.width - element.damage > 0) {
-                                entity.HP.width -= element.damage;
-                                //entity.getSoundHit();
-                                // element.knockback(entity);
-                            } else {
-                                entity.onDeath();
+                if(entity.hitBox.intersects(element.hitBox)) {
+                    if (element != entity && entity.speed != 0 && element.speed != 0) {
+                        entity.collision = true;
+                        if (entity.HP.width - element.damage > 0) {
+                            entity.HP.width -= element.damage;
+                            switch (entity.direction) {
+                                case "up":
+                                    element.y -= entity.speed;
+                                    break;
+                                case "down":
+                                    element.y += entity.speed;
+                                    break;
+                                case "left":
+                                    element.x -= entity.speed;
+                                    break;
+                                case "right":
+                                    element.x += entity.speed;
+                                    break;
                             }
+                            //entity.getSoundHit();
+                            // element.knockback(entity);
                         } else {
-
-                            if (element.HP.width - entity.damage > 0) {
-                                element.HP.width -= entity.damage;
-                                //element.getSoundHit();
-                                // element.knockback(entity);
-                            } else {
-                                element.onDeath();
-                            }
-                            if (entity.speed != 0) {
-                                element.collision = true;
-                            }
-
+                            entity.onDeath();
+                        }
+                         
+                    }
+                    else{
+                        if (element.HP.width - entity.damage > 0) {
+                            element.HP.width -= entity.damage;
+                        } else {
+                            element.onDeath();
                         }
                     }
                 }
+            
                 // restore dafaults
                 entity.hitBox.x = entity.solidAreaDefaultX;
                 entity.hitBox.y = entity.solidAreaDefaultY;
                 element.hitBox.x = element.solidAreaDefaultX;
                 element.hitBox.y = element.solidAreaDefaultY;
-
             }
         }
-
     }
+        
+
+    
 
     public static void checkEnemy(Entity entity, List<Entity> target) {
 
