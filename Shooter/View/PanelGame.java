@@ -52,6 +52,7 @@ public class PanelGame extends JPanel implements Runnable{
     public String playerChoice ; 
     int FPS = 60;
     public boolean ret = false;
+    public int bombdmg = 90;
     Thread gameThread;
     public int Lvl = 1;
     public int difficolta;
@@ -134,6 +135,7 @@ public class PanelGame extends JPanel implements Runnable{
         SoundIntroMusic.stop();
         SoundWhilePlay.LoopMusicEffect(9);
         Lvl =1;
+        bombdmg = 90;
         player = new Player(this, controllK, mouseC);
         assetM.replaceAll();
         gameState = playState;
@@ -149,6 +151,7 @@ public class PanelGame extends JPanel implements Runnable{
         }
         player.x = 1600;
         player.y = 1600;
+        player.HP.width = player.maxHealth;
         assetM.replaceAll();
         gameState = playState;
 

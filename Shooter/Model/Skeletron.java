@@ -4,8 +4,6 @@ import java.util.Random;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import javax.imageio.ImageIO;
-
-import Controller.Utils;
 import View.PanelGame;
 
 public class Skeletron extends Entity{
@@ -114,7 +112,6 @@ public class Skeletron extends Entity{
                 }
 
                 g2.drawImage(image, screenX - (gp.tileSize*4), screenY - (gp.tileSize*4), gp.tileSize*8, gp.tileSize*8, null );
-                g2.drawRect(screenX + hitBox.x, screenY + hitBox.y, hitBox.width, hitBox.height);
                 g2.fillRect(screenX  - (gp.tileSize * 4), screenY - (gp.tileSize * 4), HP.width, HP.height);
                 g2.drawRect(screenX - (gp.tileSize * 4), screenY - (gp.tileSize * 4), lifeW, HP.height);
 
@@ -123,45 +120,7 @@ public class Skeletron extends Entity{
     }
 
     public void update(){
-
-        
-        imageCounter++;
-        if(imageCounter > 15){
-            imageNumber++;
-            imageNumber = imageNumber % 4;
-            imageCounter = 0;
-            rand = choice.nextInt(4);
-            int pgx = Math.abs(gp.player.x - this.x);
-            int pgy = Math.abs(gp.player.y - this.y);
-            if(pgy > pgx){
-                if(this.y > gp.player.y){
-                    direction = "up";
-                }
-                else{
-                    direction = "down";
-                }
-            }
-            else{
-                if(this.x > gp.player.x){
-                    direction = "left";
-                }else{
-                    direction = "right";
-                }
-            }
-        }
-        Utils.checkCollisionPlayerEnemy(gp.player, gp.enemies, false);
-        gp.cDetector.checkTile(this);
-        if(collision == false){
-        switch(direction){
-            case "up": y -= speed; break;
-            case "down": y += speed; break;
-            case "left": x -= speed; break;
-            case "right": x += speed; break;
-        }
-
-        }
-        collision = false;
-        idle = false;
+     updateE();   
     }
 
     public void onDeath(){

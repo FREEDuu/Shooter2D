@@ -121,7 +121,6 @@ public class Player extends Entity{
         if(this.name.equals("babypunk")){
             gp.bullets.add(new Bullet(gp, MouseInfo.getPointerInfo().getLocation().x+2 , MouseInfo.getPointerInfo().getLocation().y+2, true, 50));
         }
-        gp.SoundM.PlaySoundEffect(0);
     }
     public void shootBomb(){
         gp.BombPlayerList.add(new Bomb(gp, gp.player.x, gp.player.y));
@@ -251,11 +250,7 @@ public class Player extends Entity{
                 }
                 break;
         }
-
-        g2.setColor(Color.BLUE);
-        g2.fillRect((gp.width/2)- 50, (gp.height/2)-50, 100,100);
         g2.drawImage(image, cameraX - (gp.tileSize*4), cameraY - (gp.tileSize*4), gp.tileSize*8, gp.tileSize*8, null);
-        g2.drawRect(cameraX + hitBox.x, cameraY + hitBox.y , hitBox.width, hitBox.height);
         g2.setColor(Color.gray);
         g2.fillRect(HP.x + gp.tileSize, HP.y + gp.tileSize*10 , rectReloadBomb.width, rectReloadBomb.height);
         g2.drawRect(HP.x + gp.tileSize, HP.y + gp.tileSize*10 , 100, 50);
@@ -268,9 +263,16 @@ public class Player extends Entity{
     }
 
     public void onDeath(){
-        gp.SoundWhilePlay.stop();
-        gp.SoundM.PlaySoundEffect(8);
-        gp.gameState = gp.loseState;
+        if (gp.gameState != gp.loseState) {
+            if(gp.Lvl == 3){
+                gp.SoundBoss.stop();
+            }
+            else{
+                gp.SoundWhilePlay.stop();
+            }
+            gp.SoundM.PlaySoundEffect(8);
+            gp.gameState = gp.loseState;
+        }
     }
 
     public void DamageIncrease(){
@@ -283,7 +285,13 @@ public class Player extends Entity{
         maxHealth += 120;
         HP.width = maxHealth;
     }
-
+    public void BombIncrease(){
+        gp.bombdmg += 30;
+    }
+    public void BothIncrease(){
+        gp.bombdmg += 15;
+        damage += 5;
+    }
     public void getSoundHit(){
         //gp.SoundM.PlaySoundEffect(4);
     }

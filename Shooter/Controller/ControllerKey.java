@@ -1,7 +1,6 @@
 package Controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
 import View.PanelGame;
 public class ControllerKey implements KeyListener {
 
@@ -73,10 +72,10 @@ public class ControllerKey implements KeyListener {
                     pg.player.DamageIncrease();
                 }
                 if(pg.uiManager.arrowPos == 1){
-                    pg.player.HealthIncrease();
+                    pg.player.BombIncrease();
                 }
                 if(pg.uiManager.arrowPos == 2){
-                    pg.player.SpeedIncrease();
+                    pg.player.BothIncrease();
                 }
                 pg.uiManager.arrowPos = 0;
                 pg.SoundIntroMusic.stop();
@@ -207,12 +206,6 @@ public class ControllerKey implements KeyListener {
         }
         if(keycode == KeyEvent.VK_R){
             bomb = false;
-        }
-    }
-
-    public void mousePressed(MouseEvent e) {
-        if(e.getButton() == MouseEvent.BUTTON1){
-            System.out.println("Left button clicked");
         }
     }
     

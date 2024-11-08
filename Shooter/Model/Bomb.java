@@ -20,7 +20,7 @@ public class Bomb extends Projectile{
         this.speed = 0;
         this.counter = 0;
         this.counterImg = 0;
-        this.damage = 90;
+        this.damage = pg.bombdmg;
         this.x = xCoord;
         this.expire = false;
         this.y = Ycoord;
@@ -68,15 +68,11 @@ public class Bomb extends Projectile{
         screenX = x - pg.player.x + pg.player.cameraX;
         screenY = y - pg.player.y + pg.player.cameraY;
 
-        g2.drawImage(img, screenX , screenY, pg.tileSize*8, pg.tileSize*8, null);
-        g2.drawRect(screenX + hitBox.x , screenY + hitBox.y, hitBox.width, hitBox.height);
-
+        g2.drawImage(img, screenX - (pg.tileSize*4) , screenY - (pg.tileSize*4), pg.tileSize*8, pg.tileSize*8, null);
     }
 
     public void onDeath(){
-        pg.SoundM.PlaySoundEffect(2);
         Utils.makeExplosion(this, pg.enemies);
-
     }
 
 }

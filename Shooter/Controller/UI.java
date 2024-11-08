@@ -58,7 +58,6 @@ public class UI {
         }
         else if(pg.gameState == pg.loseState){
 
-            System.out.println(arrowPos);
             g2.setColor(Color.BLACK);
             g2.fillRect(0, 0, pg.width, pg.height);
 

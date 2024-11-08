@@ -140,7 +140,6 @@ public class Boss extends Entity{
                     g2.drawImage(image, screenX -(gp.tileSize*4), screenY -(gp.tileSize*4), gp.tileSize*8, gp.tileSize*8, null );
                 }
 
-                g2.drawRect(screenX + hitBox.x, screenY + hitBox.y, hitBox.width, hitBox.height);
                 g2.fillRect(screenX, screenY + gp.tileSize, HP.width, HP.height);
                 g2.drawRect(screenX, screenY + gp.tileSize, lifeW, HP.height);
                 onRange = false;
