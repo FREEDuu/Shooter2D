@@ -18,7 +18,7 @@ public class Skeletron extends Entity{
         this.collision = false;
         this.onLife = true;
         this.damage = 1;
-        this.speed = 4;
+        this.speed = 6;
         this.hitBox = new Rectangle(-(gp.tileSize), -(3 * gp.tileSize)/2, gp.tileSize * 2, gp.tileSize * 5);
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;

@@ -17,7 +17,7 @@ public class WhiteMonster extends Entity{
         this.name = "dragonite";
         this.direction = "down";
         this.collision = false;
-        this.speed = 4;
+        this.speed = 3;
         this.onLife = true;
         this.hitBox = new Rectangle(-(gp.tileSize ), -(3 * gp.tileSize)/2, gp.tileSize * 2, gp.tileSize * 5);
         this.solidAreaDefaultX = this.hitBox.x;

@@ -34,17 +34,17 @@ public class AssetManager {
         pg.boss = new Boss[]{new Boss(pg)};
         pg.enemies = new Entity[][]{ pg.Skeletrons, pg.Dragonites, pg.WhiteMonsters, pg.boss};
 
-    for(int i = 0; i<5; i++){
+    for(int i = 0; i<pg.Lvl*pg.difficolta*choice.nextInt(4,10); i++){
             pg.Skeletrons[i] = new Skeletron(pg);
             pg.Skeletrons[i].x = choice.nextInt(3500, 3700);
             pg.Skeletrons[i].y = choice.nextInt(3500, 3700);
         }
-        for(int i = 0; i < 0;i++){
+        for(int i = 0; i < pg.Lvl*pg.difficolta*choice.nextInt(4,10);i++){
             pg.Dragonites[i] = new Dragonite(pg);
             pg.Dragonites[i].x = choice.nextInt(3500, 3700);
             pg.Dragonites[i].y = choice.nextInt(3500, 3700);
         }
-        for(int i = 0; i < 0; i++){
+        for(int i = 0; i < pg.Lvl*pg.difficolta*choice.nextInt(4,10); i++){
             pg.WhiteMonsters[i] = new WhiteMonster(pg);
             pg.WhiteMonsters[i].x = choice.nextInt(3500, 3700);
             pg.WhiteMonsters[i].y = choice.nextInt(3500, 3700);

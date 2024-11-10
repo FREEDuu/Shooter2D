@@ -19,7 +19,7 @@ public class Dragonite extends Entity{
         this.direction = "down";
         this.onLife = true;
         this.collision = false;
-        this.speed = 4;
+        this.speed = 8;
         this.hitBox = new Rectangle(-(gp.tileSize ), -(gp.tileSize), gp.tileSize * 2, gp.tileSize * 5);
         this.solidAreaDefaultX = this.hitBox.x;
         this.solidAreaDefaultY = this.hitBox.y;
