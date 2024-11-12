@@ -90,6 +90,7 @@ public class UI {
         }
         else if(pg.gameState == pg.winGameState){
 
+            System.out.print('V');
             g2.setColor(Color.BLACK);
             g2.fillRect(0, 0, pg.width, pg.height);
 
@@ -115,7 +116,7 @@ public class UI {
             }
     
     
-            test = "Best Record : LvL 3";
+            test = "Hai Superato L'ultimo Livello ( 3 ) ";
             this.g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*25);
 
 

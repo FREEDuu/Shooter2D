@@ -34,6 +34,7 @@ public class Utils {
             if (indice != 999999) {
                 if (enemy[i].HP.width - bull.get(indice).damage > 0) {
                     enemy[i].HP.width -= bull.get(indice).damage;
+                    enemy[i].onHit();
                 } else {
                     enemy[i].onDeath();
                     enemy[i] = null;
@@ -53,7 +54,9 @@ public class Utils {
         for (int i = 0; i < enemy.length; i++) {
             CollisionDetector.checkEnemy(bomb, enemy[i], false);
             bomb.collision = true;
+            bomb.gp.SoundBomb.play();
         }
+        
 
     }
 
@@ -70,6 +73,8 @@ public class Utils {
         if (indice != 999999) {
             if (entity.HP.width - Wbullets.get(indice).damage > 0) {
                 entity.HP.width -= Wbullets.get(indice).damage;
+                entity.onHit();
+
             } else {
                 entity.onDeath();
             }

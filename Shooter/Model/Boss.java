@@ -4,8 +4,6 @@ import java.util.Random;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 import javax.imageio.ImageIO;
-
-import Controller.Utils;
 import View.PanelGame;
 
 public class Boss extends Entity{
@@ -34,7 +32,7 @@ public class Boss extends Entity{
         this.solidAreaDefaultY = this.hitBox.y;
         this.life = 10;
         this.gp = gp;
-        this.HP = new Rectangle(0,0,120,25);
+        this.HP = new Rectangle(0,0,350,25);
         this.lifeW = HP.width;
         this.imageCounter = 0;
         this.imageNumber = 0;
@@ -140,8 +138,8 @@ public class Boss extends Entity{
                     g2.drawImage(image, screenX -(gp.tileSize*4), screenY -(gp.tileSize*4), gp.tileSize*8, gp.tileSize*8, null );
                 }
 
-                g2.fillRect(screenX, screenY + gp.tileSize, HP.width, HP.height);
-                g2.drawRect(screenX, screenY + gp.tileSize, lifeW, HP.height);
+                g2.fillRect(screenX -(gp.tileSize*6), screenY -(gp.tileSize*6), HP.width, HP.height);
+                g2.drawRect(screenX -(gp.tileSize*6), screenY -(gp.tileSize*6), lifeW, HP.height);
                 onRange = false;
             }
 
@@ -165,56 +163,11 @@ public class Boss extends Entity{
             rand = choice.nextInt(4);
             pgx = Math.abs(gp.player.x - this.x);
             pgy = Math.abs(gp.player.y - this.y);
-            if(pgy > pgx){
-                if (!blocked) {
-                    if(this.y > gp.player.y){
-                        direction = "up";
-                    }
-                    else{
-                        direction = "down";
-                    }
-                }
-                else{
-                    if(this.x > gp.player.x){
-                        direction = "left";
-                    }else{
-                        direction = "right";
-                    }
-                }
-            }
-            else{
-                if (!blocked) {
-                    if(this.x > gp.player.x){
-                        direction = "left";
-                    }else{
-                        direction = "right";
-                    } 
-                }
-                else{
-                    if(this.y > gp.player.y){
-                        direction = "up";
-                    }
-                    else{
-                        direction = "down";
-                    }
-                }
-            }
+            smartMove(pgx, pgy);
         }
         
     
-        gp.cDetector.checkTile(this);
-        Utils.checkCollisionPlayerEnemy(gp.player, gp.enemies, false);
-        if(collision == false){
-        switch(direction){
-            case "up": y -= speed; break;
-            case "down": y += speed; break;
-            case "left": x -= speed; break;
-            case "right": x += speed; break;
-        }
-
-
-        }
-
+        checkCollisionEntity();
         collision = false;
         idle = false;
 
@@ -227,18 +180,8 @@ public class Boss extends Entity{
            
     }
 
-    public void distanceAttack(){
-        /*
-         * 
-         *         
-         * 
-         */
-
-    }
-
     public void onDeath(){
         this.onLife = false;
     }
-        
     
 }

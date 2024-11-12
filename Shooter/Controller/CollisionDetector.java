@@ -151,8 +151,6 @@ public class CollisionDetector {
                                     element.x += entity.speed;
                                     break;
                             }
-                            //entity.getSoundHit();
-                            // element.knockback(entity);
                         } else {
                             entity.onDeath();
                         }
@@ -161,6 +159,7 @@ public class CollisionDetector {
                     else{
                         if (element.HP.width - entity.damage > 0) {
                             element.HP.width -= entity.damage;
+                            element.onHit();
                         } else {
                             element.onDeath();
                         }

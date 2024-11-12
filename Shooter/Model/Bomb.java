@@ -9,22 +9,21 @@ import View.PanelGame;
 
 public class Bomb extends Projectile{
 
-    PanelGame pg;
     boolean expire;
     BufferedImage[] images;
     BufferedImage img;
     int counter ,counterImg, solidAreaDefaultX, solidAreaDefaultY;
 
-    public Bomb(PanelGame pg, int xCoord, int Ycoord){
-        this.pg = pg;
+    public Bomb(PanelGame gp, int xCoord, int Ycoord){
+        this.gp = gp;
         this.speed = 0;
         this.counter = 0;
         this.counterImg = 0;
-        this.damage = pg.bombdmg;
+        this.damage = gp.bombdmg;
         this.x = xCoord;
         this.expire = false;
         this.y = Ycoord;
-        this.hitBox = new Rectangle(-(pg.tileSize * 9),-(9 * pg.tileSize), pg.tileSize * 25, pg.tileSize * 25);
+        this.hitBox = new Rectangle(-(gp.tileSize * 9),-(9 * gp.tileSize), gp.tileSize * 25, gp.tileSize * 25);
         this.solidAreaDefaultX = hitBox.x;
         this.solidAreaDefaultY = hitBox.y;
         this.getBombImg();
@@ -65,14 +64,14 @@ public class Bomb extends Projectile{
 
         int screenX, screenY;
 
-        screenX = x - pg.player.x + pg.player.cameraX;
-        screenY = y - pg.player.y + pg.player.cameraY;
+        screenX = x - gp.player.x + gp.player.cameraX;
+        screenY = y - gp.player.y + gp.player.cameraY;
 
-        g2.drawImage(img, screenX - (pg.tileSize*4) , screenY - (pg.tileSize*4), pg.tileSize*8, pg.tileSize*8, null);
+        g2.drawImage(img, screenX - (gp.tileSize*4) , screenY - (gp.tileSize*4), gp.tileSize*8, gp.tileSize*8, null);
     }
 
     public void onDeath(){
-        Utils.makeExplosion(this, pg.enemies);
+        Utils.makeExplosion(this, gp.enemies);
     }
 
 }

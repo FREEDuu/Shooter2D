@@ -34,17 +34,17 @@ public class AssetManager {
         pg.boss = new Boss[]{new Boss(pg)};
         pg.enemies = new Entity[][]{ pg.Skeletrons, pg.Dragonites, pg.WhiteMonsters, pg.boss};
 
-    for(int i = 0; i<pg.Lvl*pg.difficolta*choice.nextInt(4,10); i++){
+    for(int i = 0; i<pg.Lvl * pg.difficolta; i++){
             pg.Skeletrons[i] = new Skeletron(pg);
             pg.Skeletrons[i].x = choice.nextInt(3500, 3700);
             pg.Skeletrons[i].y = choice.nextInt(3500, 3700);
         }
-        for(int i = 0; i < pg.Lvl*pg.difficolta*choice.nextInt(4,10);i++){
+        for(int i = 0; i < pg.Lvl * pg.difficolta;i++){
             pg.Dragonites[i] = new Dragonite(pg);
             pg.Dragonites[i].x = choice.nextInt(3500, 3700);
             pg.Dragonites[i].y = choice.nextInt(3500, 3700);
         }
-        for(int i = 0; i < pg.Lvl*pg.difficolta*choice.nextInt(4,10); i++){
+        for(int i = 0; i < pg.Lvl * pg.difficolta; i++){
             pg.WhiteMonsters[i] = new WhiteMonster(pg);
             pg.WhiteMonsters[i].x = choice.nextInt(3500, 3700);
             pg.WhiteMonsters[i].y = choice.nextInt(3500, 3700);
@@ -106,7 +106,8 @@ public class AssetManager {
     }
 
     public void allPaint(Graphics2D g2){
-            g2.setColor(Color.red);
+            if(pg.gameState == pg.playState){
+                g2.setColor(Color.red);
             pg.tileM.draw(g2, pg.mapPath[pg.Lvl-1]);
             pg.player.draw(g2);
             for(int i = 0; i < pg.Skeletrons.length; i++ ){
@@ -148,6 +149,8 @@ public class AssetManager {
             if(pg.boss[0] != null){
                 pg.boss[0].draw(g2);
             }
+            }
+            
             pg.uiManager.draw(g2);
     }
 }

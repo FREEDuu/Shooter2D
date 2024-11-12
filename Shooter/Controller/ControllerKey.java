@@ -79,8 +79,8 @@ public class ControllerKey implements KeyListener {
                 }
                 pg.uiManager.arrowPos = 0;
                 pg.SoundIntroMusic.stop();
-                pg.SoundWhilePlay.LoopMusicEffect(9);
-                pg.SoundM.PlaySoundEffect(7);
+                pg.SoundWhilePlay.play();
+                pg.SoundPowerup.play();
                 pg.setupStartGameLevel();
             }
         }

@@ -86,6 +86,7 @@ public class Potion extends Entity{
         if (name.equals("AttackIncrease")) {
             gp.player.DamageIncrease();
         }
+        gp.SoundPotion.play();
     }
 
     

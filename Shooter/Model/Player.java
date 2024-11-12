@@ -11,7 +11,7 @@ import View.PanelGame;
 
 public class Player extends Entity{
 
-    public int cameraX, cameraY, damage, maxHealth;
+    public int cameraX, cameraY, damage, maxHealth, speedCounter;
     ControllerKey controllerK;
     mouseController mouseC;
     boolean reload, reloadBomb;
@@ -121,6 +121,9 @@ public class Player extends Entity{
         if(this.name.equals("babypunk")){
             gp.bullets.add(new Bullet(gp, MouseInfo.getPointerInfo().getLocation().x+2 , MouseInfo.getPointerInfo().getLocation().y+2, true, 50));
         }
+
+        gp.SoundShootPlayer.play();
+        
     }
     public void shootBomb(){
         gp.BombPlayerList.add(new Bomb(gp, gp.player.x, gp.player.y));
@@ -133,6 +136,7 @@ public class Player extends Entity{
         this.x = 2600;
         this.y = 2600;
         this.speed = 10;
+        speedCounter = 0;
         if(this.name.equals("erbiondo")){
             this.speed = 15;
             this.damage = 50;
@@ -144,6 +148,12 @@ public class Player extends Entity{
     }
 
     public void update(){
+        if(speed > 10 && speedCounter == 0){
+            speed--;
+        }
+        if(speedCounter > 0){
+            speedCounter--;
+        }
         reloadCounter++;
         reloadBombCounter++;
         if(RectReload.width < 350){
@@ -267,10 +277,13 @@ public class Player extends Entity{
             if(gp.Lvl == 3){
                 gp.SoundBoss.stop();
             }
+            else if(gp.Lvl == 2){
+                gp.SoundLvl2.stop();
+            }
             else{
                 gp.SoundWhilePlay.stop();
             }
-            gp.SoundM.PlaySoundEffect(8);
+            gp.SoundLose.play();
             gp.gameState = gp.loseState;
         }
     }
@@ -279,7 +292,8 @@ public class Player extends Entity{
         this.damage += 10;
     }
     public void SpeedIncrease(){
-        this.speed += 2;
+        this.speed += 7;
+        this.speedCounter = 120;
     }
     public void HealthIncrease(){
         maxHealth += 120;
