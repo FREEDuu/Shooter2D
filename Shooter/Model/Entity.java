@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Random;
 import javax.imageio.ImageIO;
-import Controller.Utils;
+import manager.Utils;
 import View.PanelGame;
 import java.awt.Graphics2D;
 

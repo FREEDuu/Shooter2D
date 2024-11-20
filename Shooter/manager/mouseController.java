@@ -1,4 +1,4 @@
-package Controller;
+package manager;
 import java.awt.event.*;
 import View.PanelGame;
 

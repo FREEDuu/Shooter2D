@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
-import Controller.Utils;
+import manager.Utils;
 import View.PanelGame;
 
 public class Bomb extends Projectile{

@@ -4,9 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 
-import Controller.ControllerKey;
-import Controller.Utils;
-import Controller.mouseController;
+import manager.ControllerKey;
+import manager.Utils;
+import manager.mouseController;
 import View.PanelGame;
 
 public class Player extends Entity{

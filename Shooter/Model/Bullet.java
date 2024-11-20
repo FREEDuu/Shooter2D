@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 
-import Controller.Utils;
+import manager.Utils;
 import View.PanelGame;
 
 import java.util.Random;

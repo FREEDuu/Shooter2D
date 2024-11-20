@@ -1,4 +1,4 @@
-package Controller;
+package manager;
 import java.awt.image.*;
 
 public class Tile {

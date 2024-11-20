@@ -9,14 +9,15 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
-import Controller.AssetManager;
-import Controller.CollisionDetector;
-import Controller.ControllerKey;
-import Controller.Sound;
-import Controller.TileManager;
-import Controller.UI;
-import Controller.Utils;
-import Controller.mouseController;
+import manager.AssetManager;
+import manager.CollisionDetector;
+import manager.ControllerKey;
+import manager.ControllerUI;
+import manager.Sound;
+import manager.TileManager;
+import manager.UiManager;
+import manager.Utils;
+import manager.mouseController;
 import Model.Boss;
 import Model.Dragonite;
 import Model.Entity;
@@ -56,7 +57,6 @@ public class PanelGame extends JPanel implements Runnable{
     public int width = gd.getDisplayMode().getWidth();
     public int height = gd.getDisplayMode().getHeight();
     public TileManager tileM = new TileManager(this);
-    public UI uiManager = new UI(this);
 
     public String playerChoice ; 
     int FPS = 60;
@@ -65,17 +65,21 @@ public class PanelGame extends JPanel implements Runnable{
     Thread gameThread;
     public int Lvl = 1;
     public int difficolta;
-    public int startState = 0;
-    public int gameState = startState;
-    public int playState = 1;
-    public int pauseState = 2;
-    public int loseState = 3;
-    public int nextLevelState = 4;
-    public int winGameState = 5;
+    public final int startState1 = 0;
+    public final int startState2 = 1;
+    public final int playState = 2;
+    public final int pauseState = 3;
+    public final int loseState = 4;
+    public final int nextLevelState = 5;
+    public final int winGameState = 6;
+    public int gameState = startState1;
+
     public Player player;
 
     public CollisionDetector cDetector = new CollisionDetector(this);
     ControllerKey controllK = new ControllerKey(this);
+    ControllerUI controllUI = new ControllerUI(this);
+    public UiManager uiManager = new UiManager(this, controllK);
     mouseController mouseC = new mouseController(this);
     AssetManager assetM = new AssetManager(this);
 
@@ -93,12 +97,13 @@ public class PanelGame extends JPanel implements Runnable{
     // Costruttore PanelGame, qui con startGame viene avviato il Mainloop del gioco, viene aggiunto il keyListener ecc.
     public PanelGame(){
         this.playerChoice = "toChoice";
-        this.gameState = startState;
+        this.gameState = startState1;
         this.tileM.loadMap(mapPath[0]);
         this.setPreferredSize(new DimensionUIResource(width, height));
         this.setDoubleBuffered(true);
         this.setBackground(Color.black);
         this.addKeyListener(controllK);
+        this.addKeyListener(controllUI);
         this.addMouseListener(mouseC);
         this.setFocusable(true);
         this.startGame();
@@ -202,12 +207,8 @@ public class PanelGame extends JPanel implements Runnable{
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-        if(gameState == startState || gameState == winGameState){
-            uiManager.draw(g2);
-        }
-        else{
-            assetM.allPaint(g2);
-        }
+        assetM.allPaint(g2);
+        uiManager.draw(g2);
     }
 
     public void nextLevel(){

@@ -1,4 +1,4 @@
-package Controller;
+package manager;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;

@@ -1,4 +1,4 @@
-package Controller;
+package manager;
 import java.io.IOException;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

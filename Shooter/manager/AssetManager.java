@@ -1,4 +1,4 @@
-package Controller;
+package manager;
 import java.util.ArrayList;
 import java.util.Random;
 

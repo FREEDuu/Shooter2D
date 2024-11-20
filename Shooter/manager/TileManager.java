@@ -1,4 +1,4 @@
-package Controller;
+package manager;
 import javax.imageio.ImageIO;
 
 import View.PanelGame;

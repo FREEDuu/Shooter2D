@@ -1,4 +1,4 @@
-package Controller;
+package manager;
 import java.util.List;
 
 import Model.Entity;
