@@ -2,13 +2,13 @@ package manager;
 import java.util.ArrayList;
 import java.util.Random;
 
-import Model.Boss;
-import Model.Dragonite;
-import Model.Entity;
-import Model.Projectile;
-import Model.Skeletron;
-import Model.WhiteMonster;
-import View.PanelGame;
+import model.Boss;
+import model.Dragonite;
+import model.Entity;
+import model.Projectile;
+import model.Skeletron;
+import model.WhiteMonster;
+import view.PanelGame;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

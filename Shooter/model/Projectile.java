@@ -1,4 +1,4 @@
-package Model;
+package model;
 import java.awt.Graphics2D;
 
 public class Projectile extends Entity{

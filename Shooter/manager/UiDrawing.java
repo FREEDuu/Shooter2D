@@ -1,9 +1,10 @@
 package manager;
 import java.awt.Graphics2D;
+
+import view.PanelGame;
+
 import java.awt.Color;
 import java.awt.Font;
-
-import View.PanelGame;
 
 public class UiDrawing {
     UiManager uiManager;

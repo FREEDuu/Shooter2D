@@ -1,8 +1,10 @@
-package Model;
+package model;
 import java.util.Random;
+
+import view.PanelGame;
+
 import java.awt.image.BufferedImage;
 import java.awt.*;
-import View.PanelGame;
 
 public class Skeletron extends Entity{
 

@@ -1,7 +1,7 @@
 package manager;
 import javax.imageio.ImageIO;
 
-import View.PanelGame;
+import view.PanelGame;
 
 import java.awt.Graphics2D;
 import java.io.BufferedReader;

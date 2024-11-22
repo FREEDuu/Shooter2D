@@ -1,11 +1,12 @@
-package Model;
+package model;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Random;
 import javax.imageio.ImageIO;
 import manager.Utils;
-import View.PanelGame;
+import view.PanelGame;
+
 import java.awt.Graphics2D;
 
 public class Entity {

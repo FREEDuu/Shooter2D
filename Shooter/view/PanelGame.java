@@ -1,4 +1,4 @@
-package View;
+package view;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -18,13 +18,13 @@ import manager.TileManager;
 import manager.UiManager;
 import manager.Utils;
 import manager.mouseController;
-import Model.Boss;
-import Model.Dragonite;
-import Model.Entity;
-import Model.Player;
-import Model.Projectile;
-import Model.Skeletron;
-import Model.WhiteMonster;
+import model.Boss;
+import model.Dragonite;
+import model.Entity;
+import model.Player;
+import model.Projectile;
+import model.Skeletron;
+import model.WhiteMonster;
 
 public class PanelGame extends JPanel implements Runnable{
 

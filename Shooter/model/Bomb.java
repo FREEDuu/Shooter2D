@@ -1,11 +1,11 @@
-package Model;
+package model;
 import java.io.File;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import manager.Utils;
-import View.PanelGame;
+import view.PanelGame;
 
 public class Bomb extends Projectile{
 
