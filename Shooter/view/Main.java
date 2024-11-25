@@ -28,7 +28,6 @@ public class Main {
         Point point = new Point(50, 50);
         Cursor cursor = toolKit.createCustomCursor(cursore, point, "Cursor");
         panelgame.setCursor(cursor);
-
         frame.add(panelgame);     
         frame.pack();
         frame.setResizable(true);

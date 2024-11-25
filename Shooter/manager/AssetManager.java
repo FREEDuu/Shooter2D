@@ -106,7 +106,7 @@ public class AssetManager {
     }
 
     public void allPaint(Graphics2D g2){
-            if(pg.gameState == pg.playState){
+            if(pg.gameState == pg.playState || pg.gameState == pg.transitionLoseState){
                 g2.setColor(Color.red);
             pg.tileM.draw(g2, pg.mapPath[pg.Lvl-1]);
             pg.player.draw(g2);

@@ -72,6 +72,9 @@ public class PanelGame extends JPanel implements Runnable{
     public final int loseState = 4;
     public final int nextLevelState = 5;
     public final int winGameState = 6;
+    public final int transitionLoseState = 7;
+    public final int transitionStartGame = 8;
+
     public int gameState = startState1;
 
     public Player player;

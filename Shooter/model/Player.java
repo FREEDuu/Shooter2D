@@ -273,7 +273,7 @@ public class Player extends Entity{
     }
 
     public void onDeath(){
-        if (gp.gameState != gp.loseState) {
+        if (gp.gameState == gp.playState) {
             if(gp.Lvl == 3){
                 gp.SoundBoss.stop();
             }
@@ -284,7 +284,7 @@ public class Player extends Entity{
                 gp.SoundWhilePlay.stop();
             }
             gp.SoundLose.play();
-            gp.gameState = gp.loseState;
+            gp.gameState = gp.transitionLoseState;
         }
     }
 

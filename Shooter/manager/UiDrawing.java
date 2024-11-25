@@ -1,13 +1,13 @@
 package manager;
-import java.awt.Graphics2D;
-
+import java.awt.*;
 import view.PanelGame;
-
-import java.awt.Color;
-import java.awt.Font;
 
 public class UiDrawing {
     UiManager uiManager;
+    int progress = 0; // Counter for color interpolation
+    int maxProgress = 250; // Maximum steps for color transition
+    Color startColor = Color.black; // Starting color
+    Color endColor = Color.white;
     PanelGame pg;
     public UiDrawing(UiManager uiManager, PanelGame pg){
         this.uiManager = uiManager;
@@ -122,7 +122,6 @@ public class UiDrawing {
 
     public void drawWin(Graphics2D g2){
 
-        System.out.print('V');
         g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, pg.width, pg.height);
 
@@ -198,4 +197,40 @@ public class UiDrawing {
         return (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
 
     }
+
+    public void drawTransitionLoseState(Graphics2D g2){
+
+        // Calculate progress fraction
+        float fraction = progress / (float) maxProgress;
+        fraction = Math.min(1.0f, fraction); // Clamp to [0, 1]
+
+        // Interpolate color
+        int r = (int) (startColor.getRed() + fraction * (endColor.getRed() - startColor.getRed()));
+        int g = (int) (startColor.getGreen() + fraction * (endColor.getGreen() - startColor.getGreen()));
+        int b = (int) (startColor.getBlue() + fraction * (endColor.getBlue() - startColor.getBlue()));
+        Color currentColor = new Color(r, g, b);
+        g2.setColor(currentColor);
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        // Set the new color and draw a rectangle
+        g2.fillRect(0,0, pg.width, pg.height);
+
+        // Increment progress for next call
+        if (progress < maxProgress) {
+            progress++;
+        }
+        else{
+            if (pg.gameState == pg.transitionLoseState) {
+                pg.gameState = pg.loseState;
+                progress = 0;
+            }
+            else{
+                pg.gameState = pg.playState;
+                progress = 0;             
+            }
+
+        }
+    
+    
+    }
+    
 }

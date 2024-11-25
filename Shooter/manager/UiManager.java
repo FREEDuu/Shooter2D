@@ -16,6 +16,8 @@ public class UiManager {
     public final int loseState = 4;
     public final int nextLevelState = 5;
     public final int winGameState = 6;
+    public final int transitionLoseState = 7;
+    public final int transitionStartGame = 8;
     PanelGame pg;
     ControllerKey ck;
     Graphics2D g2;
@@ -77,7 +79,6 @@ public class UiManager {
                 uiDrawing.draw_startState2(g2);
                 break;
             case playState:
-                uiDrawing.drawPlayState();
                 break;
             case pauseState:
                 drawPausedScreen();
@@ -88,8 +89,15 @@ public class UiManager {
             case loseState:
                 uiDrawing.drawLose(g2);
                 break;  
+            case transitionLoseState:
+                uiDrawing.drawTransitionLoseState(g2);
+                break;
             case winGameState:
                 uiDrawing.drawWin(g2);
+                break;               
+            case transitionStartGame:
+                uiDrawing.draw_startState2(g2);
+                uiDrawing.drawTransitionLoseState(g2);
                 break;        
             default:
                 System.out.println("FAILED");    
@@ -167,16 +175,16 @@ public class UiManager {
         if(pg.uiManager.arrowPos == 0){
             pg.playerChoice = "babypunk";
             pg.setupStartGame();
-            pg.gameState = pg.playState;
+            pg.gameState = pg.transitionStartGame;
         }
         else if (pg.uiManager.arrowPos == 1) {
             pg.playerChoice = "queen";
             pg.setupStartGame();
-            pg.gameState = pg.playState; 
+            pg.gameState = pg.transitionStartGame; 
         }else{
             pg.playerChoice = "erbiondo";
             pg.setupStartGame();
-            pg.gameState = pg.playState; 
+            pg.gameState = pg.transitionStartGame; 
         }
         pg.SoundIntroMusic.stop();
         pg.uiManager.arrowPos = 0;
@@ -216,6 +224,7 @@ public class UiManager {
     }
     public void endDisplay(){
         if(pg.uiManager.arrowPos == 0){
+
             pg.setupStartGame();
 
         }
