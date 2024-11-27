@@ -32,20 +32,7 @@ public class PanelGame extends JPanel implements Runnable{
     public int maxWorldCol = 100;
     public int maxWorldRow = 100;
     public int tileSize = 16;
-    public Sound SoundShootPlayer = new Sound(2);
-    public Sound SoundIntroMusic = new Sound(10);
-    public Sound SoundWhilePlay = new Sound(9);
-    public Sound SoundBoss = new Sound(11);
-    public Sound SoundLevelup = new Sound(1);
-    public Sound SoundLose = new Sound(8);
-    public Sound SoundPowerup = new Sound(7);
-    public Sound SoundPotion = new Sound(3);
-    public Sound SoundHitMonster = new Sound(4);
-    public Sound SoundMonsterDeath = new Sound(5);    
-    public Sound SoundLvl2 = new Sound(12);
-    public Sound SoundWinGame = new Sound(6);
-    public Sound SoundBomb = new Sound(0);
-    
+    public Sound SoundManager = new Sound();    
     public List<Projectile> bullets = new ArrayList<Projectile>();
     public List<Projectile> WhiteMonsterbullets = new ArrayList<Projectile>();
     public List<Projectile> BombPlayerList = new ArrayList<Projectile>();
@@ -74,6 +61,7 @@ public class PanelGame extends JPanel implements Runnable{
     public final int winGameState = 6;
     public final int transitionLoseState = 7;
     public final int transitionStartGame = 8;
+    public final int transitionNextLevel = 9;
 
     public int gameState = startState1;
 
@@ -82,7 +70,7 @@ public class PanelGame extends JPanel implements Runnable{
     public CollisionDetector cDetector = new CollisionDetector(this);
     ControllerKey controllK = new ControllerKey(this);
     ControllerUI controllUI = new ControllerUI(this);
-    public UiManager uiManager = new UiManager(this, controllK);
+    public UiManager uiManager = new UiManager(this, controllK, SoundManager);
     mouseController mouseC = new mouseController(this);
     AssetManager assetM = new AssetManager(this);
 
@@ -93,9 +81,6 @@ public class PanelGame extends JPanel implements Runnable{
     public Boss[] boss;
     
     public String[] mapPath = {"map0.txt", "map1.txt", "map2.txt"};
-    int varx = 100;
-    int vary = 100;
-    int speed = 10;
 
     // Costruttore PanelGame, qui con startGame viene avviato il Mainloop del gioco, viene aggiunto il keyListener ecc.
     public PanelGame(){
@@ -116,7 +101,7 @@ public class PanelGame extends JPanel implements Runnable{
 
         this.gameThread = new Thread(this);
         this.gameThread.start();
-        SoundIntroMusic.play();
+        SoundManager.play(10);
     }
     
     //funzione builtin di swing chiamata in gamethread.start
@@ -149,8 +134,8 @@ public class PanelGame extends JPanel implements Runnable{
         }
     }
     public void setupStartGame(){
-        SoundIntroMusic.stop();
-        SoundWhilePlay.loop();
+        SoundManager.stop(10);
+        SoundManager.loop(9);
         Lvl =1;
         bombdmg = 90;
         player = new Player(this, controllK, mouseC);
@@ -160,22 +145,22 @@ public class PanelGame extends JPanel implements Runnable{
     }
     public void setupStartGameLevel(){
         if(Lvl == 1){
-            SoundWhilePlay.loop();
+            SoundManager.loop(9);
         }
         else if(Lvl == 2){
-            SoundLvl2.loop();
-            SoundWhilePlay.stop();
+            SoundManager.loop(12);
+            SoundManager.stop(9);
         }
         else{
-            SoundWhilePlay.stop();
-            SoundLvl2.stop();
-            SoundBoss.loop();
+            SoundManager.stop(9);
+            SoundManager.stop(12);
+            SoundManager.loop(11);
         }
        player.x = 1600;
        player.y = 1600;
        player.HP.width =player.maxHealth;
         assetM.replaceAll();
-        gameState =playState;
+        gameState = playState;
 
         //SoundM.play(0); da migliorare è bruttissimo xD
     }
@@ -216,19 +201,27 @@ public class PanelGame extends JPanel implements Runnable{
 
     public void nextLevel(){
         if(this.Lvl == 3){
-            this.SoundBoss.stop();
-            this.SoundWinGame.play();
-            this.gameState = winGameState;
+            this.SoundManager.stop(11);
 
         }else if(this.Lvl == 2){
-            SoundLevelup.play();
+            this.SoundManager.stop(12);
+        }
+        else{
+            SoundManager.stop(9);
+        }
+        gameState = transitionNextLevel;
+        SoundManager.play(1);
+    }
+    public void nextLevelAfterTransition(){
+        if(this.Lvl == 3){
+            this.gameState = winGameState;
+            this.SoundManager.play(6);
+
+        }else if(this.Lvl == 2){
             this.Lvl ++;
-            this.SoundLvl2.stop();
             this.gameState = nextLevelState;
         }
         else{
-            SoundWhilePlay.stop();
-            SoundLevelup.play();
             this.Lvl ++;
             this.gameState = nextLevelState;
         }

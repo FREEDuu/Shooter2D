@@ -1,8 +1,8 @@
 package view;
-import javax.swing.JFrame;
 import java.awt.*;
 import java.io.File;
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
 
 public class Main {
     public static void main(String[] args){
@@ -23,7 +23,7 @@ public class Main {
             cursore = ImageIO.read(new File("Resources/Weapons/crosshair.png")).getSubimage(38, 10, 18,18).getScaledInstance(100, 100, 0);
         }
         catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e);
         }
         Point point = new Point(50, 50);
         Cursor cursor = toolKit.createCustomCursor(cursore, point, "Cursor");

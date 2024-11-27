@@ -1,4 +1,5 @@
 package model;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -6,8 +7,6 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import manager.Utils;
 import view.PanelGame;
-
-import java.awt.Graphics2D;
 
 public class Entity {
 
@@ -27,7 +26,7 @@ public class Entity {
     public PanelGame gp;
 
     public void onHit(){
-        gp.SoundHitMonster.play();
+        gp.SoundManager.play(4);
     }
 
     public void drawE(Graphics2D g2){
@@ -135,7 +134,7 @@ public class Entity {
             }
         }
 
-        gp.SoundMonsterDeath.play();
+        gp.SoundManager.play(5);
     }
 
     public void checkCollisionEntity(){
@@ -155,13 +154,7 @@ public class Entity {
     public void draw(Graphics2D g2){
         
     }
-    public void getSoundHit(){
-        gp.SoundHitMonster.play();
-    }
-    public void playDeath(){
-        gp.SoundMonsterDeath.play();
 
-    }
     public void updateE(){
         int pgx = Math.abs(gp.player.x - this.x);
         int pgy = Math.abs(gp.player.y - this.y);

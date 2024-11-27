@@ -1,32 +1,84 @@
 package manager;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import view.PanelGame;
 
 public class UiDrawing {
     UiManager uiManager;
     int progress = 0; // Counter for color interpolation
-    int maxProgress = 250; // Maximum steps for color transition
-    Color startColor = Color.black; // Starting color
-    Color endColor = Color.white;
+    int maxProgress = 150; // Maximum steps for color transition
+    Color startColor = Color.white; // Starting color
+    Color endColor = Color.black;
     PanelGame pg;
+    private Font pixelFont;
+
+    
     public UiDrawing(UiManager uiManager, PanelGame pg){
         this.uiManager = uiManager;
         this.pg = pg;
+        loadFont();
     }
 
     public void drawPlayState(){
     }
 
-    public void draw_startState2(Graphics2D g2){
+    public void loadFont() {
+        try {
+            // Load the pixelated font from a .ttf file
+            File fontFile = new File("Resources/Font/pixel.ttf");
+            pixelFont = Font.createFont(Font.TRUETYPE_FONT, fontFile).deriveFont(Font.BOLD, 96F); // Set size to 24
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+            pixelFont = new Font("Monospaced", Font.PLAIN, 24); // Fallback to default monospaced font
+        }
+    }
+
+    public void drawPlayStateUI(Graphics2D g2, PanelGame pg){
         
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+    }
+
+    public void drawPausedScreen(Graphics2D g2){
+        g2.setFont(pixelFont);
+        String test = "GIOCO IN PAUSA";
+        g2.setColor(Color.white);
+        g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 - pg.tileSize*12);
+        test = "(ESC per riprendere)";
+        g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 - pg.tileSize*18);
+    
+        test = "Ricomincia";
+        g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2);
+        if (uiManager.arrowPos == 0) {
+            g2.drawString(">", pg.width/2 - getXofText(g2, test) , pg.height/2);
+            g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2);
+    
+        }
+        test = "Volume "+ uiManager.volumeOn;
+        g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*8);
+        if (uiManager.arrowPos == 1) {
+            g2.drawString(">", pg.width/2 - getXofText(g2, test) ,  pg.height/2 + pg.tileSize*8);
+            g2.drawString("<", pg.width/2 + getXofText(g2, test) ,  pg.height/2 + pg.tileSize*8);
+    
+        }
+        test = "Esci dal Gioco";
+        g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*16);
+        if (uiManager.arrowPos == 2) {
+            g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*16);
+            g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*16);
+        }
+    
+    }
+
+    public void draw_startState2(Graphics2D g2, boolean transition){
+        
+        g2.setFont(pixelFont);
         String test = "Scegli Personaggio";
         g2.setColor(Color.white);
         g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 - pg.tileSize*12);
     
         test = "Baby Punk";
         g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2);
-        if (uiManager.arrowPos == 0) {
+        if (uiManager.arrowPos == 0  && !transition) {
             g2.drawString(">", pg.width/2 - getXofText(g2, test) , pg.height/2);
             g2.drawImage(uiManager.imgPG1, pg.width/2 - pg.tileSize*8 , pg.height/32, pg.tileSize*16, pg.tileSize*16, null );
             g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2);
@@ -35,7 +87,7 @@ public class UiDrawing {
 
         test = "Queen";
         g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*10);
-        if (uiManager.arrowPos == 1) {
+        if (uiManager.arrowPos == 1 && !transition) {
             g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*10);
             g2.drawImage(uiManager.imgPG2, pg.width/2 - pg.tileSize*8 , pg.height/32, pg.tileSize*16, pg.tileSize*16, null );
             g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*10);
@@ -43,7 +95,7 @@ public class UiDrawing {
 
         test = "Er Biondo";
         g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 + pg.tileSize*20);
-        if (uiManager.arrowPos == 2) {
+        if (uiManager.arrowPos == 2 && !transition) {
             g2.drawString(">", pg.width/2 - getXofText(g2, test), pg.height/2 + pg.tileSize*20);
             g2.drawImage(uiManager.imgPG3, pg.width/2 - pg.tileSize*8, pg.height/32, pg.tileSize*16, pg.tileSize*16, null );
             g2.drawString("<", pg.width/2 + getXofText(g2, test) , pg.height/2 + pg.tileSize*20);
@@ -54,16 +106,11 @@ public class UiDrawing {
     public void draw_startState1(Graphics2D g2){
 
         String test = "SHOOTER 2D";
-
-        g2.drawImage(uiManager.imageBoss, pg.width/32 - getXofText(g2, test)/4 , pg.height/16, pg.tileSize*48, pg.tileSize*48, null );
-        g2.drawImage(uiManager.imageDrg, pg.width - getXofText(g2, test)*2 , pg.height/2 - pg.tileSize*20, pg.tileSize*16, pg.tileSize*16, null );
-        g2.drawImage(uiManager.imageSklt, pg.width - getXofText(g2, test)*2 , pg.height/2 - pg.tileSize*7 , pg.tileSize*16, pg.tileSize*16, null );
-        g2.drawImage(uiManager.imageWhiteMns, pg.width - getXofText(g2, test)*2 , pg.height/2 + pg.tileSize*6, pg.tileSize*16, pg.tileSize*16, null );
-
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+        g2.setFont(pixelFont);
         g2.setColor(Color.white);
         g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 - pg.tileSize*12);
-    
+        g2.drawImage(uiManager.imageBoss, pg.width/2 - getXofText(g2, test)/2 , pg.height/2  - pg.tileSize*32, pg.tileSize*16, pg.tileSize*16, null );
+
         test = "Avvia Parita";
         g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2);
         if (uiManager.arrowPos == 0) {
@@ -95,7 +142,7 @@ public class UiDrawing {
         g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, pg.width, pg.height);
 
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+        g2.setFont(pixelFont);
         String test = "Livello Raggiunto : "+ Integer.toString(pg.Lvl);
         g2.setColor(Color.white);
         g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 - pg.tileSize*12);
@@ -125,7 +172,7 @@ public class UiDrawing {
         g2.setColor(Color.BLACK);
         g2.fillRect(0, 0, pg.width, pg.height);
 
-        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+        g2.setFont(pixelFont);
         String test = "Hai Vinto il Gioco !!";
         g2.setColor(Color.white);
         g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 - pg.tileSize*12);
@@ -154,7 +201,7 @@ public class UiDrawing {
         
             g2.setColor(Color.BLACK);
             g2.fillRect(0, 0, pg.width, pg.height);
-            g2.setFont(g2.getFont().deriveFont(Font.BOLD, 96F));
+            g2.setFont(pixelFont);
             g2.setColor(Color.white);
             String test = "Livello : "+ Integer.toString(pg.Lvl-1) + " Superato";
             g2.drawString(test, pg.width/2 - getXofText(g2, test)/2 , pg.height/2 - pg.tileSize*20);
@@ -223,11 +270,14 @@ public class UiDrawing {
                 pg.gameState = pg.loseState;
                 progress = 0;
             }
-            else{
+            else if(pg.gameState == pg.transitionNextLevel){
+                progress = 0;
+                pg.nextLevelAfterTransition();
+            }
+            else {
                 pg.gameState = pg.playState;
                 progress = 0;             
             }
-
         }
     
     

@@ -1,9 +1,8 @@
 package model;
+import java.awt.*;
 import java.io.File;
 import java.util.Random;
-import java.awt.*;
 import javax.imageio.ImageIO;
-
 import view.PanelGame;
 
 public class Potion extends Entity{
@@ -86,7 +85,7 @@ public class Potion extends Entity{
         if (name.equals("AttackIncrease")) {
             gp.player.DamageIncrease();
         }
-        gp.SoundPotion.play();
+        gp.SoundManager.play(3);
     }
 
     

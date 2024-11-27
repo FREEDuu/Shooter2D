@@ -2,7 +2,6 @@ package manager;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
-
 import model.Entity;
 import model.Player;
 import model.Projectile;
@@ -54,7 +53,7 @@ public class Utils {
         for (int i = 0; i < enemy.length; i++) {
             CollisionDetector.checkEnemy(bomb, enemy[i], false);
             bomb.collision = true;
-            bomb.gp.SoundBomb.play();
+            bomb.gp.SoundManager.play(0);
         }
         
 

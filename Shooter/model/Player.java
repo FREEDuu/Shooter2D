@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
-
 import manager.ControllerKey;
 import manager.Utils;
 import manager.mouseController;
@@ -122,7 +121,7 @@ public class Player extends Entity{
             gp.bullets.add(new Bullet(gp, MouseInfo.getPointerInfo().getLocation().x+2 , MouseInfo.getPointerInfo().getLocation().y+2, true, 50));
         }
 
-        gp.SoundShootPlayer.play();
+        gp.SoundManager.play(2);
         
     }
     public void shootBomb(){
@@ -275,15 +274,15 @@ public class Player extends Entity{
     public void onDeath(){
         if (gp.gameState == gp.playState) {
             if(gp.Lvl == 3){
-                gp.SoundBoss.stop();
+                gp.SoundManager.stop(11);
             }
             else if(gp.Lvl == 2){
-                gp.SoundLvl2.stop();
+                gp.SoundManager.stop(12);
             }
             else{
-                gp.SoundWhilePlay.stop();
+                gp.SoundManager.stop(9);
             }
-            gp.SoundLose.play();
+            gp.SoundManager.play(8);
             gp.gameState = gp.transitionLoseState;
         }
     }
