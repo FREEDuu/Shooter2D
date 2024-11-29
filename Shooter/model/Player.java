@@ -201,7 +201,7 @@ public class Player extends Entity{
             idle = false;
             collision = false;
             gp.cDetector.checkTile(this);
-            Utils.checkCollisionPlayerEnemy(this, gp.enemies, true);
+            Utils.checkCollisionPlayerEnemy(this, gp.enemies);
             if(collision == false){
 
                 switch(direction){

@@ -51,7 +51,7 @@ public class Utils {
 
     public static void makeExplosion(Entity bomb, Entity[][] enemy) {
         for (int i = 0; i < enemy.length; i++) {
-            CollisionDetector.checkEnemy(bomb, enemy[i], false);
+            CollisionDetector.checkEnemy(bomb, enemy[i]);
             bomb.collision = true;
             bomb.gp.SoundManager.play(0);
         }
@@ -59,9 +59,9 @@ public class Utils {
 
     }
 
-    public static void checkCollisionPlayerEnemy(Player player, Entity[][] enemy, boolean CallPlayer) {
+    public static void checkCollisionPlayerEnemy(Player player, Entity[][] enemy) {
         for (int i = 0; i < enemy.length; i++) {
-            CollisionDetector.checkEnemy(player, enemy[i], CallPlayer);
+            CollisionDetector.checkEnemy(player, enemy[i]);
         }
 
     }

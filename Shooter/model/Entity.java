@@ -138,7 +138,7 @@ public class Entity {
     }
 
     public void checkCollisionEntity(){
-        Utils.checkCollisionPlayerEnemy(gp.player, gp.enemies, false);
+        Utils.checkCollisionPlayerEnemy(gp.player, gp.enemies);
         gp.cDetector.checkTile(this);
         if(collision == false){
         switch(direction){

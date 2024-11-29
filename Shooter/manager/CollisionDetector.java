@@ -1,6 +1,5 @@
 package manager;
 import java.util.List;
-
 import model.Entity;
 import model.Projectile;
 import view.PanelGame;
@@ -75,7 +74,7 @@ public class CollisionDetector {
         Entity element;
         for (int i = 0; i < target.size(); i++) {
             element = target.get(i);
-            if (element != null && entity != null) {
+            if (element != null && entity != null && element != entity) {
                 // imposta le posizioni delle aree dei rettangoli "come sono nello spazio" (e
                 // poi reset)
                 
@@ -86,10 +85,8 @@ public class CollisionDetector {
                 element.hitBox.y = element.hitBox.y + element.y;
 
                 if (entity.hitBox.intersects(element.hitBox)) {
-                    if (element != entity) {
-                        return i;
+                    return i;
                     }
-                }
                 // restore dafaults
                 entity.hitBox.x = entity.solidAreaDefaultX;
                 entity.hitBox.y = entity.solidAreaDefaultY;
@@ -101,7 +98,7 @@ public class CollisionDetector {
         return index;
     }
 
-    public static void checkEnemy(Entity entity, Entity[] target, boolean CallPlayer) {
+    public static void checkEnemy(Entity entity, Entity[] target) {
 
         Entity element;
         for (int i = 0; i < target.length; i++) {
@@ -116,54 +113,10 @@ public class CollisionDetector {
                 element.hitBox.x = element.hitBox.x + element.x;
                 element.hitBox.y = element.hitBox.y + element.y;
 
-                if (entity.speed != 0) {
-                    switch (entity.direction) {
-                        case "up":
-                            entity.hitBox.y -= entity.speed;
-                            break;
-                        case "down":
-                            entity.hitBox.y += entity.speed;
-                            break;
-                        case "left":
-                            entity.hitBox.x -= entity.speed;
-                            break;
-                        case "right":
-                            entity.hitBox.x += entity.speed;
-                            break;
-                    }
-                }
+                estimateCollision(entity);
+
                 if(entity.hitBox.intersects(element.hitBox)) {
-                    if (element != entity && entity.speed != 0 && element.speed != 0) {
-                        entity.collision = true;
-                        if (entity.HP.width - element.damage > 0) {
-                            entity.HP.width -= element.damage;
-                            switch (entity.direction) {
-                                case "up":
-                                    element.y -= entity.speed;
-                                    break;
-                                case "down":
-                                    element.y += entity.speed;
-                                    break;
-                                case "left":
-                                    element.x -= entity.speed;
-                                    break;
-                                case "right":
-                                    element.x += entity.speed;
-                                    break;
-                            }
-                        } else {
-                            entity.onDeath();
-                        }
-                         
-                    }
-                    else{
-                        if (element.HP.width - entity.damage > 0) {
-                            element.HP.width -= entity.damage;
-                            element.onHit();
-                        } else {
-                            element.onDeath();
-                        }
-                    }
+                    handleCollision(element, entity);
                 }
             
                 // restore dafaults
@@ -193,22 +146,7 @@ public class CollisionDetector {
                 element.hitBox.x = element.hitBox.x + element.x;
                 element.hitBox.y = element.hitBox.y + element.y;
 
-                if (entity.speed != 0) {
-                    switch (entity.direction) {
-                        case "up":
-                            entity.hitBox.y -= entity.speed;
-                            break;
-                        case "down":
-                            entity.hitBox.y += entity.speed;
-                            break;
-                        case "left":
-                            entity.hitBox.x -= entity.speed;
-                            break;
-                        case "right":
-                            entity.hitBox.x += entity.speed;
-                            break;
-                    }
-                }
+                estimateCollision(entity);
                 if (entity.hitBox.intersects(element.hitBox)) {
                     if (element != entity) {
                         element.onDeath();
@@ -224,6 +162,63 @@ public class CollisionDetector {
             }
         }
 
+    }
+
+    public static void estimateCollision(Entity entity){
+        if (entity.speed != 0) {
+            switch (entity.direction) {
+                case "up":
+                    entity.hitBox.y -= entity.speed;
+                    break;
+                case "down":
+                    entity.hitBox.y += entity.speed;
+                    break;
+                case "left":
+                    entity.hitBox.x -= entity.speed;
+                    break;
+                case "right":
+                    entity.hitBox.x += entity.speed;
+                    break;
+            }
+        }
+    }
+
+    public static void handleCollision(Entity element, Entity entity){
+        if (element != entity && entity.speed != 0 && element.speed != 0) {
+            entity.collision = true;
+            if (entity.HP.width - element.damage > 0) {
+                entity.HP.width -= element.damage;
+                makeKnockback(entity, element);
+            } else {
+                entity.onDeath();
+            }
+             
+        }
+        else{
+            if (element.HP.width - entity.damage > 0) {
+                element.HP.width -= entity.damage;
+                element.onHit();
+            } else {
+                element.onDeath();
+            }
+        }
+    }
+
+    public static void makeKnockback(Entity entity, Entity element){
+        switch (entity.direction) {
+            case "up":
+                element.y -= entity.speed;
+                break;
+            case "down":
+                element.y += entity.speed;
+                break;
+            case "left":
+                element.x -= entity.speed;
+                break;
+            case "right":
+                element.x += entity.speed;
+                break;
+        }
     }
 
 }

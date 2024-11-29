@@ -1,14 +1,12 @@
 package manager;
-import javax.imageio.ImageIO;
-
-import view.PanelGame;
-
 import java.awt.Graphics2D;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import javax.imageio.ImageIO;
+import view.PanelGame;
 
 public class TileManager {
     // classe per la gestione della mappa (insieme di tile)
@@ -16,6 +14,7 @@ public class TileManager {
     PanelGame gp;
     Tile[] tiles = new Tile[32];
     int numTiles = 7;
+    int tileLimit = 8;
     int[][] mapTileArrayIndex = new int[100][100];
 
     public TileManager(PanelGame gp) {
@@ -61,6 +60,39 @@ public class TileManager {
         }
     }
 
+    public boolean limitLeft(int worldX){
+        if(worldX > gp.player.x - gp.player.cameraX - (tileLimit * gp.tileSize)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean limitright(int worldX){
+        if(worldX < gp.player.x + gp.player.cameraX + (tileLimit * gp.tileSize)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean limitUp(int worldY){
+        if(worldY > gp.player.y - gp.player.cameraY - (tileLimit * gp.tileSize)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public boolean limitDown(int worldY){
+        if(worldY < gp.player.y + gp.player.cameraY + (tileLimit * gp.tileSize)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     public void draw(Graphics2D g2, String map) {
         loadMap(map);
 
@@ -74,11 +106,8 @@ public class TileManager {
 
                 screenX = worldX - gp.player.x + gp.player.cameraX;
                 screenY = worldY - gp.player.y + gp.player.cameraY;
-                if (worldX > gp.player.x - gp.player.cameraX - (8 * gp.tileSize) &&
-                        worldX < gp.player.x + gp.player.cameraX + (8 * gp.tileSize) &&
-                        worldY > gp.player.y - gp.player.cameraY - (8 * gp.tileSize) &&
-
-                        worldY < gp.player.y + gp.player.cameraY + (8 * gp.tileSize)) {
+                if ( limitLeft(worldX) && limitright(worldX) &&
+                    limitUp(worldY) && limitDown(worldY)) {
                         
                     g2.drawImage(tiles[mapTileArrayIndex[i][j]].image, screenX, screenY, gp.tileSize * 4,
                             gp.tileSize * 4, null);
