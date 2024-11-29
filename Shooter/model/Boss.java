@@ -1,10 +1,9 @@
 package model;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Random;
-import java.awt.image.BufferedImage;
-import java.awt.*;
 import javax.imageio.ImageIO;
-
 import view.PanelGame;
 
 public class Boss extends Entity{
@@ -15,7 +14,7 @@ public class Boss extends Entity{
     int rand, lifeW, pgx, pgy;
     Rectangle hitboxAttack, normalHitbox;
     boolean onRange = false;
-    int distanceToPlayer, distanceToAttack;
+    int distanceToAttack;
 
     public Boss(PanelGame gp){
 
@@ -23,7 +22,7 @@ public class Boss extends Entity{
         this.direction = "down";
         this.onLife = true;
         this.damage = 10;
-        this.distanceToAttack = 200;
+        this.distanceToAttack = 120;
         this.collision = false;
         this.speed = 6;
         this.normalHitbox = new Rectangle(-(gp.tileSize ), -(3* gp.tileSize)/2, gp.tileSize * 2, gp.tileSize * 3);
@@ -86,12 +85,11 @@ public class Boss extends Entity{
             x < gp.player.x + gp.player.cameraX + (8 * gp.tileSize) &&
             y > gp.player.y - gp.player.cameraY - ( 8 * gp.tileSize) &&
             y < gp.player.y + gp.player.cameraY + ( 8 * gp.tileSize) ){
-
+                checkDistance();
                 switch (direction) {
                     case "up":
-                        if (distanceToPlayer < distanceToAttack) {
+                        if (onRange) {
                             image = up_a[imageNumber];
-                            onRange = true;
                         }
                         else{
                             image = up[imageNumber];
@@ -99,9 +97,8 @@ public class Boss extends Entity{
                         break;
                     case "down":                        
                    
-                        if (distanceToPlayer < distanceToAttack) {
+                        if (onRange) {
                             image = down_a[imageNumber];
-                            onRange = true;
                         }
                         else{
                             image = down[imageNumber];
@@ -109,9 +106,8 @@ public class Boss extends Entity{
                         break;
                     case "right":
 
-                        if (distanceToPlayer < distanceToAttack) {
+                        if (onRange) {
                             image = right_a[imageNumber];
-                            onRange = true;
                         }
                         else{
                             image = right[imageNumber];
@@ -119,9 +115,8 @@ public class Boss extends Entity{
                         break;
                     case "left":
 
-                        if (distanceToPlayer < distanceToAttack) {
+                        if (onRange) {
                             image = left_a[imageNumber];
-                            onRange = true;
                         }
                         else{
                             image = left[imageNumber];
@@ -129,10 +124,10 @@ public class Boss extends Entity{
                         break;
                 }
 
-                
-                if (onRange && (direction == "left" || direction == "right")) {
+                System.out.println(onRange);                
+                if (onRange && (direction.equals("left") || direction.equals("right"))) {
                     g2.drawImage(image, screenX -(gp.tileSize*8), screenY -(gp.tileSize*4), gp.tileSize*16, gp.tileSize*8, null );
-                }else if(onRange && (direction == "up" || direction == "down")){
+                }else if(onRange && (direction.equals("up")|| direction.equals("down"))){
                     g2.drawImage(image, screenX -(gp.tileSize*4), screenY -(gp.tileSize*8), gp.tileSize*8, gp.tileSize*16, null );
                 }
                 else{
@@ -144,14 +139,6 @@ public class Boss extends Entity{
                 onRange = false;
             }
 
-    }
-
-    public boolean onRange(){
-        switch(direction){
-            case "right":
-            break;
-        }
-        return false;
     }
 
     public void update(){
@@ -184,5 +171,14 @@ public class Boss extends Entity{
     public void onDeath(){
         this.onLife = false;
     }
-    
+    public void checkDistance(){
+        int dx = Math.abs(this.x - this.gp.player.x);
+        int dy = Math.abs(this.y - this.gp.player.y);
+        if(dx < distanceToAttack || dy < distanceToAttack){
+            onRange = true;
+        }
+        else{
+            onRange = false;
+        }
+    }
 }
