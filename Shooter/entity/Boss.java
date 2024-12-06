@@ -1,10 +1,11 @@
-package model;
+package entity;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Random;
 import javax.imageio.ImageIO;
-import view.PanelGame;
+
+import frame.PanelGame;
 
 public class Boss extends Entity{
 
@@ -78,7 +79,7 @@ public class Boss extends Entity{
     public void draw(Graphics2D g2){
         image = down[0];
         int screenX, screenY;
-
+        
         screenX = x - gp.player.x + gp.player.cameraX;
         screenY = y - gp.player.y + gp.player.cameraY;
         if(x > gp.player.x - gp.player.cameraX - (8 * gp.tileSize ) &&
@@ -123,8 +124,7 @@ public class Boss extends Entity{
                         }                    
                         break;
                 }
-
-                System.out.println(onRange);                
+                
                 if (onRange && (direction.equals("left") || direction.equals("right"))) {
                     g2.drawImage(image, screenX -(gp.tileSize*8), screenY -(gp.tileSize*4), gp.tileSize*16, gp.tileSize*8, null );
                 }else if(onRange && (direction.equals("up")|| direction.equals("down"))){

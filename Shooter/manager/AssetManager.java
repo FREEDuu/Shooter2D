@@ -3,13 +3,14 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
-import model.Boss;
-import model.Dragonite;
-import model.Entity;
-import model.Projectile;
-import model.Skeletron;
-import model.WhiteMonster;
-import view.PanelGame;
+
+import entity.Boss;
+import entity.Dragonite;
+import entity.Entity;
+import entity.Projectile;
+import entity.Skeletron;
+import entity.WhiteMonster;
+import frame.PanelGame;
 
 public class AssetManager {
     PanelGame pg;

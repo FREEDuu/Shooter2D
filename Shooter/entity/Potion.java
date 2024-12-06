@@ -1,9 +1,10 @@
-package model;
+package entity;
 import java.awt.*;
 import java.io.File;
 import java.util.Random;
 import javax.imageio.ImageIO;
-import view.PanelGame;
+
+import frame.PanelGame;
 
 public class Potion extends Entity{
 

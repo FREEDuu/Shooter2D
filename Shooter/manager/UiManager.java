@@ -4,7 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
-import view.PanelGame;
+
+import frame.PanelGame;
 
 public class UiManager {
     public final int startState1 = 0;

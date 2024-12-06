@@ -1,7 +1,7 @@
-package model;
+package entity;
 import java.util.Random;
 
-import view.PanelGame;
+import frame.PanelGame;
 
 import java.awt.image.BufferedImage;
 import java.awt.*;

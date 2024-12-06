@@ -1,4 +1,4 @@
-package view;
+package frame;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,6 +9,13 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
+import entity.Boss;
+import entity.Dragonite;
+import entity.Entity;
+import entity.Player;
+import entity.Projectile;
+import entity.Skeletron;
+import entity.WhiteMonster;
 import manager.AssetManager;
 import manager.CollisionDetector;
 import manager.ControllerKey;
@@ -18,13 +25,6 @@ import manager.TileManager;
 import manager.UiManager;
 import manager.Utils;
 import manager.mouseController;
-import model.Boss;
-import model.Dragonite;
-import model.Entity;
-import model.Player;
-import model.Projectile;
-import model.Skeletron;
-import model.WhiteMonster;
 
 public class PanelGame extends JPanel implements Runnable{
 

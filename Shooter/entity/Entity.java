@@ -1,12 +1,13 @@
-package model;
+package entity;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Random;
 import javax.imageio.ImageIO;
+
+import frame.PanelGame;
 import manager.Utils;
-import view.PanelGame;
 
 public class Entity {
 
@@ -32,49 +33,51 @@ public class Entity {
     public void drawE(Graphics2D g2){
         BufferedImage image = down[0];
         int screenX, screenY;
-
+        
+        // cambio coordinate da logiche a grafiche 
         screenX = x - gp.player.x + gp.player.cameraX;
         screenY = y - gp.player.y + gp.player.cameraY;
+
         if(x > gp.player.x - gp.player.cameraX - (8 * gp.tileSize ) &&
             x < gp.player.x + gp.player.cameraX + (8 * gp.tileSize) &&
             y > gp.player.y - gp.player.cameraY - ( 8 * gp.tileSize) &&
             y < gp.player.y + gp.player.cameraY + ( 8 * gp.tileSize) ){
-
-                switch (direction) {
-                    case "up":
-                        if(idle){
-                            image = up[0];
-                        }
-                        else{
-                            image = up[imageNumber];
-                        }
-                        break;
-                    case "down":
-                        if(idle){
-                            image = down[0];
-                        }
-                        else{
-                            image = down[imageNumber];
-                        }
-                        break;
-                    case "right":
-                        if(idle){
-                            image = left[0];
-                        }
-                        else{
-                            image = left[imageNumber];
-                        }
-                        break;
-                    case "left":
-                        image = right[imageNumber];
-                        if(idle){
-                            image = right[0];
-                        }
-                        else{
+                
+                    switch (direction) {
+                        case "up":
+                            if(idle){
+                                image = up[0];
+                            }
+                            else{
+                                image = up[imageNumber];
+                            }
+                            break;
+                        case "down":
+                            if(idle){
+                                image = down[0];
+                            }
+                            else{
+                                image = down[imageNumber];
+                            }
+                            break;
+                        case "right":
+                            if(idle){
+                                image = left[0];
+                            }
+                            else{
+                                image = left[imageNumber];
+                            }
+                            break;
+                        case "left":
                             image = right[imageNumber];
-                        }
-                        break;
-                }
+                            if(idle){
+                                image = right[0];
+                            }
+                            else{
+                                image = right[imageNumber];
+                            }
+                            break;
+                    }
 
                 g2.drawImage(image, screenX - (gp.tileSize*4), screenY - (gp.tileSize*4), gp.tileSize*8, gp.tileSize*8, null );
                 g2.fillRect(screenX  - (gp.tileSize * 4), screenY - (gp.tileSize * 4), HP.width, HP.height);

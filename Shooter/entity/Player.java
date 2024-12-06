@@ -1,12 +1,13 @@
-package model;
+package entity;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
+
+import frame.PanelGame;
 import manager.ControllerKey;
 import manager.Utils;
 import manager.mouseController;
-import view.PanelGame;
 
 public class Player extends Entity{
 

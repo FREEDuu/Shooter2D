@@ -3,7 +3,7 @@ import java.awt.event.KeyListener;
 import java.util.HashSet;
 import java.util.Set;
 
-import view.PanelGame;
+import frame.PanelGame;
 
 import java.awt.event.KeyEvent;
 

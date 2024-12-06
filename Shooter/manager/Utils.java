@@ -2,9 +2,10 @@ package manager;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
-import model.Entity;
-import model.Player;
-import model.Projectile;
+
+import entity.Entity;
+import entity.Player;
+import entity.Projectile;
 
 public class Utils {
 

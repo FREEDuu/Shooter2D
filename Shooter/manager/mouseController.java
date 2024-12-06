@@ -1,7 +1,7 @@
 package manager;
 import java.awt.event.*;
 
-import view.PanelGame;
+import frame.PanelGame;
 
 public class mouseController extends MouseAdapter{
 

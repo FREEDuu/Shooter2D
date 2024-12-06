@@ -2,7 +2,7 @@ package manager;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import view.PanelGame;
+import frame.PanelGame;
 public class ControllerKey implements KeyListener {
 
     // variabili che servono per capire che tasto wasd si sta premendo, vengono cambiate a t/f quando viene premuto/rilasciato wasd

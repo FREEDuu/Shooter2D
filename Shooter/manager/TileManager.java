@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import javax.imageio.ImageIO;
-import view.PanelGame;
+
+import frame.PanelGame;
 
 public class TileManager {
     // classe per la gestione della mappa (insieme di tile)

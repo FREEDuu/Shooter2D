@@ -2,7 +2,8 @@ package manager;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import view.PanelGame;
+
+import frame.PanelGame;
 
 public class UiDrawing {
     UiManager uiManager;
