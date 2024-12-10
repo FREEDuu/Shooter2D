@@ -1,8 +1,8 @@
 package manager;
 import java.util.List;
 
-import entity.Entity;
-import entity.Projectile;
+import entities.Entity;
+import entities.Projectile;
 import frame.PanelGame;
 
 public class CollisionDetector {

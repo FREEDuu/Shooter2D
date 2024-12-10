@@ -3,12 +3,12 @@ import java.awt.event.*;
 
 import frame.PanelGame;
 
-public class mouseController extends MouseAdapter{
+public class MouseController extends MouseAdapter{
 
     PanelGame pg;
     public boolean shoot;
 
-    public mouseController(PanelGame pg){
+    public MouseController(PanelGame pg){
         this.pg = pg;
     }
 

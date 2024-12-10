@@ -3,9 +3,9 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
-import entity.Entity;
-import entity.Player;
-import entity.Projectile;
+import entities.Entity;
+import entities.Player;
+import entities.Projectile;
 
 public class Utils {
 

@@ -9,13 +9,13 @@ import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.plaf.DimensionUIResource;
 
-import entity.Boss;
-import entity.Dragonite;
-import entity.Entity;
-import entity.Player;
-import entity.Projectile;
-import entity.Skeletron;
-import entity.WhiteMonster;
+import entities.Boss;
+import entities.Dragonite;
+import entities.Entity;
+import entities.Player;
+import entities.Projectile;
+import entities.Skeletron;
+import entities.WhiteMonster;
 import manager.AssetManager;
 import manager.CollisionDetector;
 import manager.ControllerKey;
@@ -24,7 +24,7 @@ import manager.Sound;
 import manager.TileManager;
 import manager.UiManager;
 import manager.Utils;
-import manager.mouseController;
+import manager.MouseController;
 
 public class PanelGame extends JPanel implements Runnable{
 
@@ -71,7 +71,7 @@ public class PanelGame extends JPanel implements Runnable{
     ControllerKey controllK = new ControllerKey(this);
     ControllerUI controllUI = new ControllerUI(this);
     public UiManager uiManager = new UiManager(this, controllK, SoundManager);
-    mouseController mouseC = new mouseController(this);
+    MouseController mouseC = new MouseController(this);
     AssetManager assetM = new AssetManager(this);
 
     public Entity [][] enemies;

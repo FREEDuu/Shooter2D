@@ -4,12 +4,12 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 
-import entity.Boss;
-import entity.Dragonite;
-import entity.Entity;
-import entity.Projectile;
-import entity.Skeletron;
-import entity.WhiteMonster;
+import entities.Boss;
+import entities.Dragonite;
+import entities.Entity;
+import entities.Projectile;
+import entities.Skeletron;
+import entities.WhiteMonster;
 import frame.PanelGame;
 
 public class AssetManager {

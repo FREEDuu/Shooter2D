@@ -1,4 +1,4 @@
-package entity;
+package entities;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -7,19 +7,19 @@ import javax.imageio.ImageIO;
 import frame.PanelGame;
 import manager.ControllerKey;
 import manager.Utils;
-import manager.mouseController;
+import manager.MouseController;
 
 public class Player extends Entity{
 
     public int cameraX, cameraY, damage, maxHealth, speedCounter;
     ControllerKey controllerK;
-    mouseController mouseC;
+    MouseController mouseC;
     boolean reload, reloadBomb;
     int reloadCounter, reloadBombCounter;
     Rectangle RectReload, rectReloadBomb;
     int wLife;
 
-    public Player(PanelGame gp, ControllerKey controllerK, mouseController mouseC){
+    public Player(PanelGame gp, ControllerKey controllerK, MouseController mouseC){
         this.gp = gp;
         this.RectReload = new Rectangle(0 ,0, 350, 50);
         this.rectReloadBomb = new Rectangle(0 ,0, 100, 50);
